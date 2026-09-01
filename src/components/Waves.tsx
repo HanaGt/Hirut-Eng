@@ -1,11 +1,11 @@
 /* The site's motif: the logo's layered wave sweep, echoed in section
    dividers, the scrub band's phase indicator, and eyebrow accents.
-   FlowWaves adds the persistent ambient motion  layered strokes
+   FlowWaves adds the persistent ambient motion &mdash; layered strokes
    drifting continuously, transform-only. */
 
 /* Each wave spans exactly 0→1440 and starts/ends at the same y, so two
    copies (the second translated +1440) tile seamlessly inside a 2880
-   viewBox  a -1440px drift then loops with no visible seam. */
+   viewBox &mdash; a -1440px drift then loops with no visible seam. */
 const W1 = 'M0,40 C240,18 480,56 720,42 C960,28 1200,52 1440,40'
 const W2 = 'M0,52 C260,32 520,66 780,52 C1040,38 1260,64 1440,52'
 const W3 = 'M0,28 C300,12 620,44 940,30 C1160,20 1320,38 1440,28'

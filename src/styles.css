@@ -663,7 +663,7 @@ a.card { text-decoration: none; color: inherit; }
   margin-block: 4px;
 }
 .ph-chip::before {
-  content: 'PLACEHOLDER  ';
+  content: 'PLACEHOLDER \2014  ';
   font-family: var(--font-display);
   font-weight: 700;
   font-size: var(--text-2xs);
@@ -869,6 +869,15 @@ a.card { text-decoration: none; color: inherit; }
   text-align: center;
 }
 /* the original sand-toned exclusivity label, with the tick motif */
+/* holding the real mark now: solid chip, no dashed "pending" border */
+.orica-logo-slot--filled {
+  border: 1px solid var(--line);
+  padding: 10px 16px;
+  width: auto;
+  min-width: 170px;
+}
+.orica-logo-slot--filled img { width: 150px; height: auto; }
+
 .orica-exclusive {
   font-family: var(--font-display);
   font-weight: 600;

@@ -71,7 +71,7 @@ export function ContactForm({ preselect }: { preselect?: string }) {
         </div>
         <h2 className="contact-h">Inquiry received</h2>
         <p>
-          Thank you  we've got your message and an engineer will contact you shortly. For anything
+          Thank you &mdash; we've got your message and an engineer will contact you shortly. For anything
           urgent, call <a href={`tel:${PHONE_1.tel}`}>{PHONE_1.display}</a>.
         </p>
       </div>
@@ -178,7 +178,7 @@ export function ContactForm({ preselect }: { preselect?: string }) {
         </button>
       </p>
       <PhChip>
-        form submission endpoint / destination email pending  the form currently validates and
+        form submission endpoint / destination email pending &mdash; the form currently validates and
         shows its success state without sending; wire the endpoint in ContactForm.tsx where marked
       </PhChip>
     </form>

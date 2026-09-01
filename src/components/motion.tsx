@@ -16,7 +16,7 @@ export const saveData = () => Boolean(conn()?.saveData)
 /**
  * Ambient video is a luxury, not the message. On a metered or slow
  * link the still already carries the header, so don't spend megabytes
- * on top of it  a large share of this site's visitors are on
+ * on top of it &mdash; a large share of this site's visitors are on
  * mid-range Android over Ethiopian mobile networks.
  */
 export const tooSlowForVideo = () => {
@@ -30,14 +30,14 @@ export const tooSlowForVideo = () => {
  *
  * Progressive enhancement: the server-rendered HTML is fully visible.
  * After hydration, only elements still below the viewport get "armed"
- * (hidden) and then revealed on intersection  no flash for above-fold
+ * (hidden) and then revealed on intersection &mdash; no flash for above-fold
  * content, nothing hidden without JS, nothing hidden under
  * prefers-reduced-motion.
  */
 /**
  * Background videos (§4.2): poster-first, lazy-attached near the
  * viewport, paused while offscreen, and never started at all under
- * reduced motion or Save-Data  the poster is the experience there.
+ * reduced motion or Save-Data &mdash; the poster is the experience there.
  */
 export function BgVideoEffects() {
   const pathname = useRouterState({ select: (s) => s.location.pathname })
@@ -94,7 +94,7 @@ export function BgVideoEffects() {
  * and back out on exit, so a section is composed every time it is
  * scrolled through rather than only the first time.
  *
- * Same progressive-enhancement contract as RevealEffects  the server
+ * Same progressive-enhancement contract as RevealEffects &mdash; the server
  * HTML is fully visible, and the hidden state is only armed (by putting
  * `cycle-armed` on the ancestor) after hydration, never under reduced
  * motion or with JS off.

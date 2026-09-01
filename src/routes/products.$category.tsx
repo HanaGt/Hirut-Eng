@@ -99,7 +99,7 @@ function CategoryPage() {
                   Download spec sheet (PDF)
                 </a>
               </p>
-              <PhChip>datasheets pending  download slots built, files to be attached</PhChip>
+              <PhChip>datasheets pending &mdash; download slots built, files to be attached</PhChip>
             </div>
             <div className="reveal" style={{ '--reveal-delay': '.1s' } as React.CSSProperties}>
               <SampleImg
@@ -108,7 +108,7 @@ function CategoryPage() {
                 sizes="(max-width: 980px) 92vw, 44vw"
               />
               <p className="sample-note">
-                Sample photograph  stock imagery standing in until the company's own photography
+                Sample photograph &mdash; stock imagery standing in until the company's own photography
                 of this category is supplied.
               </p>
               <div className="card" style={{ marginTop: '1.2rem' }}>

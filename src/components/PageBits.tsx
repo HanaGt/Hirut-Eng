@@ -130,7 +130,7 @@ export function CtaBand({
    Orica co-branded partnership band (v2 §5): ink background,
    Hirut × Orica lockup, exclusivity headline, instrument families,
    CTA into the Geotechnical Equipment category. The partner logo is
-   NEVER redrawn or restyled  an official file drops into the light
+   NEVER redrawn or restyled &mdash; an official file drops into the light
    chip slot untouched.
    ============================================================ */
 export function OricaBand({ compact = false }: { compact?: boolean }) {
@@ -150,25 +150,36 @@ export function OricaBand({ compact = false }: { compact?: boolean }) {
             <span className="lockup-x" aria-hidden="true">
               ×
             </span>
-            <span className="orica-logo-slot">
-              [PLACEHOLDER: official Orica logo file  placed here in its official colors, never
-              redrawn]
+            {/* Third-party trademark: shown as supplied, in its official
+                colours on a white chip. Never recoloured or redrawn. */}
+            <span className="orica-logo-slot orica-logo-slot--filled">
+              <picture>
+                <source type="image/webp" srcSet="/img/logo/orica.webp" />
+                <img
+                  src="/img/logo/orica.png"
+                  alt="Orica"
+                  width={234}
+                  height={76}
+                  loading="lazy"
+                  decoding="async"
+                />
+              </picture>
             </span>
           </div>
           <h2>The only importer &amp; installer of Orica geotechnical and subsurface instruments in East Africa</h2>
           <p>
-            When a dam, a deep excavation, or a slope needs to be understood  not guessed at 
-            Hirut Engineering supplies and installs Orica's globally sought-after monitoring
+            When a dam, a deep excavation, or a slope needs to be understood &mdash; not guessed at
+            &mdash; Hirut Engineering supplies and installs Orica's globally sought-after monitoring
             instruments, exclusively in East Africa.
           </p>
           <p>
             Piezometers (vibrating wire and standpipe), inclinometers, extensometers, and complete
-            subsurface monitoring systems  installed, commissioned, and monitored by our own
+            subsurface monitoring systems &mdash; installed, commissioned, and monitored by our own
             engineers.
           </p>
           <PhChip>
-            confirm the exact entity name  source materials say both “Orica Digital Solutions” and
-            “Orica Geosolution”  and the partnership wording Hirut is permitted to publish
+            confirm the exact entity name &mdash; source materials say both “Orica Digital Solutions” and
+            “Orica Geosolution” &mdash; and the partnership wording Hirut is permitted to publish
           </PhChip>
           <p style={{ marginTop: '1.2rem' }}>
             <Link

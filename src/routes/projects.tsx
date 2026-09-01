@@ -9,13 +9,13 @@ import { projectImages, stock } from '../data/media'
 export const Route = createFileRoute('/projects')({
   head: () => ({
     meta: [
-      { title: 'Projects  Hirut Engineering and General Trading PLC' },
+      { title: 'Projects \u2014 Hirut Engineering and General Trading PLC' },
       {
         name: 'description',
         content:
           'A portfolio of water supply, irrigation, geotechnical, hydraulic structure, waterproofing, and well drilling projects delivered by Hirut Engineering across Ethiopia and Africa.',
       },
-      { property: 'og:title', content: 'Projects  Hirut Engineering' },
+      { property: 'og:title', content: 'Projects \u2014 Hirut Engineering' },
       {
         property: 'og:description',
         content: '50+ projects across Ethiopia. 5+ consultancy projects across Africa. $100M+ USD total portfolio.',
@@ -65,10 +65,10 @@ function ProjectsPage() {
         media="projects"
         current="Projects"
         title="Fifty projects and counting"
-        lead="Water supply, irrigation, geotechnical instrumentation, hydraulic structures, waterproofing, and well drilling  delivered across Ethiopia, with consultancy work across Africa."
+        lead="Water supply, irrigation, geotechnical instrumentation, hydraulic structures, waterproofing, and well drilling \u2014 delivered across Ethiopia, with consultancy work across Africa."
       >
         <PhChip>
-          all project content pending  the six cards below are clearly-labeled samples that
+          all project content pending &mdash; the six cards below are clearly-labeled samples that
           demonstrate the portfolio layout and filters
         </PhChip>
       </PageHero>
@@ -127,13 +127,13 @@ function ProjectsPage() {
                       <span>{p.regionLabel}</span>
                     </div>
                     <h3>{p.title}</h3>
-                    <p>Sample card for layout only  client, scope, and outcome to be supplied.</p>
+                    <p>Sample card for layout only &mdash; client, scope, and outcome to be supplied.</p>
                   </div>
                 </div>
               ))}
             </div>
           ) : (
-            <div className="filter-empty">No projects match the selected filters  try clearing one.</div>
+            <div className="filter-empty">No projects match the selected filters &mdash; try clearing one.</div>
           )}
         </div>
       </section>

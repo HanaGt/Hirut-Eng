@@ -7,13 +7,13 @@ import { afterSalesPillars } from '../data/site'
 export const Route = createFileRoute('/services')({
   head: () => ({
     meta: [
-      { title: 'Services  Construction, Consultancy & After-Sales | Hirut Engineering' },
+      { title: 'Services \u2014 Construction, Consultancy & After-Sales | Hirut Engineering' },
       {
         name: 'description',
         content:
           'Construction works, professional design and consultancy, and a six-pillar after-sales program: well drilling, irrigation, hydraulic structures, waterproofing, piezometer installation, commissioning, training, maintenance, and long-term monitoring.',
       },
-      { property: 'og:title', content: 'Services  Hirut Engineering' },
+      { property: 'og:title', content: 'Services \u2014 Hirut Engineering' },
       {
         property: 'og:description',
         content: 'We build it, we design it, and we support it for years after commissioning.',
@@ -44,7 +44,7 @@ const CONSULTANCY = [
   {
     num: 'Water',
     title: 'Well Drilling Design & Consultancy',
-    body: 'Hydrogeological judgment for boreholes that produce  and keep producing.',
+    body: 'Hydrogeological judgment for boreholes that produce \u2014 and keep producing.',
   },
   {
     num: 'Irrigation',
@@ -64,7 +64,7 @@ const CONSULTANCY = [
   {
     num: 'Features',
     title: 'Water Features & Aquariums Design & Consultancy',
-    body: 'Fountains, features, and aquariums engineered  not just decorated.',
+    body: 'Fountains, features, and aquariums engineered \u2014 not just decorated.',
   },
 ]
 
@@ -75,7 +75,7 @@ function ServicesPage() {
         media="services"
         current="Services"
         title="Build. Advise. Support."
-        lead="Three service lines under one roof  construction crews, professional consultants, and an after-sales organization that stays engaged for the life of what we deliver."
+        lead="Three service lines under one roof \u2014 construction crews, professional consultants, and an after-sales organization that stays engaged for the life of what we deliver."
       >
         <p style={{ marginTop: '1.4rem', display: 'flex', flexWrap: 'wrap', gap: 10 }}>
           <a className="btn btn-ghost" href="#construction">Construction</a>
@@ -91,7 +91,7 @@ function ServicesPage() {
             <Eyebrow>Service line 01</Eyebrow>
             <h2>Construction Works</h2>
             <p className="lead">
-              Field crews and site engineers who install what we import  from a single pump station
+              Field crews and site engineers who install what we import &mdash; from a single pump station
               to complete water supply infrastructure.
             </p>
           </div>
@@ -102,7 +102,7 @@ function ServicesPage() {
               ))}
             </ul>
             <div className="reveal" style={{ '--reveal-delay': '.1s' } as React.CSSProperties}>
-              <PhMedia detail="Construction-progress photo from the supplied batch (building progress / foundation work)  swap in when the media library is delivered" />
+              <PhMedia detail="Construction-progress photo from the supplied batch (building progress / foundation work) \u2014 swap in when the media library is delivered" />
               <p className="spec-note" style={{ marginTop: '.8rem' }}>
                 Background video slot: this section can carry an ambient site video (autoplay,
                 muted, loop) once the media library is delivered.
@@ -124,7 +124,7 @@ function ServicesPage() {
             <Eyebrow>Service line 02</Eyebrow>
             <h2>Professional &amp; Consultancy Services</h2>
             <p className="lead">
-              Design and advisory work delivered across Africa  engineering judgment on paper
+              Design and advisory work delivered across Africa &mdash; engineering judgment on paper
               before anything goes in the ground.
             </p>
           </div>
@@ -153,11 +153,11 @@ function ServicesPage() {
       <section className="section" id="after-sales">
         <div className="container">
           <div className="section-head reveal">
-            <Eyebrow>Service line 03  the differentiator</Eyebrow>
+            <Eyebrow>Service line 03 &mdash; the differentiator</Eyebrow>
             <h2>After-Sales Services</h2>
             <p className="lead">
               Most suppliers in this market disappear after commissioning. Our after-sales program
-              is a six-pillar service organization  expand each pillar to see exactly what it
+              is a six-pillar service organization &mdash; expand each pillar to see exactly what it
               covers.
             </p>
           </div>
