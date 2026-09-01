@@ -9,13 +9,13 @@ import { categoryImages, stock } from '../data/media'
 export const Route = createFileRoute('/products/')({
   head: () => ({
     meta: [
-      { title: 'Products \u2014 Seven Categories | Hirut Engineering and General Trading PLC' },
+      { title: 'Products: Seven Categories | Hirut Engineering and General Trading PLC' },
       {
         name: 'description',
         content:
           'Seven imported product categories: gabions and wire products, geosynthetics, geotechnical equipment, irrigation and farm equipment, power supply, pumps and accessories, and waterproofing materials.',
       },
-      { property: 'og:title', content: 'Products \u2014 Hirut Engineering' },
+      { property: 'og:title', content: 'Products | Hirut Engineering' },
       {
         property: 'og:description',
         content: 'Imported, specified honestly, installed by our own engineers, and supported after the sale.',

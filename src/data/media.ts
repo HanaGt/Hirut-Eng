@@ -1,5 +1,5 @@
 /* ============================================================
-   PLACEHOLDER MEDIA &mdash; stock photography, hotlinked from Unsplash's
+   PLACEHOLDER MEDIA - stock photography, hotlinked from Unsplash's
    CDN so the preview build reads like a finished site.
 
    These are NOT photographs of Hirut Engineering's own work. Every
@@ -33,7 +33,7 @@ const S = (id: string, w: number) =>
 
 /**
  * Lighter variant for decorative photographs that sit behind a heavy
- * scrim with text over them &mdash; they are dimmed and blurred by the
+ * scrim with text over them - they are dimmed and blurred by the
  * overlay anyway, so quality and resolution can drop a long way before
  * anyone could tell, and these load during the initial viewport pass.
  */
@@ -110,13 +110,13 @@ export const legImages: StockImage[] = [
 /* ============================================================
    Page-header media. Each header shows a still immediately (cheap,
    responsive, always visible) and fades a short looping clip in over
-   it &mdash; but only once the page is idle, the header is on screen, and
+   it - but only once the page is idle, the header is on screen, and
    the connection can afford it. On a slow link, Save-Data, or with
    reduced motion, the still simply stays: the header is never blank
    and never costs megabytes it did not earn.
 
    Video is hotlinked from Pexels (free licence, Range-capable CDN);
-   stills from Unsplash. Both are placeholders &mdash; swap for the
+   stills from Unsplash. Both are placeholders - swap for the
    company's own footage when the media library lands.
    ============================================================ */
 export interface HeaderMedia {

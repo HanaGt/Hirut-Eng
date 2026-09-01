@@ -9,11 +9,11 @@ import { initials, leadership } from '../data/site'
 export const Route = createFileRoute('/about')({
   head: () => ({
     meta: [
-      { title: 'About Us \u2014 Hirut Engineering and General Trading PLC' },
+      { title: 'About Us | Hirut Engineering and General Trading PLC' },
       {
         name: 'description',
         content:
-          'Founded in 2016 by experienced engineers, Hirut Engineering has grown into a multi-disciplinary supply, construction, and consultancy firm \u2014 and the exclusive East Africa importer and installer of Orica geotechnical instruments.',
+          'Founded in 2016 by experienced engineers, Hirut Engineering has grown into a multi-disciplinary supply, construction, and consultancy firm, and the exclusive East Africa importer and installer of Orica geotechnical instruments.',
       },
       { property: 'og:title', content: 'About Hirut Engineering' },
       {
@@ -40,7 +40,7 @@ const WHY = [
   {
     num: 'Support',
     title: 'After-sales depth',
-    body: 'A six-pillar after-sales program \u2014 from training to long-term monitoring and emergency response.',
+    body: 'A six-pillar after-sales program, from training to long-term monitoring and emergency response.',
   },
   {
     num: 'Track record',
@@ -56,7 +56,7 @@ function AboutPage() {
         media="about"
         current="About"
         title="Built by engineers, for the long term"
-        lead="Hirut Engineering and General Trading PLC was founded in 2016 by engineers with long field experience. Ten years on, we are a multi-disciplinary firm that supplies, builds, advises \u2014 and stays."
+        lead="Hirut Engineering and General Trading PLC was founded in 2016 by engineers with long field experience. Ten years on, we are a multi-disciplinary firm that supplies, builds, advises, and stays."
       />
 
       <section className="section">
@@ -78,13 +78,13 @@ function AboutPage() {
                 geotechnical and subsurface instruments.
               </p>
               <PhChip>
-                confirm exact Orica brand wording &mdash; “Orica Digital Solutions” vs “Orica Geosolution”
+                confirm exact Orica brand wording: “Orica Digital Solutions” vs “Orica Geosolution”
               </PhChip>
             </div>
             <div className="reveal" style={{ '--reveal-delay': '.1s' } as React.CSSProperties}>
               <SampleImg {...stock(teamImage)} ratio="4 / 3" sizes="(max-width: 980px) 92vw, 44vw" />
               <p className="sample-note">
-                Sample photograph &mdash; stock imagery standing in until the company's own site
+                Sample photograph: stock imagery standing in until the company's own site
                 photography is supplied.
               </p>
             </div>
@@ -191,7 +191,7 @@ function AboutPage() {
             ))}
           </ul>
           <PhChip style={{ marginTop: '1.4rem' }}>
-            one portrait still pending (Tegene Negussie Begashaw) &mdash; initials stand in rather than a
+            one portrait still pending (Tegene Negussie Begashaw): initials stand in rather than a
             stock face; add the photo to that entry in src/data/site.ts and the card will use it
           </PhChip>
         </div>
@@ -222,7 +222,7 @@ function AboutPage() {
               <Eyebrow>Credentials</Eyebrow>
               <h2>Certifications &amp; licenses</h2>
               <PhChip>
-                certifications, licenses, and contractor grade pending &mdash; document list and scans
+                certifications, licenses, and contractor grade pending: document list and scans
                 will be presented here
               </PhChip>
               <ul className="check-list" style={{ marginTop: '1.4rem' }}>
@@ -234,7 +234,7 @@ function AboutPage() {
             <div className="reveal" style={{ '--reveal-delay': '.1s' } as React.CSSProperties}>
               <Eyebrow>On site</Eyebrow>
               <h2>Our engineers in the field</h2>
-              <PhMedia ratio="4 / 3" detail="Team / site photograph from the company's own media library \u2014 pending" />
+              <PhMedia ratio="4 / 3" detail="Team / site photograph from the company's own media library: pending" />
             </div>
           </div>
         </div>

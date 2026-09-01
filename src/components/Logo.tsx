@@ -2,8 +2,8 @@
 
    Source files live in media-src/logo/ and are prepared for the web by
    tools/make-logo.mjs. Two variants ship: the mark in its official
-   colours for light surfaces, and a reversed one &mdash; the dark ink strokes
-   swapped for paper, the blue wave kept &mdash; for the ink bands, where the
+   colours for light surfaces, and a reversed one - the dark ink strokes
+   swapped for paper, the blue wave kept - for the ink bands, where the
    original would all but disappear. Nothing is redrawn.
 
    Both are rendered and CSS picks the right one per surface, so the

@@ -1,17 +1,14 @@
 import { defineConfig } from 'vite'
-
 import { tanstackStart } from '@tanstack/react-start/plugin/vite'
-
 import viteReact from '@vitejs/plugin-react'
 
 const config = defineConfig({
   resolve: { tsconfigPaths: true },
   plugins: [
     tanstackStart({
-      // Per-route code splitting is on by default (each route's component
-      // ships in its own chunk  verified in dist/client/assets).
-      // Every route is statically prerendered at build time (non-negotiable:
-      // buyers arrive from search engines on slow mobile networks).
+      // NOTE: a 'target' option is not supported by @tanstack/react-start 1.168.
+      // The build emits dist/client (static) + dist/server; point Vercel at
+      // dist/client as the output directory. See the deploy note in README.
       prerender: {
         enabled: true,
         crawlLinks: true,

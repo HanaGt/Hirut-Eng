@@ -7,7 +7,7 @@ export const PHONE_2 = { display: '+251 976 575 859', tel: '+251976575859' }
 export const stats = [
   { value: 50, suffix: '+', label: 'Projects delivered across Ethiopia' },
   { value: 5, suffix: '+', label: 'Professional consultancy projects delivered across Africa' },
-  { value: 10, suffix: '+', label: 'Years of excellence \u2014 established 2016' },
+  { value: 10, suffix: '+', label: 'Years of excellence, established 2016' },
   { value: 100, prefix: '$', suffix: 'M+', label: 'USD total contract value (Total portfolio)' },
   { value: 50, suffix: '+', label: 'Skilled engineers' },
 ] as const
@@ -85,7 +85,7 @@ export const sampleProjects: SampleProject[] = [
   { sector: 'well-drilling', sectorLabel: 'Well Drilling', region: 'sample-c', regionLabel: 'Sample Region C', year: 'sample-earlier', title: 'Sample: deep borehole drilling' },
 ]
 
-/* Executive officer and management staff &mdash; supplied by the company.
+/* Executive officer and management staff - supplied by the company.
    Names, roles and qualifications are reproduced verbatim. No portraits
    have been supplied; the cards show initials rather than a stock face,
    because putting a stranger's photograph on a named real person would

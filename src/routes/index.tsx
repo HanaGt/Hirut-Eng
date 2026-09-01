@@ -16,14 +16,14 @@ export const Route = createFileRoute('/')({
       {
         name: 'description',
         content:
-          'Ethiopian engineering, construction and supply company: well drilling, modern irrigation, geotechnical instrumentation, waterproofing and hydraulic works \u2014 supplied, built, and supported. Exclusive East Africa importer and installer of Orica geotechnical instruments.',
+          'Ethiopian engineering, construction and supply company: well drilling, modern irrigation, geotechnical instrumentation, waterproofing and hydraulic works, supplied, built, and supported. Exclusive East Africa importer and installer of Orica geotechnical instruments.',
       },
       { property: 'og:image', content: '/img/hero-poster.jpg' },
-      { property: 'og:title', content: 'Hirut Engineering \u2014 Engineering water. Understanding ground.' },
+      { property: 'og:title', content: 'Hirut Engineering | Engineering water. Understanding ground.' },
       {
         property: 'og:description',
         content:
-          'Well drilling, modern irrigation, geotechnical instrumentation and waterproofing across Ethiopia and East Africa \u2014 supplied, built, advised, and supported after the sale.',
+          'Well drilling, modern irrigation, geotechnical instrumentation and waterproofing across Ethiopia and East Africa, supplied, built, advised, and supported after the sale.',
       },
     ],
     links: [
@@ -63,7 +63,7 @@ const ORG_JSON_LD = JSON.stringify({
 
 const LEGS = [
   {
-    num: '01 \u2014 Supply',
+    num: '01 · Supply',
     title: 'Import & supply',
     body: 'Seven product categories imported and sold with technical backing behind every line.',
     linkShort: 'Browse the catalog',
@@ -71,7 +71,7 @@ const LEGS = [
     hash: undefined as string | undefined,
   },
   {
-    num: '02 \u2014 Build',
+    num: '02 · Build',
     title: 'Construction & installation',
     body: 'Well drilling, hydraulic structures, irrigation and water supply infrastructure, built by our own crews.',
     linkShort: 'Construction services',
@@ -79,17 +79,17 @@ const LEGS = [
     hash: 'construction',
   },
   {
-    num: '03 \u2014 Advise',
+    num: '03 · Advise',
     title: 'Design & consultancy',
-    body: 'Design, project management and evaluation \u2014 engineering judgment before anything goes in the ground.',
+    body: 'Design, project management and evaluation: engineering judgment before anything goes in the ground.',
     linkShort: 'Consultancy services',
     to: '/services',
     hash: 'consultancy',
   },
   {
-    num: '04 \u2014 Support',
+    num: '04 · Support',
     title: 'After-sales program',
-    body: 'Commissioning, training, maintenance and emergency response \u2014 six pillars, not a promise.',
+    body: 'Commissioning, training, maintenance and emergency response: six pillars, not a promise.',
     linkShort: 'After-sales services',
     to: '/services',
     hash: 'after-sales',
@@ -126,7 +126,7 @@ function HomePage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: ORG_JSON_LD }} />
 
-      {/* 1. Hero &mdash; poster paints instantly, the ambient loop fades in behind
+      {/* 1. Hero - poster paints instantly, the ambient loop fades in behind
              it once it is near-buffered (skipped under reduced motion /
              Save-Data by the shared bg-video effect). */}
       <section className="hero">
@@ -167,7 +167,7 @@ function HomePage() {
           </h1>
           <p className="hero-lead">
             From deep boreholes to modern irrigation, from piezometers reading the subsurface to
-            membranes sealing it out &mdash; Hirut Engineering supplies, builds, advises, and stays to
+            membranes sealing it out: Hirut Engineering supplies, builds, advises, and stays to
             support what it delivers.
           </p>
           <div className="hero-ctas">
@@ -179,7 +179,7 @@ function HomePage() {
             </Link>
           </div>
           <p className="sample-note">
-            Sample background &mdash; an illustrative animated site scene, standing in until the
+            Sample background: an illustrative animated site scene, standing in until the
             company's own footage is supplied.
           </p>
         </div>
@@ -199,7 +199,7 @@ function HomePage() {
             <h2>One firm, four commitments</h2>
             <p className="lead">
               Most suppliers sell and leave. Most contractors build and hand over. Hirut Engineering
-              does both &mdash; and designs the work, and stays afterward.
+              does both, designs the work, and stays afterward.
             </p>
           </div>
           <div className="legs" data-cycle-group>
@@ -233,7 +233,7 @@ function HomePage() {
         </div>
       </section>
 
-      {/* 4. Signature scroll-scrubbed band &mdash; the one bold moment */}
+      {/* 4. Signature scroll-scrubbed band - the one bold moment */}
       <ScrubBand />
 
       {/* 5. Product categories */}
@@ -268,7 +268,7 @@ function HomePage() {
               <p className="card-num">Not sure where to start?</p>
               <h3>Talk to an engineer</h3>
               <p>
-                Describe the problem &mdash; seepage, a slope, a field to irrigate, a well to drill &mdash; and
+                Describe the problem (seepage, a slope, a field to irrigate, a well to drill) and
                 we'll specify the right products for it.
               </p>
               <span className="card-link">Request a quote →</span>
@@ -290,7 +290,7 @@ function HomePage() {
               50+ projects delivered across Ethiopia and consultancy work across Africa.
             </p>
             <PhChip>
-              real project content pending &mdash; the three cards below are labeled samples with
+              real project content pending: the three cards below are labeled samples with
               illustrative artwork, demonstrating the layout only
             </PhChip>
           </div>
@@ -311,7 +311,7 @@ function HomePage() {
                     <span>{p.regionLabel}</span>
                   </div>
                   <h3>{p.title}</h3>
-                  <p>Layout demonstration &mdash; real project scope, client, and outcome to be supplied.</p>
+                  <p>Layout demonstration. Real project scope, client, and outcome to be supplied.</p>
                   <span className="card-link">All projects →</span>
                 </div>
               </Link>
@@ -324,11 +324,11 @@ function HomePage() {
       <section className="section band-ink" id="after-sales-promise">
         <div className="container">
           <div className="section-head reveal">
-            <Eyebrow>Support &mdash; the fourth leg</Eyebrow>
+            <Eyebrow>Support · the fourth leg</Eyebrow>
             <h2>We're still here after commissioning</h2>
             <p className="lead">
               In this market, a supplier who stays after the sale is rare. Our after-sales program
-              has six pillars &mdash; each a real service line with its own engineers, not a courtesy
+              has six pillars, each a real service line with its own engineers, not a courtesy
               call.
             </p>
           </div>
@@ -377,7 +377,7 @@ function HomePage() {
       <CtaBand
         eyebrow="Start a conversation"
         heading="Tell us what you're building. We'll still be there after handover."
-        body="Quotes, specifications, site visits, and honest engineering advice \u2014 for projects of any size."
+        body="Quotes, specifications, site visits, and honest engineering advice, for projects of any size."
         phones
       />
     </>

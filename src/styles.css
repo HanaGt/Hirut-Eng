@@ -663,7 +663,7 @@ a.card { text-decoration: none; color: inherit; }
   margin-block: 4px;
 }
 .ph-chip::before {
-  content: 'PLACEHOLDER \2014  ';
+  content: 'PLACEHOLDER: ';
   font-family: var(--font-display);
   font-weight: 700;
   font-size: var(--text-2xs);

@@ -4,16 +4,16 @@ import { prefersReducedMotion, saveData } from './motion'
 
 /* ============================================================
    Signature interaction (§4.1): scroll-scrubbed construction
-   time-lapse &mdash; "From bare land to handover".
+   time-lapse - "From bare land to handover".
 
    The four phase captions are BURNED INTO THE VIDEO FRAMES, so as
    the pinned card is scrubbed the right text appears at the right
    moment inside the picture itself.
 
    Current file is a generated SAMPLE (tools/make-videos.mjs).
-   To swap in the real footage, re-encode it ALL-INTRA &mdash; every frame
+   To swap in the real footage, re-encode it ALL-INTRA - every frame
    a keyframe, or seeking snaps between sparse keyframes and the
-   effect is ruined &mdash; with the captions rendered into the frames:
+   effect is ruined - with the captions rendered into the frames:
 
      ffmpeg -i in.mp4 -an -g 1 -keyint_min 1 -vf scale=1440:-2 \
        -c:v libx264 -crf 25 -pix_fmt yuv420p \
@@ -27,11 +27,11 @@ import { prefersReducedMotion, saveData } from './motion'
      scrubbing needs random access to the whole file: streaming it
      leaves `seekable.end === 0` on any host that does not answer HTTP
      Range requests, and `canplaythrough` fires while only a couple of
-     seconds are buffered &mdash; both make seeks silently no-op. Holding the
+     seconds are buffered - both make seeks silently no-op. Holding the
      bytes locally removes that dependency entirely.
    - Then the card freezes (position: sticky) and scroll drives
      playback: currentTime is lerped toward the scroll-implied time in
-     rAF &mdash; raw scroll values are never written.
+     rAF - raw scroll values are never written.
    - Downgrades itself if seeking stalls (weak devices) or the fetch
      fails; the static band is always the floor.
    ============================================================ */
@@ -41,7 +41,7 @@ const SCRUB_VIDEO: { src: string; poster: string } | null = {
 }
 
 /* Mirrors the captions burned into the video. Shown only in the
-   static fallback and to assistive tech &mdash; the live scrub reads its
+   static fallback and to assistive tech - the live scrub reads its
    text from the frames themselves. */
 const PHASES = [
   {
@@ -52,17 +52,17 @@ const PHASES = [
   {
     phase: 'Phase 02 · 25–50%',
     title: 'Foundations & waterproofing',
-    body: 'Excavation, membrane laid at the source, slab poured \u2014 the structure rises on ground we understand.',
+    body: 'Excavation, membrane laid at the source, slab poured. The structure rises on ground we understand.',
   },
   {
     phase: 'Phase 03 · 50–75%',
     title: 'Structure & water systems',
-    body: 'Frame rises, risers and pumps in, roof tank set \u2014 the building learns to move water.',
+    body: 'Frame rises, risers and pumps in, roof tank set. The building learns to move water.',
   },
   {
     phase: 'Phase 04 · 75–100%',
     title: 'Commissioning & handover',
-    body: 'Systems tested, fountain and irrigation live, operators trained \u2014 and the after-sales program begins.',
+    body: 'Systems tested, fountain and irrigation live, operators trained, and the after-sales program begins.',
   },
 ]
 
@@ -154,7 +154,7 @@ export function ScrubBand() {
         if (!video.duration || s.length === 0 || s.end(s.length - 1) < video.duration * 0.9) return
         goLive()
       } catch {
-        /* offline, aborted, or undecodable &mdash; the static band stands */
+        /* offline, aborted, or undecodable - the static band stands */
       }
     }
 
@@ -208,11 +208,11 @@ export function ScrubBand() {
               How a project rises
             </p>
             <h2>From bare land to handover</h2>
-            <p className="scrub-hint">Keep scrolling &mdash; the build runs as you go.</p>
+            <p className="scrub-hint">Keep scrolling. The build runs as you go.</p>
           </div>
 
           <figure className="scrub-media">
-            {/* src is attached as a Blob URL after fetch &mdash; see the effect */}
+            {/* src is attached as a Blob URL after fetch - see the effect */}
             <video
               className="scrub-video"
               muted
@@ -226,7 +226,7 @@ export function ScrubBand() {
               <span className="scrub-rail-fill" ref={railRef} />
             </span>
             <figcaption className="scrub-note">
-              Sample time-lapse &mdash; an illustrative sequence standing in until the company's own
+              Sample time-lapse: an illustrative sequence standing in until the company's own
               footage is supplied.
             </figcaption>
           </figure>
