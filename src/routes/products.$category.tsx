@@ -17,9 +17,9 @@ export const Route = createFileRoute('/products/$category')({
     if (!c) return { meta: [{ title: SITE_NAME }] }
     return {
       meta: [
-        { title: `${c.name} — Hirut Engineering` },
+        { title: `${c.name}  Hirut Engineering` },
         { name: 'description', content: c.metaDescription },
-        { property: 'og:title', content: `${c.name} — Hirut Engineering` },
+        { property: 'og:title', content: `${c.name}  Hirut Engineering` },
         { property: 'og:description', content: c.ogDescription },
       ],
     }
@@ -58,6 +58,7 @@ function CategoryPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: itemListJsonLd }} />
 
       <PageHero
+        media="products"
         current={c.name}
         trail={[
           { label: 'Home', to: '/' },
@@ -98,7 +99,7 @@ function CategoryPage() {
                   Download spec sheet (PDF)
                 </a>
               </p>
-              <PhChip>datasheets pending — download slots built, files to be attached</PhChip>
+              <PhChip>datasheets pending  download slots built, files to be attached</PhChip>
             </div>
             <div className="reveal" style={{ '--reveal-delay': '.1s' } as React.CSSProperties}>
               <SampleImg
@@ -107,7 +108,7 @@ function CategoryPage() {
                 sizes="(max-width: 980px) 92vw, 44vw"
               />
               <p className="sample-note">
-                Sample photograph — stock imagery standing in until the company's own photography
+                Sample photograph  stock imagery standing in until the company's own photography
                 of this category is supplied.
               </p>
               <div className="card" style={{ marginTop: '1.2rem' }}>

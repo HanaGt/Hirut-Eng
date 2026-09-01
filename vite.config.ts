@@ -9,7 +9,7 @@ const config = defineConfig({
   plugins: [
     tanstackStart({
       // Per-route code splitting is on by default (each route's component
-      // ships in its own chunk — verified in dist/client/assets).
+      // ships in its own chunk  verified in dist/client/assets).
       // Every route is statically prerendered at build time (non-negotiable:
       // buyers arrive from search engines on slow mobile networks).
       prerender: {

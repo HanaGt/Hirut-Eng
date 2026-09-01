@@ -11,11 +11,11 @@ export const Route = createFileRoute('/contact')({
   }),
   head: () => ({
     meta: [
-      { title: 'Contact & Request a Quote — Hirut Engineering and General Trading PLC' },
+      { title: 'Contact & Request a Quote  Hirut Engineering and General Trading PLC' },
       {
         name: 'description',
         content:
-          'Request a quote from Hirut Engineering — products, construction, consultancy, and after-sales support. Call +251 911 518 448 or +251 976 575 859.',
+          'Request a quote from Hirut Engineering  products, construction, consultancy, and after-sales support. Call +251 911 518 448 or +251 976 575 859.',
       },
       { property: 'og:title', content: 'Contact Hirut Engineering' },
       {
@@ -32,9 +32,10 @@ function ContactPage() {
   return (
     <>
       <PageHero
+        media="contact"
         current="Contact"
         title="Request a quote"
-        lead="Tell us what you're planning — a product inquiry, a construction project, or a design question. An engineer, not a call center, will get back to you."
+        lead="Tell us what you're planning  a product inquiry, a construction project, or a design question. An engineer, not a call center, will get back to you."
       />
 
       <section className="section">
@@ -61,7 +62,7 @@ function ContactPage() {
               <PhChip>physical address pending</PhChip>
               <PhMedia
                 ratio="16/9"
-                detail="Map embed — pending address confirmation"
+                detail="Map embed  pending address confirmation"
                 className="contact-map"
               />
             </div>
@@ -81,7 +82,7 @@ function ContactPage() {
                   Download company profile (PDF)
                 </a>
               </p>
-              <PhChip>company profile PDF pending — button built, link to be attached</PhChip>
+              <PhChip>company profile PDF pending  button built, link to be attached</PhChip>
             </div>
             <div className="contact-item">
               <h2 className="contact-h">Social</h2>

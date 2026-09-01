@@ -22,7 +22,7 @@ src/
   routes/
     __root.tsx               Document shell, header/footer, 240ms route transitions
     index.tsx                Home (10 approved sections)
-    about.tsx  services.tsx  projects.tsx  partners.tsx  contact.tsx
+    about.tsx — services.tsx — projects.tsx — partners.tsx — contact.tsx
     products.index.tsx       Hub with Water/Ground/Power filter
     products.$category.tsx   All 7 category pages (data-driven, prerendered)
   components/
@@ -37,10 +37,10 @@ src/
     motion.tsx               Reveal wiring, bg-video lazy-load, RM / Save-Data helpers
   data/
     products.ts              The 7 categories — all approved copy, verbatim
-    site.ts                  Stats (§6: $100M+ Total portfolio), partners, pillars, projects
+    site.ts                  Stats, partners, pillars, projects, leadership (real, verbatim)
     media.ts                 Every placeholder photo URL — the one file to edit
 media-src/timelapse.mp4      Supplied source clip (not deployed)
-tools/scrub-captions.filter  ffmpeg caption layout burned into the scrub video
+tools/scrub-captions.filter — ffmpeg caption layout burned into the scrub video
 public/video, public/img     Built video + posters, favicon
 ```
 
@@ -55,9 +55,18 @@ The original water-and-ground palette and type pairing are in force (restored at
 
 ## The logo
 
-`src/components/Logo.tsx` holds `HirutMark` — a **vector recreation of the delivered logo**, drawn as inline SVG: transparent background (the bitmap's backdrop is gone), crisp at any size, and weightless on the network. The two H posts render in `currentColor`, so the mark is dark on light surfaces and white on the ink bands without a second file; the wave sweep keeps the logo's own blues (`--logo-blue-deep/light`). It appears in the header lockup, the footer, and the Orica co-brand lockup, and the same geometry is exported as `public/favicon.svg`.
+The **official logo** is in place. Sources sit in `media-src/logo/` (the supplied background-removed PNGs, mark and full lockup) and `tools/make-logo.mjs` prepares the web assets into `public/img/logo/`:
 
-If the designer can supply the original vector (`.svg` / `.ai`), swap the path data in that one component and the favicon — the geometry here is traced by eye from the supplied bitmap, which is noted in the file.
+| File | Use |
+|---|---|
+| `mark.webp/.png` | official colours — light surfaces |
+| `mark-reversed.webp/.png` | dark ink strokes swapped for paper — ink bands |
+| `lockup(-reversed).webp/.png` | full horizontal lockup, for print/social |
+| `favicon-32.png`, `favicon-180.png` | browser + Apple touch icon |
+
+The mark is dark navy, so on the ink header, the footer and the dark bands it would all but disappear. The reversed variant is the conventional fix: **only the dark ink is swapped for paper — the blue wave keeps its hue and nothing is redrawn.** `HirutMark` renders both and CSS picks per surface (`.band-dark`, `.band-ink`, `.site-footer`, and the un-scrolled `.header-on-dark`), so the right mark paints on the first frame with no flash and no JS.
+
+Re-run `node tools/make-logo.mjs` after replacing either source file. If a true vector (`.svg`/`.ai`) ever arrives it should replace the rasters — the supplied files are compressed bitmaps, so the strokes carry faint JPEG mottling that a vector would not.
 
 ## Motion
 
@@ -77,6 +86,16 @@ Everything visible is in place so the site can be judged as a whole. Two differe
 | All photography | **hotlinked stock from Unsplash's CDN** | editing `src/data/media.ts` |
 
 **The photography is external.** `src/data/media.ts` is the only file to touch: every image is one entry, and the `stock()` helper builds the `src`/`srcset`. Decorative photos that sit behind a scrim with text over them use `stockSoft()` instead — lower quality and smaller widths, because the overlay hides the difference and those four load during the initial viewport pass (it took the homepage from 83 back to 95 on Lighthouse). Before launch these should be **self-hosted** rather than hotlinked — an external CDN can be blocked (it was, inside Lighthouse's sandboxed Chrome during testing), rate-limited, or changed under you, and none of these photographs depict Hirut's own work. Drop real files into `public/img/` and point the entries at them.
+
+## Page headers
+
+Every inner page header carries a short looping clip instead of a flat gradient. Both the clip and its still are **self-hosted** in `public/video/headers/` and prepared by `node tools/fetch-header-videos.mjs`, which downloads the source, trims it to 8s, and re-encodes to 854x480.
+
+They were briefly hotlinked from the stock CDN, and self-hosting is not a detail: the CDN set **third-party cookies on every visitor** (a privacy problem on a client site, and Lighthouse Best Practices fell to 79) and served ~2.3 MB per header. Local files are 168-789 KB, cookie-free, and under our own cache headers - Best Practices back to 100 and the page from 2,599 KB to 614 KB.
+
+The still is frame one of its own clip, so the fade-in is seamless. Loading is deferred to idle, gated on the header being in view, and skipped entirely under reduced motion, Save-Data, or a 2g-class connection (`tooSlowForVideo`) - on a slow link the still simply stays.
+
+**Scrim maths.** White type over moving footage has to hold at the worst frame, not the average one. Against a pure-white frame, `--paper` needs ~62% ink to clear 4.5:1 and `--ink-100` needs ~66%. The scrim therefore holds ~66% under the text column, eases to 60% at the 64% mark where the lead ends, then drops to 14% so the footage reads - and the lead and breadcrumbs switch to `--paper` on media headers for the extra margin.
 
 ## The scrub band (§4.1)
 
@@ -112,9 +131,9 @@ One honest deviation: initial-route JS is **~113 KB gzipped** vs the ~100 KB tar
 
 - **All photography** — currently hotlinked stock, to be replaced with the company's own images and self-hosted (`src/data/media.ts`). Nothing on the site depicts Hirut's real work yet.
 - **Video** — the supplied clip is a sample; swap in the company's own footage and re-run the caption/encode command above.
-- Original logo **vector** if one exists (current mark is a faithful SVG recreation of the supplied bitmap — see “The logo” above)
+- A true logo **vector** (.svg/.ai) if one exists — the supplied files are bitmaps; the reversed variant is generated, not hand-drawn
 - **Official Orica logo file** for the co-branded band (never redrawn — dropped in as delivered), exact entity name (“Orica Digital Solutions” vs “Orica Geosolution”), and permitted partnership wording
-- Mission, vision, values; leadership profiles; certifications & contractor grade
+- Mission, vision, values; **portrait photographs of the six named leaders** (initials stand in — never a stock face for a real person); Customer Promise and Our Charter wording; certifications & contractor grade
 - All real project content (sample cards flagged; v1's `project-detail.html` in `reference-v1/` is the approved detail template to port when content arrives)
 - Product datasheet PDFs; company profile PDF
 - Form endpoint / destination email; physical address, map, email, hours, socials

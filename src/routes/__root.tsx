@@ -20,12 +20,13 @@ export const Route = createRootRoute({
       { title: SITE_NAME },
       { property: 'og:type', content: 'website' },
       { property: 'og:site_name', content: SITE_NAME },
-      /* [PLACEHOLDER: og:image — final brand/social image pending media library] */
+      /* [PLACEHOLDER: og:image  final brand/social image pending media library] */
     ],
     links: [
       { rel: 'stylesheet', href: appCss },
-      { rel: 'icon', href: '/favicon.svg', type: 'image/svg+xml' },
-      /* placeholder photography is served from Unsplash's CDN — drop this
+      { rel: 'icon', href: '/img/logo/favicon-32.png', type: 'image/png', sizes: '32x32' },
+      { rel: 'apple-touch-icon', href: '/img/logo/favicon-180.png', sizes: '180x180' },
+      /* placeholder photography is served from Unsplash's CDN  drop this
          once the media library is self-hosted (see src/data/media.ts) */
       { rel: 'preconnect', href: 'https://images.unsplash.com', crossOrigin: 'anonymous' },
     ],

@@ -2,6 +2,7 @@ import { Link } from '@tanstack/react-router'
 import { EyebrowWave, FlowWaves } from './Waves'
 import { PhChip } from './Placeholders'
 import { HirutMark } from './Logo'
+import { headerMedia, headerStill, headerVideo } from '../data/media'
 import { PHONE_1, PHONE_2 } from '../data/site'
 
 export function Eyebrow({ children, center }: { children: React.ReactNode; center?: boolean }) {
@@ -40,16 +41,44 @@ export function PageHero({
   trail = [{ label: 'Home', to: '/' }],
   title,
   lead,
+  media,
   children,
 }: {
   current: string
   trail?: Array<{ label: string; to: CrumbTo }>
   title: React.ReactNode
   lead: React.ReactNode
+  /** key into `headerMedia`  still paints at once, clip fades in after */
+  media?: keyof typeof headerMedia
   children?: React.ReactNode
 }) {
+  const m = media ? headerMedia[media] : undefined
   return (
-    <section className="page-hero">
+    <section className={m ? 'page-hero page-hero--media' : 'page-hero'}>
+      {m ? (
+        <>
+          <img
+            className="page-hero-still"
+            {...headerStill(m)}
+            alt=""
+            aria-hidden="true"
+            fetchPriority="high"
+            decoding="async"
+          />
+          <video
+            className="page-hero-video"
+            data-bg-video
+            data-src={headerVideo(m)}
+            muted
+            loop
+            playsInline
+            preload="none"
+            aria-hidden="true"
+            tabIndex={-1}
+          />
+          <span className="page-hero-scrim" aria-hidden="true" />
+        </>
+      ) : null}
       <div className="container">
         <Breadcrumbs trail={trail} current={current} />
         <h1>{title}</h1>
@@ -101,7 +130,7 @@ export function CtaBand({
    Orica co-branded partnership band (v2 §5): ink background,
    Hirut × Orica lockup, exclusivity headline, instrument families,
    CTA into the Geotechnical Equipment category. The partner logo is
-   NEVER redrawn or restyled — an official file drops into the light
+   NEVER redrawn or restyled  an official file drops into the light
    chip slot untouched.
    ============================================================ */
 export function OricaBand({ compact = false }: { compact?: boolean }) {
@@ -122,24 +151,24 @@ export function OricaBand({ compact = false }: { compact?: boolean }) {
               ×
             </span>
             <span className="orica-logo-slot">
-              [PLACEHOLDER: official Orica logo file — placed here in its official colors, never
+              [PLACEHOLDER: official Orica logo file  placed here in its official colors, never
               redrawn]
             </span>
           </div>
           <h2>The only importer &amp; installer of Orica geotechnical and subsurface instruments in East Africa</h2>
           <p>
-            When a dam, a deep excavation, or a slope needs to be understood — not guessed at —
+            When a dam, a deep excavation, or a slope needs to be understood  not guessed at 
             Hirut Engineering supplies and installs Orica's globally sought-after monitoring
             instruments, exclusively in East Africa.
           </p>
           <p>
             Piezometers (vibrating wire and standpipe), inclinometers, extensometers, and complete
-            subsurface monitoring systems — installed, commissioned, and monitored by our own
+            subsurface monitoring systems  installed, commissioned, and monitored by our own
             engineers.
           </p>
           <PhChip>
-            confirm the exact entity name — source materials say both “Orica Digital Solutions” and
-            “Orica Geosolution” — and the partnership wording Hirut is permitted to publish
+            confirm the exact entity name  source materials say both “Orica Digital Solutions” and
+            “Orica Geosolution”  and the partnership wording Hirut is permitted to publish
           </PhChip>
           <p style={{ marginTop: '1.2rem' }}>
             <Link

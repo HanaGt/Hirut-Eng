@@ -7,7 +7,7 @@ export const PHONE_2 = { display: '+251 976 575 859', tel: '+251976575859' }
 export const stats = [
   { value: 50, suffix: '+', label: 'Projects delivered across Ethiopia' },
   { value: 5, suffix: '+', label: 'Professional consultancy projects delivered across Africa' },
-  { value: 10, suffix: '+', label: 'Years of excellence — established 2016' },
+  { value: 10, suffix: '+', label: 'Years of excellence  established 2016' },
   { value: 100, prefix: '$', suffix: 'M+', label: 'USD total contract value (Total portfolio)' },
   { value: 50, suffix: '+', label: 'Skilled engineers' },
 ] as const
@@ -84,6 +84,81 @@ export const sampleProjects: SampleProject[] = [
   { sector: 'waterproofing', sectorLabel: 'Waterproofing', region: 'sample-b', regionLabel: 'Sample Region B', year: 'sample-recent', title: 'Sample: basement waterproofing works' },
   { sector: 'well-drilling', sectorLabel: 'Well Drilling', region: 'sample-c', regionLabel: 'Sample Region C', year: 'sample-earlier', title: 'Sample: deep borehole drilling' },
 ]
+
+/* Executive officer and management staff  supplied by the company.
+   Names, roles and qualifications are reproduced verbatim. No portraits
+   have been supplied; the cards show initials rather than a stock face,
+   because putting a stranger's photograph on a named real person would
+   be inventing their likeness. Add `photo` to a row when the real
+   portrait arrives and the card will use it. */
+export interface Leader {
+  name: string
+  role: string
+  quals: string[]
+  /** path without extension  `.webp` is preferred, `.jpg` is the fallback */
+  photo?: string
+}
+
+export const leadership: Leader[] = [
+  {
+    name: 'Michael Tilahun Gebeyehu',
+    photo: '/img/team/michael',
+    role: 'CEO, Hirut Engineering Construction and Wholesales',
+    quals: [
+      'B.Sc. (Irrigation Engineering)',
+      'M.Sc. (Geotechnical Engineering)',
+      'M.Sc. (PPM)',
+      'Ph.D.',
+    ],
+  },
+  {
+    name: 'Fikru Kinfu Geberekirstos',
+    photo: '/img/team/fikru',
+    role: 'CEO, Construction Department; Consulting Engineer',
+    quals: [
+      'B.Sc. (Civil Engineering)',
+      'M.Sc. (Construction Management)',
+      'M.Sc. (PPM)',
+      'Ph.D.',
+    ],
+  },
+  {
+    name: 'Hirut Girma Legesse',
+    photo: '/img/team/hirut',
+    role: 'CEO, Finance and Marketing Departments',
+    quals: ['B.Sc. (Accounting)', 'M.Sc. (Accounting)'],
+  },
+  {
+    name: 'Mehari Tadesse Tsegaye',
+    photo: '/img/team/mehari',
+    role: 'CEO, Technical Manager',
+    quals: ['B.Sc. (Geology)', 'M.Sc. (Hydrogeology)', 'Ph.D.'],
+  },
+  {
+    name: 'Tegene Negussie Begashaw',
+    role: 'Finance Manager, TAX Consultant',
+    quals: [
+      'B.Sc. (Accounting)',
+      'M.Sc. (Accounting)',
+      'M.A. (Tax and Property Valuation)',
+    ],
+  },
+  {
+    name: 'Nathan Guta Feyissa',
+    photo: '/img/team/nathan',
+    role: 'Marketing, Digital Marketing Head',
+    quals: ['B.A. (Business Administration)'],
+  },
+]
+
+/** Initials for the monogram, from the first two name parts. */
+export function initials(name: string) {
+  return name
+    .split(/\s+/)
+    .slice(0, 2)
+    .map((n) => n[0])
+    .join('')
+}
 
 export const afterSalesPillars: Array<{ title: string; blurb: string; items: string[] }> = [
   {

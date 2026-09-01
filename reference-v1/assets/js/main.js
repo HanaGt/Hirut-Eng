@@ -1,5 +1,5 @@
 /* ============================================================
-   HIRUT ENGINEERING — site behavior
+   HIRUT ENGINEERING  site behavior
    Progressive enhancement only: every feature degrades to a
    fully informative static page with JS disabled.
    ============================================================ */
@@ -92,7 +92,7 @@
   /* ============================================================
      Signature interaction (§4.1): scroll-scrubbed time-lapse.
      - Starts in static mode (normal flowing section, steps reveal
-       on scroll) — fully informative with the effect off.
+       on scroll)  fully informative with the effect off.
      - Upgrades to pinned scrub ONLY when: a <source> exists, enough
        is buffered, and neither reduced-motion nor Save-Data is set.
      - Downgrades live if seeking stalls repeatedly (weak devices).
@@ -143,13 +143,13 @@
       if (!live) return;
       var p = progress();
       target = p * (video.duration || 0);
-      // Lerp toward the scroll-implied time — never write raw values.
+      // Lerp toward the scroll-implied time  never write raw values.
       current += (target - current) * 0.14;
       if (Math.abs(target - current) > 0.01 && !video.seeking) {
         try { video.currentTime = current; } catch (e) { /* not seekable yet */ }
       }
       // Frame-drop guard: sustained seeking means the device or the
-      // encode can't keep up — fall back to the static band.
+      // encode can't keep up  fall back to the static band.
       stallFrames = video.seeking ? stallFrames + 1 : 0;
       if (stallFrames > 90) { downgrade(); return; }
       setPhase(p);
@@ -177,7 +177,7 @@
   })();
 
   /* ---------- Background videos (§4.2) ----------
-     <video data-bg-video data-src="..."> — lazy-attached near the
+     <video data-bg-video data-src="...">  lazy-attached near the
      viewport, paused offscreen, poster-only under RM / Save-Data. */
   var bgVideos = document.querySelectorAll('[data-bg-video]');
   if (bgVideos.length && !reducedMotion && !saveData && 'IntersectionObserver' in window) {

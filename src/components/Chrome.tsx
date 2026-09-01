@@ -103,7 +103,7 @@ export function Footer() {
           <div className="footer-brand">
             <Brand footer />
             <p>
-              Water and ground engineering — supplied, built, advised, and supported across
+              Water and ground engineering  supplied, built, advised, and supported across
               Ethiopia and East Africa since 2016.
             </p>
             <PhChip>physical address, email address &amp; working hours pending</PhChip>

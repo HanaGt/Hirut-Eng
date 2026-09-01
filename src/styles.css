@@ -1,5 +1,5 @@
 /* ============================================================
-   HIRUT ENGINEERING — design system
+   HIRUT ENGINEERING  design system
    v1 palette & type (restored by client request) on the v2
    TanStack architecture. All colors live in the token block;
    hairlines & tints derive via color-mix. Every font size
@@ -12,21 +12,21 @@
 
 /* ---------- 1. Design tokens ---------- */
 :root {
-  /* Ink — deep water / authority */
+  /* Ink  deep water / authority */
   --ink-950: #071522;
   --ink-900: #0b1f30;
   --ink-800: #12304a;
   --ink-700: #1a4160;
   --ink-100: #d5e1ea;
 
-  /* Hydro — the living accent */
+  /* Hydro  the living accent */
   --hydro-300: #62d3e9;
   --hydro-400: #2fbbd8;
   --hydro-500: #17a0c2;
   --hydro-600: #0f89a8;
   --hydro-700: #0c7391; /* AA on paper for text/links */
 
-  /* Sand — the geotechnical earth tone */
+  /* Sand  the geotechnical earth tone */
   --sand-600: #a8834f;
   --sand-500: #c2a374;
   --sand-200: #e9dfc9;
@@ -49,12 +49,12 @@
   --line: color-mix(in srgb, var(--ink-900) 15%, transparent);
   --line-dark: color-mix(in srgb, var(--ink-100) 17%, transparent);
 
-  /* Type — Space Grotesk display, Inter body.
+  /* Type  Space Grotesk display, Inter body.
      Noto Sans Ethiopic sits in the stacks for the future Amharic build. */
   --font-display: 'Space Grotesk Variable', 'Noto Sans Ethiopic', system-ui, sans-serif;
   --font-body: 'Inter Variable', 'Noto Sans Ethiopic', system-ui, -apple-system, 'Segoe UI', sans-serif;
 
-  /* Type scale — every font-size in the app references one of these */
+  /* Type scale  every font-size in the app references one of these */
   --text-2xs: 0.66rem;
   --text-xs: 0.74rem;
   --text-sm: 0.86rem;
@@ -313,6 +313,33 @@ body.nav-open .header-on-dark .nav-toggle-bar { background: var(--ink-900); }
 }
 .header-on-dark:not(.is-solid) .brand { color: var(--paper); }
 .site-header.is-solid .brand { color: var(--ink-900); }
+/* ---- official logomark ----
+   Two variants ship; CSS chooses per surface so the right one paints on
+   the first frame. Default is the official colourway (light surfaces);
+   ink bands and the un-scrolled dark header get the reversed one. */
+.hirut-mark {
+  display: inline-block;
+  flex: 0 0 auto;
+  height: var(--mark-h, 40px);
+  line-height: 0;
+}
+.hirut-mark-img {
+  height: 100%;
+  width: auto;
+  display: block;
+}
+.hirut-mark-img--on-dark { display: none; }
+
+.band-dark .hirut-mark-img--on-light,
+.band-ink .hirut-mark-img--on-light,
+.site-footer .hirut-mark-img--on-light,
+.header-on-dark:not(.is-solid) .hirut-mark-img--on-light { display: none; }
+
+.band-dark .hirut-mark-img--on-dark,
+.band-ink .hirut-mark-img--on-dark,
+.site-footer .hirut-mark-img--on-dark,
+.header-on-dark:not(.is-solid) .hirut-mark-img--on-dark { display: block; }
+
 .brand svg, .footer-brand-mark svg, .lockup-hirut svg { flex: 0 0 auto; }
 .brand-name {
   display: block;
@@ -459,11 +486,66 @@ body.nav-open .header-on-dark .nav-toggle-bar { background: var(--ink-900); }
 .hero-wave { position: relative; z-index: 1; margin-top: clamp(2.5rem, 6vh, 4.5rem); }
 
 .page-hero {
+  position: relative;
   background: linear-gradient(180deg, var(--ink-950), var(--ink-900));
   color: var(--ink-100);
   padding-top: calc(var(--header-h) + clamp(2.5rem, 6vh, 4.5rem));
   padding-bottom: clamp(2.5rem, 6vh, 4.5rem);
+  overflow: hidden;
 }
+.page-hero--media { padding-block: calc(var(--header-h) + clamp(3.5rem, 8vh, 6rem)) clamp(3.5rem, 8vh, 6rem); }
+.page-hero > .container { position: relative; z-index: 3; }
+
+/* The still paints at once; the clip fades in over it when the
+   connection can afford it (see BgVideoEffects). */
+.page-hero-still,
+.page-hero-video {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.page-hero-video {
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 1s var(--ease-out);
+}
+.page-hero-video.is-playing { opacity: 1; }
+@media (prefers-reduced-motion: reduce) {
+  .page-hero-video { display: none; }
+}
+
+/* Two purposeful layers instead of one blanket, so the footage stays
+   visible while the type stays readable:
+   · a top band that protects the header/nav, faded out by ~190px
+   · a left band under the heading and lead
+   Left column lands near 66% ink  the floor that still clears 4.5:1
+   for paper-on-ink even if a frame goes to white  while the right of
+   the frame sits around 18%, so the clip actually reads. */
+.page-hero-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background:
+    linear-gradient(180deg,
+      color-mix(in srgb, var(--ink-950) 78%, transparent) 0,
+      color-mix(in srgb, var(--ink-950) 52%, transparent) 95px,
+      transparent 200px),
+    linear-gradient(96deg,
+      color-mix(in srgb, var(--ink-950) 72%, transparent) 0%,
+      color-mix(in srgb, var(--ink-950) 66%, transparent) 50%,
+      color-mix(in srgb, var(--ink-950) 60%, transparent) 64%,
+      color-mix(in srgb, var(--ink-950) 26%, transparent) 82%,
+      color-mix(in srgb, var(--ink-950) 14%, transparent) 100%);
+}
+
+/* Over footage the lead runs to ~64% of the width, where the scrim has
+   eased to 60% ink. Paper clears 4.5:1 there against even a white
+   frame; --ink-100 would not (see the contrast table in the README). */
+.page-hero--media .lead,
+.page-hero--media .breadcrumbs { color: var(--paper); }
 .page-hero h1 { color: var(--paper); }
 .page-hero .lead { max-width: 62ch; font-size: var(--text-lg); }
 
@@ -581,7 +663,7 @@ a.card { text-decoration: none; color: inherit; }
   margin-block: 4px;
 }
 .ph-chip::before {
-  content: 'PLACEHOLDER — ';
+  content: 'PLACEHOLDER  ';
   font-family: var(--font-display);
   font-weight: 700;
   font-size: var(--text-2xs);
@@ -1104,7 +1186,7 @@ a.card { text-decoration: none; color: inherit; }
   .card, .btn, .gauge-fill, .btn .arrow, .pillar summary::after { transition: none; }
 }
 
-/* ---------- 22b. "What we do" — photo tiles with overlaid text ----------
+/* ---------- 22b. "What we do"  photo tiles with overlaid text ----------
    Four portrait tiles that compose on entry and decompose on exit. The
    image settles from a slight over-scale while the text rises under it. */
 .legs {
@@ -1249,6 +1331,113 @@ a.card { text-decoration: none; color: inherit; }
   .leg-img, .leg-body > *, .reveal-cycle { transition: none; transform: none; }
   .leg-img { transform: scale(1); }
 }
+
+/* ---------- 22c. Leadership cards ---------- */
+.team-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1rem, 2vw, 1.6rem);
+}
+@media (max-width: 980px) { .team-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 620px) { .team-grid { grid-template-columns: 1fr; } }
+
+/* Photo-led card: the portrait is the card, the credentials sit under it. */
+.team-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s var(--ease-out);
+}
+.team-card:hover {
+  border-color: var(--hydro-500);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 44px -24px color-mix(in srgb, var(--ink-900) 55%, transparent);
+}
+
+/* Both media slots share the frame; each sets its own display/background
+   below at equal specificity, so neither is clobbered by this rule. */
+.team-card > picture,
+.team-card > .team-monogram {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  line-height: 0;
+}
+.team-card > picture { display: block; background: var(--paper-2); }
+.team-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 22%;
+  transition: transform 0.6s var(--ease-out), filter 0.4s;
+  filter: saturate(0.94);
+}
+.team-card:hover .team-photo { transform: scale(1.045); filter: saturate(1.04); }
+
+/* initials stand-in  deliberately not a stock face for a named person */
+.team-card > .team-monogram {
+  display: grid;
+  place-items: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2.4rem, 5vw, 3.4rem);
+  letter-spacing: 0.06em;
+  line-height: 1;
+  color: var(--paper);
+  background:
+    radial-gradient(120% 120% at 30% 20%, color-mix(in srgb, var(--hydro-500) 40%, transparent), transparent 60%),
+    linear-gradient(140deg, var(--ink-900), var(--ink-800));
+}
+
+.team-body {
+  min-width: 0;
+  padding: clamp(1rem, 1.9vw, 1.35rem);
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.team-card h3 {
+  font-size: var(--text-h3);
+  margin: 0 0 4px;
+  line-height: 1.22;
+}
+.team-role {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--text-sm);
+  color: var(--hydro-700);
+  margin: 0 0 0.7rem;
+  line-height: 1.35;
+}
+.team-quals {
+  list-style: none;
+  margin: auto 0 0;
+  padding: 0.9rem 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.team-quals li {
+  font-size: var(--text-2xs);
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: var(--muted);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 3px 9px;
+  white-space: nowrap;
+}
+/* only an actual doctorate sits forward  keyed off the qualification
+   itself, not "whatever came last" */
+.team-quals li.is-doctorate { color: var(--ink-800); border-color: var(--sand-500); }
 
 /* ---------- 23. Misc ---------- */
 .sample-img {

@@ -7,13 +7,13 @@ import { domesticPartners, internationalPartners } from '../data/site'
 export const Route = createFileRoute('/partners')({
   head: () => ({
     meta: [
-      { title: 'Partners & Brands — Hirut Engineering and General Trading PLC' },
+      { title: 'Partners & Brands  Hirut Engineering and General Trading PLC' },
       {
         name: 'description',
         content:
-          'Domestic partners and clients, and international partners and brands Hirut Engineering works with — including Orica, RST Instruments, SISGEO, ENCARDIO RITE, Hunter, Perkins, JCB, and PENTAX.',
+          'Domestic partners and clients, and international partners and brands Hirut Engineering works with  including Orica, RST Instruments, SISGEO, ENCARDIO RITE, Hunter, Perkins, JCB, and PENTAX.',
       },
-      { property: 'og:title', content: 'Partners & Brands — Hirut Engineering' },
+      { property: 'og:title', content: 'Partners & Brands  Hirut Engineering' },
       {
         property: 'og:description',
         content: 'The companies we build for, and the brands we bring to East Africa.',
@@ -27,12 +27,13 @@ function PartnersPage() {
   return (
     <>
       <PageHero
+        media="partners"
         current="Partners & Brands"
         title="The company we keep"
         lead="The organizations we build for at home, and the international brands we bring to East Africa."
       >
         <PhChip>
-          names are rendered as styled text badges by design — official logos will be swapped in
+          names are rendered as styled text badges by design  official logos will be swapped in
           only once each company's permission is confirmed; the international group is labeled
           neutrally until the client confirms which are formal partners versus brands supplied
         </PhChip>

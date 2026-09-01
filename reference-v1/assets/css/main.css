@@ -1,6 +1,6 @@
 /* ============================================================
    HIRUT ENGINEERING & GENERAL TRADING PLC
-   Design system — water + ground
+   Design system  water + ground
    ------------------------------------------------------------
    Palette lives entirely in tokens below so exact hexes can be
    swapped when the final logo arrives.
@@ -8,21 +8,21 @@
 
 /* ---------- 1. Design tokens ---------- */
 :root {
-  /* Ink — deep water / authority */
+  /* Ink  deep water / authority */
   --ink-950: #071522;
   --ink-900: #0b1f30;
   --ink-800: #12304a;
   --ink-700: #1a4160;
   --ink-100: #d5e1ea;
 
-  /* Hydro — the living accent */
+  /* Hydro  the living accent */
   --hydro-300: #62d3e9;
   --hydro-400: #2fbbd8;
   --hydro-500: #17a0c2;
   --hydro-600: #0f89a8;
   --hydro-700: #0c7391;  /* AA on paper for text/links */
 
-  /* Sand — the geotechnical earth tone */
+  /* Sand  the geotechnical earth tone */
   --sand-600: #a8834f;
   --sand-500: #c2a374;
   --sand-200: #e9dfc9;
@@ -504,7 +504,7 @@ a.card { text-decoration: none; color: inherit; }
   margin-block: 4px;
 }
 .ph-chip::before {
-  content: "PLACEHOLDER — ";
+  content: "PLACEHOLDER  ";
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 0.66rem;
@@ -553,7 +553,7 @@ a.card { text-decoration: none; color: inherit; }
 /* ---------- 11. Scroll-scrubbed construction band (§4.1) ---------- */
 /* Default (no JS, no video, reduced motion): a normal flowing section.
    JS adds .scrub--live only once the video is buffered and scrubbing
-   is confirmed viable — then the band pins and scroll drives playback. */
+   is confirmed viable  then the band pins and scroll drives playback. */
 
 .scrub { position: relative; }
 .scrub--live { padding-block: 0; }
@@ -579,7 +579,7 @@ a.card { text-decoration: none; color: inherit; }
 .scrub--live .scrub-video { display: block; }
 .scrub--live .scrub-media .ph-media { display: none; }
 
-/* Depth gauge — the signature phase indicator */
+/* Depth gauge  the signature phase indicator */
 .scrub-side { display: flex; gap: clamp(1.2rem, 2.5vw, 2rem); }
 .gauge {
   position: relative;

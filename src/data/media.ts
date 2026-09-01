@@ -1,5 +1,5 @@
 /* ============================================================
-   PLACEHOLDER MEDIA — stock photography, hotlinked from Unsplash's
+   PLACEHOLDER MEDIA  stock photography, hotlinked from Unsplash's
    CDN so the preview build reads like a finished site.
 
    These are NOT photographs of Hirut Engineering's own work. Every
@@ -33,7 +33,7 @@ const S = (id: string, w: number) =>
 
 /**
  * Lighter variant for decorative photographs that sit behind a heavy
- * scrim with text over them — they are dimmed and blurred by the
+ * scrim with text over them  they are dimmed and blurred by the
  * overlay anyway, so quality and resolution can drop a long way before
  * anyone could tell, and these load during the initial viewport pass.
  */
@@ -106,6 +106,42 @@ export const legImages: StockImage[] = [
     alt: 'A technician servicing equipment on site',
   },
 ]
+
+/* ============================================================
+   Page-header media. Each header shows a still immediately (cheap,
+   responsive, always visible) and fades a short looping clip in over
+   it  but only once the page is idle, the header is on screen, and
+   the connection can afford it. On a slow link, Save-Data, or with
+   reduced motion, the still simply stays: the header is never blank
+   and never costs megabytes it did not earn.
+
+   Video is hotlinked from Pexels (free licence, Range-capable CDN);
+   stills from Unsplash. Both are placeholders  swap for the
+   company's own footage when the media library lands.
+   ============================================================ */
+export interface HeaderMedia {
+  /** basename in /video/headers/  `.jpg` still and `.mp4` clip */
+  name: string
+  alt: string
+}
+
+export const headerMedia: Record<string, HeaderMedia> = {
+  about: { name: 'about', alt: 'Engineers reviewing drawings on a construction site' },
+  products: { name: 'products', alt: 'Aerial view of an industrial complex' },
+  services: { name: 'services', alt: 'An excavator working on a construction site' },
+  projects: { name: 'projects', alt: 'Aerial view over a construction site' },
+  partners: { name: 'partners', alt: 'Water running over rock' },
+  contact: { name: 'contact', alt: 'Aerial view of irrigated farmland' },
+}
+
+/** The still is frame one of the clip, so the fade-in is seamless. */
+export function headerStill(m: HeaderMedia) {
+  return { src: `/video/headers/${m.name}.jpg` }
+}
+
+export function headerVideo(m: HeaderMedia) {
+  return `/video/headers/${m.name}.mp4`
+}
 
 export const teamImage: StockImage = {
   id: 'photo-1760963301666-582b92218a19',
