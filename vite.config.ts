@@ -1,14 +1,15 @@
 import { defineConfig } from 'vite'
 import { tanstackStart } from '@tanstack/react-start/plugin/vite'
+import { nitro } from 'nitro/vite'
 import viteReact from '@vitejs/plugin-react'
 
-const config = defineConfig({
-  resolve: { tsconfigPaths: true },
+export default defineConfig({
+  resolve: {
+    tsconfigPaths: true,
+  },
+
   plugins: [
     tanstackStart({
-      // NOTE: a 'target' option is not supported by @tanstack/react-start 1.168.
-      // The build emits dist/client (static) + dist/server; point Vercel at
-      // dist/client as the output directory. See the deploy note in README.
       prerender: {
         enabled: true,
         crawlLinks: true,
@@ -16,8 +17,9 @@ const config = defineConfig({
         failOnError: true,
       },
     }),
+
+    nitro(),
+
     viteReact(),
   ],
 })
-
-export default config
