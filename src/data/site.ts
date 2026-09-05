@@ -7,6 +7,19 @@ export const TAGLINE = 'Engineering water. Understanding ground.'
 export const PHONE_1 = { display: '+251 911 518 448', tel: '+251911518448' }
 export const PHONE_2 = { display: '+251 976 575 859', tel: '+251976575859' }
 
+const OFFICE_QUERY = 'Signal Business Center, Kenenisa Ave, Addis Ababa, Ethiopia'
+
+export const OFFICE = {
+  lines: ['Yeka Sub-City, Woreda 07', 'Signal Business Center', 'Addis Ababa, Ethiopia'] as const,
+  hours: 'Monday–Friday, 8am–6pm',
+  openingHours: 'Mo-Fr 08:00-18:00',
+  /** Signal Business Center on Kenenisa Ave (Google Place). */
+  lat: 9.0219851,
+  lon: 38.7866934,
+  mapsUrl: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(OFFICE_QUERY)}`,
+  mapsEmbedUrl: `https://www.google.com/maps?q=${encodeURIComponent(OFFICE_QUERY)}&ll=9.0219851,38.7866934&z=17&hl=en&output=embed`,
+}
+
 /* §6 content correction: 50M+ → 100M+ (Total portfolio) */
 export const stats = [
   { value: 50, suffix: '+', label: 'Projects delivered across Ethiopia' },

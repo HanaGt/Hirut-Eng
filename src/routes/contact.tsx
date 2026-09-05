@@ -2,8 +2,8 @@ import { createFileRoute } from '@tanstack/react-router'
 
 import { ContactForm } from '../components/ContactForm'
 import { PageHero } from '../components/PageBits'
-import { PhChip, PhMedia } from '../components/Placeholders'
-import { PHONE_1, PHONE_2 } from '../data/site'
+import { PhChip } from '../components/Placeholders'
+import { OFFICE, PHONE_1, PHONE_2 } from '../data/site'
 
 export const Route = createFileRoute('/contact')({
   validateSearch: (search: Record<string, unknown>): { type?: string } => ({
@@ -59,30 +59,35 @@ function ContactPage() {
             </div>
             <div className="contact-item">
               <h2 className="contact-h">Office</h2>
-              <PhChip>physical address pending</PhChip>
-              <PhMedia
-                ratio="16/9"
-                detail="Map embed: pending address confirmation"
-                className="contact-map"
-              />
+              <p>
+                {OFFICE.lines.map((line) => (
+                  <span key={line}>
+                    {line}
+                    <br />
+                  </span>
+                ))}
+              </p>
+              <div className="contact-map">
+                <iframe
+                  title="Map of Hirut Engineering office at Signal Business Center, Yeka Sub-City"
+                  src={OFFICE.mapsEmbedUrl}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  allowFullScreen
+                />
+              </div>
+              <a
+                className="contact-map-link"
+                href={OFFICE.mapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Open in Google Maps
+              </a>
             </div>
             <div className="contact-item">
               <h2 className="contact-h">Working hours</h2>
-              <PhChip>working hours pending</PhChip>
-            </div>
-            <div className="contact-item">
-              <h2 className="contact-h">Company profile</h2>
-              <p>
-                <a
-                  className="btn btn-ghost"
-                  href="#"
-                  aria-disabled="true"
-                  onClick={(e) => e.preventDefault()}
-                >
-                  Download company profile (PDF)
-                </a>
-              </p>
-              <PhChip>company profile PDF pending: button built, link to be attached</PhChip>
+              <p>{OFFICE.hours}</p>
             </div>
             <div className="contact-item">
               <h2 className="contact-h">Social</h2>

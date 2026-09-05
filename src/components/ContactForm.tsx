@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { InquiryTypeSelect } from './InquiryTypeSelect'
 import { PhChip } from './Placeholders'
 import { PHONE_1, inquiryTypes } from '../data/site'
 
@@ -135,26 +136,17 @@ export function ContactForm({ preselect }: { preselect?: string }) {
           <label htmlFor="inquiry-type">
             Inquiry type <span className="req" aria-hidden="true">*</span>
           </label>
-          <select
+          <InquiryTypeSelect
             id="inquiry-type"
             name="inquiry-type"
-            required
             value={type}
-            onChange={(e) => setType(e.target.value)}
-            aria-invalid={errors.type || undefined}
-            aria-describedby={errors.type ? 'err-type' : undefined}
-          >
-            <option value="">Select an inquiry type…</option>
-            {inquiryTypes.map((group) => (
-              <optgroup label={group.group} key={group.group}>
-                {group.options.map((o) => (
-                  <option value={o.value} key={o.value}>
-                    {o.label}
-                  </option>
-                ))}
-              </optgroup>
-            ))}
-          </select>
+            invalid={errors.type}
+            describedBy={errors.type ? 'err-type' : undefined}
+            onChange={(next) => {
+              setType(next)
+              setErrors((e) => (e.type ? { ...e, type: false } : e))
+            }}
+          />
           {err('type')}
         </div>
         <div className="field field--full">

@@ -5,7 +5,7 @@ import { ABOUT_SECTIONS } from './AboutNav'
 import { PhChip } from './Placeholders'
 import { HirutMark } from './Logo'
 import { categories } from '../data/products'
-import { PHONE_1, PHONE_2, SITE_DESCRIPTOR, SITE_NAME, TAGLINE } from '../data/site'
+import { OFFICE, PHONE_1, PHONE_2, SITE_DESCRIPTOR, SITE_NAME, TAGLINE } from '../data/site'
 
 /* Projects stays out of the navigation until real portfolio content exists
    (revision 3 §6); the route itself is still reachable and still prerendered. */
@@ -165,7 +165,16 @@ export function Footer() {
               Water and ground engineering, supplied, built, advised, and supported across
               Ethiopia and East Africa since 2016.
             </p>
-            <PhChip>physical address, email address &amp; working hours pending</PhChip>
+            <p>
+              {OFFICE.lines.map((line) => (
+                <span key={line}>
+                  {line}
+                  <br />
+                </span>
+              ))}
+            </p>
+            <p>{OFFICE.hours}</p>
+            <PhChip>email address pending</PhChip>
           </div>
           <div>
             <h2 className="footer-h">About Us</h2>

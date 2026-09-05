@@ -3,15 +3,16 @@ import { HeadContent, Outlet, Scripts, createRootRoute } from '@tanstack/react-r
 
 import { Footer, Header } from '../components/Chrome'
 import { CycleRevealEffects, RevealEffects } from '../components/motion'
-import { PHONE_1, PHONE_2, SITE_NAME, SITE_NAME_SHORT, TAGLINE } from '../data/site'
+import { OFFICE, PHONE_1, PHONE_2, SITE_NAME, SITE_NAME_SHORT, TAGLINE } from '../data/site'
 
 import appCss from '../styles.css?url'
 
 /* Organization data published as JSON-LD. Every field here is already
    stated on the site: the legal name (a sole proprietorship, not a private
    limited company),
-   the short trading name, the two published phone numbers, and the 2016
-   founding year. Address and social profiles stay out until supplied. */
+   the short trading name, the two published phone numbers, the 2016
+   founding year, and the Yeka office address. Social profiles stay out
+   until supplied. */
 const ORGANIZATION_LD = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
@@ -22,6 +23,13 @@ const ORGANIZATION_LD = {
   areaServed: 'Ethiopia and East Africa',
   telephone: [PHONE_1.display, PHONE_2.display],
   logo: '/img/logo/mark.webp',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: `${OFFICE.lines[1]}, ${OFFICE.lines[0]}`,
+    addressLocality: 'Addis Ababa',
+    addressCountry: 'ET',
+  },
+  openingHours: OFFICE.openingHours,
 }
 
 export const Route = createRootRoute({
