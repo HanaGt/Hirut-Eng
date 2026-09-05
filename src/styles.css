@@ -1388,6 +1388,23 @@ a.card { text-decoration: none; color: inherit; }
   margin-top: 0.7rem;
   font-size: var(--text-sm) !important;
 }
+.social-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.social-list li { margin: 0 0 8px; }
+.social-list li:last-child { margin-bottom: 0; }
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.social-link svg {
+  width: 1.15em;
+  height: 1.15em;
+  flex: 0 0 auto;
+}
 
 /* ---------- 21. Footer ---------- */
 .site-footer {

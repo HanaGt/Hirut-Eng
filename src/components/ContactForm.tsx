@@ -169,10 +169,10 @@ export function ContactForm({ preselect }: { preselect?: string }) {
           Send inquiry <span className="arrow" aria-hidden="true">→</span>
         </button>
       </p>
-      <PhChip>
+      {/* <PhChip>
         form submission endpoint / destination email pending: the form currently validates and
         shows its success state without sending; wire the endpoint in ContactForm.tsx where marked
-      </PhChip>
+      </PhChip> */}
     </form>
   )
 }

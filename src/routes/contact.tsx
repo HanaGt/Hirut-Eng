@@ -2,8 +2,8 @@ import { createFileRoute } from '@tanstack/react-router'
 
 import { ContactForm } from '../components/ContactForm'
 import { PageHero } from '../components/PageBits'
-import { PhChip } from '../components/Placeholders'
-import { OFFICE, PHONE_1, PHONE_2 } from '../data/site'
+import { SocialIcon } from '../components/SocialIcon'
+import { EMAIL, OFFICE, PHONE_1, PHONE_2, SOCIAL } from '../data/site'
 
 export const Route = createFileRoute('/contact')({
   validateSearch: (search: Record<string, unknown>): { type?: string } => ({
@@ -55,7 +55,9 @@ function ContactPage() {
             </div>
             <div className="contact-item">
               <h2 className="contact-h">Email</h2>
-              <PhChip>email address pending</PhChip>
+              <p>
+                <a href={EMAIL.href}>{EMAIL.display}</a>
+              </p>
             </div>
             <div className="contact-item">
               <h2 className="contact-h">Office</h2>
@@ -91,7 +93,16 @@ function ContactPage() {
             </div>
             <div className="contact-item">
               <h2 className="contact-h">Social</h2>
-              <PhChip>social links pending</PhChip>
+              <ul className="social-list">
+                {SOCIAL.map((s) => (
+                  <li key={s.href}>
+                    <a className="social-link" href={s.href} target="_blank" rel="noopener noreferrer">
+                      <SocialIcon name={s.id} />
+                      {s.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
             </div>
           </aside>
         </div>

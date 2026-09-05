@@ -2,10 +2,10 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { Link, useRouterState } from '@tanstack/react-router'
 import { jumpScroll, lockPageScroll, unlockPageScroll } from '../lib/scroll-lock'
 import { ABOUT_SECTIONS } from './AboutNav'
-import { PhChip } from './Placeholders'
 import { HirutMark } from './Logo'
+import { SocialIcon } from './SocialIcon'
 import { categories } from '../data/products'
-import { OFFICE, PHONE_1, PHONE_2, SITE_DESCRIPTOR, SITE_NAME, TAGLINE } from '../data/site'
+import { EMAIL, OFFICE, PHONE_1, PHONE_2, SITE_DESCRIPTOR, SITE_NAME, SOCIAL, TAGLINE } from '../data/site'
 
 /* Projects stays out of the navigation until real portfolio content exists
    (revision 3 §6); the route itself is still reachable and still prerendered. */
@@ -174,7 +174,9 @@ export function Footer() {
               ))}
             </p>
             <p>{OFFICE.hours}</p>
-            <PhChip>email address pending</PhChip>
+            <p>
+              <a href={EMAIL.href}>{EMAIL.display}</a>
+            </p>
           </div>
           <div>
             <h2 className="footer-h">About Us</h2>
@@ -219,6 +221,14 @@ export function Footer() {
             <ul>
               <li><a href={`tel:${PHONE_1.tel}`}>{PHONE_1.display}</a></li>
               <li><a href={`tel:${PHONE_2.tel}`}>{PHONE_2.display}</a></li>
+              {SOCIAL.map((s) => (
+                <li key={s.href}>
+                  <a className="social-link" href={s.href} target="_blank" rel="noopener noreferrer">
+                    <SocialIcon name={s.id} />
+                    {s.label}
+                  </a>
+                </li>
+              ))}
               <li>
                 <Link
                   className="btn btn-primary"
@@ -231,7 +241,6 @@ export function Footer() {
                 </Link>
               </li>
             </ul>
-            <PhChip style={{ marginTop: 12 }}>social links pending</PhChip>
           </div>
         </div>
         <div className="footer-bottom">

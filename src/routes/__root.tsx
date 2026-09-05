@@ -3,7 +3,7 @@ import { HeadContent, Outlet, Scripts, createRootRoute } from '@tanstack/react-r
 
 import { Footer, Header } from '../components/Chrome'
 import { CycleRevealEffects, RevealEffects } from '../components/motion'
-import { OFFICE, PHONE_1, PHONE_2, SITE_NAME, SITE_NAME_SHORT, TAGLINE } from '../data/site'
+import { EMAIL, OFFICE, PHONE_1, PHONE_2, SITE_NAME, SITE_NAME_SHORT, SOCIAL, TAGLINE } from '../data/site'
 
 import appCss from '../styles.css?url'
 
@@ -11,8 +11,8 @@ import appCss from '../styles.css?url'
    stated on the site: the legal name (a sole proprietorship, not a private
    limited company),
    the short trading name, the two published phone numbers, the 2016
-   founding year, and the Yeka office address. Social profiles stay out
-   until supplied. */
+   founding year, the Yeka office address, and the published social
+   profiles. */
 const ORGANIZATION_LD = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
@@ -22,6 +22,7 @@ const ORGANIZATION_LD = {
   foundingDate: '2016',
   areaServed: 'Ethiopia and East Africa',
   telephone: [PHONE_1.display, PHONE_2.display],
+  email: EMAIL.display,
   logo: '/img/logo/mark.webp',
   address: {
     '@type': 'PostalAddress',
@@ -30,6 +31,7 @@ const ORGANIZATION_LD = {
     addressCountry: 'ET',
   },
   openingHours: OFFICE.openingHours,
+  sameAs: SOCIAL.map((s) => s.href),
 }
 
 export const Route = createRootRoute({

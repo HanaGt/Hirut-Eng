@@ -6,6 +6,7 @@ export const SITE_DESCRIPTOR = 'Engineering Construction & General Trading'
 export const TAGLINE = 'Engineering water. Understanding ground.'
 export const PHONE_1 = { display: '+251 911 518 448', tel: '+251911518448' }
 export const PHONE_2 = { display: '+251 976 575 859', tel: '+251976575859' }
+export const EMAIL = { display: 'info@hirutengineering.com', href: 'mailto:info@hirutengineering.com' }
 
 const OFFICE_QUERY = 'Signal Business Center, Kenenisa Ave, Addis Ababa, Ethiopia'
 
@@ -19,6 +20,15 @@ export const OFFICE = {
   mapsUrl: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(OFFICE_QUERY)}`,
   mapsEmbedUrl: `https://www.google.com/maps?q=${encodeURIComponent(OFFICE_QUERY)}&ll=9.0219851,38.7866934&z=17&hl=en&output=embed`,
 }
+
+export const SOCIAL = [
+  { id: 'telegram' as const, label: 'Telegram', href: 'https://t.me/Hirutengineering' },
+  {
+    id: 'facebook' as const,
+    label: 'Facebook',
+    href: 'https://www.facebook.com/share/1czPpCM8ZQ/?mibextid=wwXIfr',
+  },
+]
 
 /* §6 content correction: 50M+ → 100M+ (Total portfolio) */
 export const stats = [
