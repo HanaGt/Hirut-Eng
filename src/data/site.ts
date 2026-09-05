@@ -57,7 +57,7 @@ export const domesticPartners: Partner[] = [
   { name: 'Oromia Water Works Construction Enterprise', logo: '/img/partners/domestic/oromia-water-works.webp' },
   { name: 'Zemen Construction Corporation', logo: '/img/partners/domestic/zemen-construction.webp' },
   { name: 'GIW', logo: '/img/partners/domestic/giw.webp?v=2' },
-  { name: 'Michael Tilahun Import' },
+  { name: 'Michael Tilahun Import', logo: '/img/partners/domestic/michael-tilahun-import.webp' },
   { name: 'Sekela Engineering' },
 ]
 
