@@ -73,8 +73,8 @@ function revealCurrentTab() {
   list.scrollTo({ left: Math.max(0, left), behavior: 'auto' })
 }
 
-/** Lives in the About layout, above every sub-page, and stays put when
-    the tab changes. Sticky under the site header on scroll. */
+/** Lives in the About layout, above every sub-page. Overlays the header
+    video at the top of the page; sticks under the site header on scroll. */
 export function AboutNav({ current }: { current: AboutPath }) {
   useLayoutEffect(() => {
     revealCurrentTab()

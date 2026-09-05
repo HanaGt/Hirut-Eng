@@ -2,9 +2,9 @@ import { Link, createFileRoute } from '@tanstack/react-router'
 
 import { ABOUT_SECTIONS, AboutNext } from '../components/AboutNav'
 import { CtaBand, Eyebrow, PageHero } from '../components/PageBits'
-import { PhChip, PhMedia, SampleImg } from '../components/Placeholders'
+import { PhChip, PhMedia } from '../components/Placeholders'
 import { StatsBand } from '../components/StatsBand'
-import { stock, teamImage } from '../data/media'
+import { storyPhoto } from '../data/media'
 import { clientExpectations, corporatePromise, leadershipIntro, purpose } from '../data/about'
 import { departments } from '../data/departments'
 import { leaderInitials, leadership } from '../data/leadership'
@@ -70,7 +70,7 @@ function AboutIndexPage() {
       {/* Our story - approved v2 copy, kept verbatim */}
       <section className="section">
         <div className="container">
-          <div className="grid grid-2" style={{ alignItems: 'center' }}>
+          <div className="grid grid-2 story-split">
             <div className="reveal">
               <Eyebrow>Our story</Eyebrow>
               <h2>From field experience to a full-service firm</h2>
@@ -87,12 +87,15 @@ function AboutIndexPage() {
                 Digital Solutions geotechnical and subsurface instruments.
               </p>
             </div>
-            <div className="reveal" style={{ '--reveal-delay': '.1s' } as React.CSSProperties}>
-              <SampleImg {...stock(teamImage)} ratio="4 / 3" sizes="(max-width: 980px) 92vw, 44vw" />
-              <p className="sample-note">
-                Sample photograph: stock imagery standing in until the company's own site
-                photography is supplied.
-              </p>
+            <div className="story-photo reveal" style={{ '--reveal-delay': '.1s' } as React.CSSProperties}>
+              <img
+                src={storyPhoto.src}
+                alt={storyPhoto.alt}
+                width={storyPhoto.width}
+                height={storyPhoto.height}
+                loading="lazy"
+                decoding="async"
+              />
             </div>
           </div>
         </div>

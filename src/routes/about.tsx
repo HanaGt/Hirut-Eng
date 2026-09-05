@@ -10,7 +10,6 @@ function AboutLayout() {
   const pathname = useRouterState({ select: (s) => s.location.pathname })
   return (
     <div className="about-shell">
-      <span className="about-nav-offset" aria-hidden="true" />
       <AboutNav current={aboutPathFromLocation(pathname)} />
       <Outlet />
     </div>

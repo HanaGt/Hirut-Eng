@@ -49,27 +49,31 @@ function Brand({ footer = false }: { footer?: boolean }) {
   )
 }
 
-function isAboutPath(path: string) {
-  const p = normPath(path)
-  return p === '/about' || p.startsWith('/about/')
-}
-
 export function Header() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
   const pathname = useRouterState({ select: (s) => s.location.pathname })
   const pathnameRef = useRef(pathname)
   pathnameRef.current = pathname
-  const solid = scrolled || isAboutPath(pathname)
+  const solid = scrolled
 
   useLayoutEffect(() => {
-    setScrolled(window.scrollY > 24)
+    const s = window.scrollY > 24
+    setScrolled(s)
+    document.body.classList.toggle('is-scrolled', s)
   }, [pathname])
 
   useEffect(() => {
-    const sync = () => setScrolled(window.scrollY > 24)
+    const sync = () => {
+      const s = window.scrollY > 24
+      setScrolled(s)
+      document.body.classList.toggle('is-scrolled', s)
+    }
     window.addEventListener('scroll', sync, { passive: true })
-    return () => window.removeEventListener('scroll', sync)
+    return () => {
+      window.removeEventListener('scroll', sync)
+      document.body.classList.remove('is-scrolled')
+    }
   }, [])
 
   // Close the drawer on navigation; reflect open state on <body> for CSS.

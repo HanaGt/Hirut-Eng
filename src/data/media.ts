@@ -143,7 +143,10 @@ export function headerVideo(m: HeaderMedia) {
   return `/video/headers/${m.name}.mp4`
 }
 
-export const teamImage: StockImage = {
-  id: 'photo-1760963301666-582b92218a19',
-  alt: 'Engineers in hard hats and high-visibility vests conferring on site',
+/** Company photography, self-hosted. */
+export const storyPhoto = {
+  src: '/img/about/our-story.jpg',
+  width: 768,
+  height: 1024,
+  alt: 'A field crew in hard hats lowering a blue well casing beside a pickup truck',
 }
