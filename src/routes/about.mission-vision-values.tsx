@@ -1,8 +1,9 @@
 import { createFileRoute } from '@tanstack/react-router'
 
 import { AboutNav, AboutNext } from '../components/AboutNav'
+import { StatementSwitcher, ValueBoard } from '../components/MissionVision'
 import { CtaBand, Eyebrow, PageHero } from '../components/PageBits'
-import { corporatePromise, coreValues, mission, purpose, vision } from '../data/about'
+import { corporatePromise } from '../data/about'
 import { SITE_NAME } from '../data/site'
 
 export const Route = createFileRoute('/about/mission-vision-values')({
@@ -19,8 +20,6 @@ export const Route = createFileRoute('/about/mission-vision-values')({
   component: MissionVisionValuesPage,
 })
 
-const STATEMENTS = [vision, mission, purpose]
-
 function MissionVisionValuesPage() {
   return (
     <>
@@ -36,63 +35,30 @@ function MissionVisionValuesPage() {
 
       <AboutNav current="/about/mission-vision-values" />
 
-      {/* Three short statements, each displayed in full */}
       <section className="section">
         <div className="container">
-          <div className="statement-stack">
-            {STATEMENTS.map((s, i) => (
-              <article
-                className="statement reveal"
-                style={i > 0 ? ({ '--reveal-delay': `${i * 0.08}s` } as React.CSSProperties) : undefined}
-                key={s.title}
-                id={s.title.toLowerCase().replace(/\s+/g, '-')}
-              >
-                <div className="statement-head">
-                  <span className="statement-num" aria-hidden="true">
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
-                  <h2>{s.title}</h2>
-                </div>
-                <div className="prose-measure">
-                  {s.paragraphs.map((p) => (
-                    <p className="statement-p" key={p.slice(0, 40)}>
-                      {p}
-                    </p>
-                  ))}
-                </div>
-              </article>
-            ))}
+          <div className="section-head reveal">
+            <Eyebrow>Direction</Eyebrow>
+            <h2>Vision, mission and purpose</h2>
+          </div>
+          <div className="reveal">
+            <StatementSwitcher />
           </div>
         </div>
       </section>
 
-      {/* 5.4 ten values as a compact grid: the words are untouched, the
-          layout does the condensing the client asked for */}
       <section className="section band-mist-soft" id="core-values">
         <div className="container">
           <div className="section-head reveal">
             <Eyebrow>Our Core Values</Eyebrow>
             <h2>Ten values, in our own words</h2>
           </div>
-          <ul className="value-grid">
-            {coreValues.map((v, i) => (
-              <li
-                className="value-card reveal"
-                style={i % 3 !== 0 ? ({ '--reveal-delay': `${(i % 3) * 0.05}s` } as React.CSSProperties) : undefined}
-                key={v.n}
-              >
-                <span className="value-num" aria-hidden="true">
-                  {v.n}
-                </span>
-                <h3>{v.name}</h3>
-                <p>{v.body}</p>
-              </li>
-            ))}
-          </ul>
+          <div className="reveal">
+            <ValueBoard />
+          </div>
         </div>
       </section>
 
-      {/* 5.5 */}
       <section className="section band-dark" id="corporate-promise">
         <div className="container">
           <div className="reveal">
