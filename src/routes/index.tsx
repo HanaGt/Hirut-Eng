@@ -16,7 +16,7 @@ export const Route = createFileRoute('/')({
       {
         name: 'description',
         content:
-          'Ethiopian engineering, construction and supply company: well drilling, modern irrigation, geotechnical instrumentation, waterproofing and hydraulic works, supplied, built, and supported. Exclusive East Africa importer and installer of Orica geotechnical instruments.',
+          'Ethiopian engineering, construction and supply company: well drilling, modern irrigation, geotechnical instrumentation, waterproofing and hydraulic works, supplied, built, and supported. Exclusive East Africa importer and installer of Orica Digital Solutions geotechnical instruments.',
       },
       { property: 'og:image', content: '/img/hero-poster.jpg' },
       { property: 'og:title', content: 'Hirut Engineering | Engineering water. Understanding ground.' },
@@ -97,7 +97,7 @@ const LEGS = [
 ]
 
 const PARTNER_BAND = [
-  'Orica',
+  'Orica Digital Solutions',
   'RST Instruments',
   'SISGEO',
   'ENCARDIO RITE',
@@ -199,7 +199,7 @@ function HomePage() {
             <h2>One firm, four commitments</h2>
             <p className="lead">
               Most suppliers sell and leave. Most contractors build and hand over. Hirut Engineering
-              does both, designs the work, and stays afterward.
+              supplies quality, designs, builds the work, and stays afterward.
             </p>
           </div>
           <div className="legs" data-cycle-group>

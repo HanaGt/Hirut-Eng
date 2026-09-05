@@ -1,6 +1,5 @@
 import { Link } from '@tanstack/react-router'
 import { EyebrowWave, FlowWaves } from './Waves'
-import { PhChip } from './Placeholders'
 import { HirutMark } from './Logo'
 import { headerMedia, headerStill, headerVideo } from '../data/media'
 import { PHONE_1, PHONE_2 } from '../data/site'
@@ -14,7 +13,7 @@ export function Eyebrow({ children, center }: { children: React.ReactNode; cente
   )
 }
 
-type CrumbTo = '/' | '/products'
+type CrumbTo = '/' | '/products' | '/about'
 
 export function Breadcrumbs({
   trail,
@@ -127,8 +126,8 @@ export function CtaBand({
 }
 
 /* ============================================================
-   Orica co-branded partnership band (v2 §5): ink background,
-   Hirut × Orica lockup, exclusivity headline, instrument families,
+   Orica Digital Solutions co-branded partnership band (v2 §5): ink background,
+   Hirut × Orica Digital Solutions lockup, exclusivity headline, instrument families,
    CTA into the Geotechnical Equipment category. The partner logo is
    NEVER redrawn or restyled - an official file drops into the light
    chip slot untouched.
@@ -157,7 +156,7 @@ export function OricaBand({ compact = false }: { compact?: boolean }) {
                 <source type="image/webp" srcSet="/img/logo/orica.webp" />
                 <img
                   src="/img/logo/orica.png"
-                  alt="Orica"
+                  alt="Orica Digital Solutions"
                   width={234}
                   height={76}
                   loading="lazy"
@@ -166,10 +165,10 @@ export function OricaBand({ compact = false }: { compact?: boolean }) {
               </picture>
             </span>
           </div>
-          <h2>The only importer &amp; installer of Orica geotechnical and subsurface instruments in East Africa</h2>
+          <h2>The only importer &amp; installer of Orica Digital Solutions geotechnical and subsurface instruments in East Africa</h2>
           <p>
             When a dam, a deep excavation, or a slope needs to be understood rather than guessed at,
-            Hirut Engineering supplies and installs Orica's globally sought-after monitoring
+            Hirut Engineering supplies and installs the globally sought-after Orica Digital Solutions monitoring
             instruments, exclusively in East Africa.
           </p>
           <p>
@@ -177,10 +176,6 @@ export function OricaBand({ compact = false }: { compact?: boolean }) {
             subsurface monitoring systems, installed, commissioned, and monitored by our own
             engineers.
           </p>
-          <PhChip>
-            confirm the exact entity name (source materials say both “Orica Digital Solutions” and
-            “Orica Geosolution”) and the partnership wording Hirut is permitted to publish
-          </PhChip>
           <p style={{ marginTop: '1.2rem' }}>
             <Link
               className="btn btn-primary"

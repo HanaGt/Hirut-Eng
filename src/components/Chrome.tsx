@@ -1,16 +1,19 @@
 import { useEffect, useState } from 'react'
 import { Link, useRouterState } from '@tanstack/react-router'
+import { ABOUT_SECTIONS } from './AboutNav'
 import { PhChip } from './Placeholders'
 import { HirutMark } from './Logo'
 import { categories } from '../data/products'
-import { PHONE_1, PHONE_2, SITE_NAME, TAGLINE } from '../data/site'
+import { PHONE_1, PHONE_2, SITE_DESCRIPTOR, SITE_NAME, TAGLINE } from '../data/site'
 
+/* About Us carries a submenu of its eight sub-sections. Projects stays out
+   of the navigation until real portfolio content exists (revision 3 §6);
+   the route itself is still reachable and still prerendered. */
 const NAV = [
   { to: '/', label: 'Home' },
-  { to: '/about', label: 'About' },
+  { to: '/about', label: 'About Us', sub: ABOUT_SECTIONS },
   { to: '/products', label: 'Products' },
   { to: '/services', label: 'Services' },
-  { to: '/projects', label: 'Projects' },
   { to: '/partners', label: 'Partners' },
   { to: '/contact', label: 'Contact' },
 ] as const
@@ -21,7 +24,7 @@ function Brand({ footer = false }: { footer?: boolean }) {
       <HirutMark size={footer ? 42 : 38} />
       <span>
         <span className="brand-name">HIRUT</span>
-        <span className="brand-sub">Engineering &amp; General Trading PLC</span>
+        <span className="brand-sub">{SITE_DESCRIPTOR}</span>
       </span>
     </>
   )
@@ -36,6 +39,7 @@ function Brand({ footer = false }: { footer?: boolean }) {
 export function Header() {
   const [solid, setSolid] = useState(false)
   const [open, setOpen] = useState(false)
+  const [aboutOpen, setAboutOpen] = useState(false)
   const pathname = useRouterState({ select: (s) => s.location.pathname })
 
   useEffect(() => {
@@ -45,8 +49,12 @@ export function Header() {
     return () => window.removeEventListener('scroll', sync)
   }, [])
 
-  // Close the drawer on navigation; reflect open state on <body> for CSS.
-  useEffect(() => setOpen(false), [pathname])
+  // Close the drawer and the submenu on navigation; reflect open state on
+  // <body> for CSS.
+  useEffect(() => {
+    setOpen(false)
+    setAboutOpen(false)
+  }, [pathname])
   useEffect(() => {
     document.body.classList.toggle('nav-open', open)
     if (!open) return
@@ -57,23 +65,78 @@ export function Header() {
     return () => document.removeEventListener('keydown', onKey)
   }, [open])
 
+  // Esc closes the About submenu, and a click anywhere outside dismisses it.
+  useEffect(() => {
+    if (!aboutOpen) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setAboutOpen(false)
+    }
+    const onDown = (e: MouseEvent) => {
+      if (!(e.target as HTMLElement).closest('.nav-item--sub')) setAboutOpen(false)
+    }
+    document.addEventListener('keydown', onKey)
+    document.addEventListener('mousedown', onDown)
+    return () => {
+      document.removeEventListener('keydown', onKey)
+      document.removeEventListener('mousedown', onDown)
+    }
+  }, [aboutOpen])
+
   return (
     <header className={`site-header header-on-dark${solid ? ' is-solid' : ''}`}>
       <div className="container header-inner">
         <Brand />
         <nav className="site-nav" id="site-nav" aria-label="Primary">
           <ul>
-            {NAV.map((item) => (
-              <li key={item.to}>
-                <Link
-                  to={item.to}
-                  activeOptions={{ exact: item.to === '/' }}
-                  activeProps={{ 'aria-current': 'page' }}
+            {NAV.map((item) =>
+              'sub' in item ? (
+                /* The label stays a link to the landing page; a separate
+                   toggle owns the submenu, so About Us is reachable in one
+                   click and the eight sections in two, mouse or keyboard.
+                   On the mobile drawer the submenu is always shown. */
+                <li
+                  className={aboutOpen ? 'nav-item--sub is-open' : 'nav-item--sub'}
+                  key={item.to}
+                  onMouseEnter={() => setAboutOpen(true)}
+                  onMouseLeave={() => setAboutOpen(false)}
                 >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
+                  <span className="nav-item-row">
+                    <Link to={item.to} activeProps={{ 'aria-current': 'page' }}>
+                      {item.label}
+                    </Link>
+                    <button
+                      type="button"
+                      className="nav-sub-toggle"
+                      aria-expanded={aboutOpen}
+                      aria-controls="about-submenu"
+                      onClick={() => setAboutOpen((v) => !v)}
+                    >
+                      <span className="nav-sub-chev" aria-hidden="true" />
+                      <span className="sr-only">About Us sections</span>
+                    </button>
+                  </span>
+                  <ul className="nav-sub" id="about-submenu">
+                    {item.sub.map((s) => (
+                      <li key={s.to}>
+                        <Link to={s.to} activeProps={{ 'aria-current': 'page' }}>
+                          {s.title}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </li>
+              ) : (
+                <li key={item.to}>
+                  <Link
+                    to={item.to}
+                    activeOptions={{ exact: item.to === '/' }}
+                    activeProps={{ 'aria-current': 'page' }}
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ),
+            )}
           </ul>
         </nav>
         <Link className="btn btn-primary header-cta" to="/contact">
@@ -109,11 +172,20 @@ export function Footer() {
             <PhChip>physical address, email address &amp; working hours pending</PhChip>
           </div>
           <div>
+            <h2 className="footer-h">About Us</h2>
+            <ul>
+              {ABOUT_SECTIONS.map((s) => (
+                <li key={s.to}>
+                  <Link to={s.to}>{s.title}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
             <h2 className="footer-h">Explore</h2>
             <ul>
-              <li><Link to="/about">About</Link></li>
               <li><Link to="/services">Services</Link></li>
-              <li><Link to="/projects">Projects</Link></li>
+              <li><Link to="/products">Products</Link></li>
               <li><Link to="/partners">Partners &amp; Brands</Link></li>
               <li><Link to="/contact">Contact</Link></li>
             </ul>

@@ -1,4 +1,8 @@
-export const SITE_NAME = 'Hirut Engineering and General Trading PLC'
+export const SITE_NAME = 'HIRUT Engineering Construction and General Trading'
+/** Short form for the header, hero and nav  matches the logo wordmark. */
+export const SITE_NAME_SHORT = 'Hirut Engineering'
+/** Wordmark sub-line under HIRUT in the brand lockup. */
+export const SITE_DESCRIPTOR = 'Engineering Construction & General Trading'
 export const TAGLINE = 'Engineering water. Understanding ground.'
 export const PHONE_1 = { display: '+251 911 518 448', tel: '+251911518448' }
 export const PHONE_2 = { display: '+251 976 575 859', tel: '+251976575859' }
@@ -18,7 +22,7 @@ export const inquiryTypes: Array<{ group: string; options: Array<{ value: string
     options: [
       { value: 'gabions-wire-products', label: 'Gabions & Wire Products' },
       { value: 'geosynthetic-products', label: 'Geosynthetic Products' },
-      { value: 'geotechnical-equipment', label: 'Geotechnical Equipment (incl. Orica instruments)' },
+      { value: 'geotechnical-equipment', label: 'Geotechnical Equipment (incl. Orica Digital Solutions instruments)' },
       { value: 'irrigation-farm-equipment', label: 'Irrigation & Farm Equipment' },
       { value: 'power-supply-equipment', label: 'Power Supply Equipment' },
       { value: 'pumps-accessories', label: 'Pumps & Accessories' },
@@ -54,7 +58,7 @@ export const domesticPartners = [
 
 export const internationalPartners = [
   'AIM Industrials',
-  'Orica',
+  'Orica Digital Solutions',
   'RST Instruments',
   'SISGEO',
   'ENCARDIO RITE',
@@ -84,81 +88,6 @@ export const sampleProjects: SampleProject[] = [
   { sector: 'waterproofing', sectorLabel: 'Waterproofing', region: 'sample-b', regionLabel: 'Sample Region B', year: 'sample-recent', title: 'Sample: basement waterproofing works' },
   { sector: 'well-drilling', sectorLabel: 'Well Drilling', region: 'sample-c', regionLabel: 'Sample Region C', year: 'sample-earlier', title: 'Sample: deep borehole drilling' },
 ]
-
-/* Executive officer and management staff - supplied by the company.
-   Names, roles and qualifications are reproduced verbatim. No portraits
-   have been supplied; the cards show initials rather than a stock face,
-   because putting a stranger's photograph on a named real person would
-   be inventing their likeness. Add `photo` to a row when the real
-   portrait arrives and the card will use it. */
-export interface Leader {
-  name: string
-  role: string
-  quals: string[]
-  /** path without extension  `.webp` is preferred, `.jpg` is the fallback */
-  photo?: string
-}
-
-export const leadership: Leader[] = [
-  {
-    name: 'Michael Tilahun Gebeyehu',
-    photo: '/img/team/michael',
-    role: 'CEO, Hirut Engineering Construction and Wholesales',
-    quals: [
-      'B.Sc. (Irrigation Engineering)',
-      'M.Sc. (Geotechnical Engineering)',
-      'M.Sc. (PPM)',
-      'Ph.D.',
-    ],
-  },
-  {
-    name: 'Fikru Kinfu Geberekirstos',
-    photo: '/img/team/fikru',
-    role: 'CEO, Construction Department; Consulting Engineer',
-    quals: [
-      'B.Sc. (Civil Engineering)',
-      'M.Sc. (Construction Management)',
-      'M.Sc. (PPM)',
-      'Ph.D.',
-    ],
-  },
-  {
-    name: 'Hirut Girma Legesse',
-    photo: '/img/team/hirut',
-    role: 'CEO, Finance and Marketing Departments',
-    quals: ['B.Sc. (Accounting)', 'M.Sc. (Accounting)'],
-  },
-  {
-    name: 'Mehari Tadesse Tsegaye',
-    photo: '/img/team/mehari',
-    role: 'CEO, Technical Manager',
-    quals: ['B.Sc. (Geology)', 'M.Sc. (Hydrogeology)', 'Ph.D.'],
-  },
-  {
-    name: 'Tegene Negussie Begashaw',
-    role: 'Finance Manager, TAX Consultant',
-    quals: [
-      'B.Sc. (Accounting)',
-      'M.Sc. (Accounting)',
-      'M.A. (Tax and Property Valuation)',
-    ],
-  },
-  {
-    name: 'Nathan Guta Feyissa',
-    photo: '/img/team/nathan',
-    role: 'Marketing, Digital Marketing Head',
-    quals: ['B.A. (Business Administration)'],
-  },
-]
-
-/** Initials for the monogram, from the first two name parts. */
-export function initials(name: string) {
-  return name
-    .split(/\s+/)
-    .slice(0, 2)
-    .map((n) => n[0])
-    .join('')
-}
 
 export const afterSalesPillars: Array<{ title: string; blurb: string; items: string[] }> = [
   {

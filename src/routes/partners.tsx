@@ -7,11 +7,11 @@ import { domesticPartners, internationalPartners } from '../data/site'
 export const Route = createFileRoute('/partners')({
   head: () => ({
     meta: [
-      { title: 'Partners & Brands | Hirut Engineering and General Trading PLC' },
+      { title: 'Partners & Brands | HIRUT Engineering Construction and General Trading' },
       {
         name: 'description',
         content:
-          'Domestic partners and clients, and international partners and brands Hirut Engineering works with, including Orica, RST Instruments, SISGEO, ENCARDIO RITE, Hunter, Perkins, JCB, and PENTAX.',
+          'Domestic partners and clients, and international partners and brands Hirut Engineering works with, including Orica Digital Solutions, RST Instruments, SISGEO, ENCARDIO RITE, Hunter, Perkins, JCB, and PENTAX.',
       },
       { property: 'og:title', content: 'Partners & Brands | Hirut Engineering' },
       {
@@ -69,7 +69,7 @@ function PartnersPage() {
           </PhChip>
           <p style={{ marginTop: '1rem' }}>
             <Link to="/products/$category" params={{ category: 'geotechnical-equipment' }}>
-              Inquire about Orica supply →
+              Inquire about Orica Digital Solutions supply →
             </Link>
           </p>
         </div>

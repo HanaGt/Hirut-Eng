@@ -108,13 +108,13 @@ export const categories: Category[] = [
     name: 'Geotechnical Equipment',
     footerLabel: 'Geotechnical',
     tags: ['ground'],
-    tagLabels: ['Ground', 'Exclusive · Orica'],
+    tagLabels: ['Ground', 'Exclusive · Orica Digital Solutions'],
     cardBlurb:
-      'Piezometers, inclinometers, extensometers, DCPs, with exclusive Orica instruments for East Africa.',
+      'Piezometers, inclinometers, extensometers, DCPs, with exclusive Orica Digital Solutions instruments for East Africa.',
     metaDescription:
-      'Vibrating wire and standpipe piezometers, inclinometers, extensometers, strain gauges, DCPs, plate bearing apparatus, tensiometers and earth pressure cells, including exclusive Orica instruments for East Africa.',
+      'Vibrating wire and standpipe piezometers, inclinometers, extensometers, strain gauges, DCPs, plate bearing apparatus, tensiometers and earth pressure cells, including exclusive Orica Digital Solutions instruments for East Africa.',
     ogDescription:
-      'Exclusive East Africa importer and installer of Orica geotechnical and subsurface monitoring instruments.',
+      'Exclusive East Africa importer and installer of Orica Digital Solutions geotechnical and subsurface monitoring instruments.',
     heroLead:
       'Instruments that let the ground speak. Pore pressure, movement, load, and strength: measured, logged, and interpreted, so dams, slopes, and deep excavations are monitored rather than guessed at.',
     specGroups: [

@@ -9,7 +9,7 @@ import { projectImages, stock } from '../data/media'
 export const Route = createFileRoute('/projects')({
   head: () => ({
     meta: [
-      { title: 'Projects | Hirut Engineering and General Trading PLC' },
+      { title: 'Projects | HIRUT Engineering Construction and General Trading' },
       {
         name: 'description',
         content:

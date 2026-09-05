@@ -90,6 +90,9 @@ function ServicesPage() {
           <div className="section-head reveal">
             <Eyebrow>Service line 01</Eyebrow>
             <h2>Construction Works</h2>
+            {/* §1.4 construction motto  a banner line for construction works only,
+                added alongside the existing copy, not in place of any of it */}
+            <p className="motto">Engineering Integrity, Delivering Excellence!</p>
             <p className="lead">
               Field crews and site engineers who install what we import, from a single pump station
               to complete water supply infrastructure.

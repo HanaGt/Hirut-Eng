@@ -10,22 +10,24 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as AboutRouteImport } from './routes/about'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as PartnersRouteImport } from './routes/partners'
 import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as ServicesRouteImport } from './routes/services'
+import { Route as AboutIndexRouteImport } from './routes/about.index'
+import { Route as AboutCertificationsRouteImport } from './routes/about.certifications'
+import { Route as AboutClientExpectationsRouteImport } from './routes/about.client-expectations'
+import { Route as AboutDepartmentsRouteImport } from './routes/about.departments'
+import { Route as AboutExpertiseRouteImport } from './routes/about.expertise'
+import { Route as AboutLeadershipRouteImport } from './routes/about.leadership'
+import { Route as AboutMissionVisionValuesRouteImport } from './routes/about.mission-vision-values'
+import { Route as AboutOurStandardsRouteImport } from './routes/about.our-standards'
 import { Route as ProductsIndexRouteImport } from './routes/products.index'
 import { Route as ProductsCategoryRouteImport } from './routes/products.$category'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AboutRoute = AboutRouteImport.update({
-  id: '/about',
-  path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -48,6 +50,47 @@ const ServicesRoute = ServicesRouteImport.update({
   path: '/services',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutIndexRoute = AboutIndexRouteImport.update({
+  id: '/about/',
+  path: '/about/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutCertificationsRoute = AboutCertificationsRouteImport.update({
+  id: '/about/certifications',
+  path: '/about/certifications',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutClientExpectationsRoute = AboutClientExpectationsRouteImport.update({
+  id: '/about/client-expectations',
+  path: '/about/client-expectations',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutDepartmentsRoute = AboutDepartmentsRouteImport.update({
+  id: '/about/departments',
+  path: '/about/departments',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutExpertiseRoute = AboutExpertiseRouteImport.update({
+  id: '/about/expertise',
+  path: '/about/expertise',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutLeadershipRoute = AboutLeadershipRouteImport.update({
+  id: '/about/leadership',
+  path: '/about/leadership',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutMissionVisionValuesRoute =
+  AboutMissionVisionValuesRouteImport.update({
+    id: '/about/mission-vision-values',
+    path: '/about/mission-vision-values',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const AboutOurStandardsRoute = AboutOurStandardsRouteImport.update({
+  id: '/about/our-standards',
+  path: '/about/our-standards',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProductsIndexRoute = ProductsIndexRouteImport.update({
   id: '/products/',
   path: '/products/',
@@ -61,76 +104,125 @@ const ProductsCategoryRoute = ProductsCategoryRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/partners': typeof PartnersRoute
   '/projects': typeof ProjectsRoute
   '/services': typeof ServicesRoute
+  '/about/certifications': typeof AboutCertificationsRoute
+  '/about/client-expectations': typeof AboutClientExpectationsRoute
+  '/about/departments': typeof AboutDepartmentsRoute
+  '/about/expertise': typeof AboutExpertiseRoute
+  '/about/leadership': typeof AboutLeadershipRoute
+  '/about/mission-vision-values': typeof AboutMissionVisionValuesRoute
+  '/about/our-standards': typeof AboutOurStandardsRoute
   '/products/$category': typeof ProductsCategoryRoute
+  '/about/': typeof AboutIndexRoute
   '/products/': typeof ProductsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/partners': typeof PartnersRoute
   '/projects': typeof ProjectsRoute
   '/services': typeof ServicesRoute
+  '/about/certifications': typeof AboutCertificationsRoute
+  '/about/client-expectations': typeof AboutClientExpectationsRoute
+  '/about/departments': typeof AboutDepartmentsRoute
+  '/about/expertise': typeof AboutExpertiseRoute
+  '/about/leadership': typeof AboutLeadershipRoute
+  '/about/mission-vision-values': typeof AboutMissionVisionValuesRoute
+  '/about/our-standards': typeof AboutOurStandardsRoute
   '/products/$category': typeof ProductsCategoryRoute
+  '/about': typeof AboutIndexRoute
   '/products': typeof ProductsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/partners': typeof PartnersRoute
   '/projects': typeof ProjectsRoute
   '/services': typeof ServicesRoute
+  '/about/certifications': typeof AboutCertificationsRoute
+  '/about/client-expectations': typeof AboutClientExpectationsRoute
+  '/about/departments': typeof AboutDepartmentsRoute
+  '/about/expertise': typeof AboutExpertiseRoute
+  '/about/leadership': typeof AboutLeadershipRoute
+  '/about/mission-vision-values': typeof AboutMissionVisionValuesRoute
+  '/about/our-standards': typeof AboutOurStandardsRoute
   '/products/$category': typeof ProductsCategoryRoute
+  '/about/': typeof AboutIndexRoute
   '/products/': typeof ProductsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/about'
     | '/contact'
     | '/partners'
     | '/projects'
     | '/services'
+    | '/about/certifications'
+    | '/about/client-expectations'
+    | '/about/departments'
+    | '/about/expertise'
+    | '/about/leadership'
+    | '/about/mission-vision-values'
+    | '/about/our-standards'
     | '/products/$category'
+    | '/about/'
     | '/products/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/about'
     | '/contact'
     | '/partners'
     | '/projects'
     | '/services'
+    | '/about/certifications'
+    | '/about/client-expectations'
+    | '/about/departments'
+    | '/about/expertise'
+    | '/about/leadership'
+    | '/about/mission-vision-values'
+    | '/about/our-standards'
     | '/products/$category'
+    | '/about'
     | '/products'
   id:
     | '__root__'
     | '/'
-    | '/about'
     | '/contact'
     | '/partners'
     | '/projects'
     | '/services'
+    | '/about/certifications'
+    | '/about/client-expectations'
+    | '/about/departments'
+    | '/about/expertise'
+    | '/about/leadership'
+    | '/about/mission-vision-values'
+    | '/about/our-standards'
     | '/products/$category'
+    | '/about/'
     | '/products/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AboutRoute: typeof AboutRoute
   ContactRoute: typeof ContactRoute
   PartnersRoute: typeof PartnersRoute
   ProjectsRoute: typeof ProjectsRoute
   ServicesRoute: typeof ServicesRoute
+  AboutCertificationsRoute: typeof AboutCertificationsRoute
+  AboutClientExpectationsRoute: typeof AboutClientExpectationsRoute
+  AboutDepartmentsRoute: typeof AboutDepartmentsRoute
+  AboutExpertiseRoute: typeof AboutExpertiseRoute
+  AboutLeadershipRoute: typeof AboutLeadershipRoute
+  AboutMissionVisionValuesRoute: typeof AboutMissionVisionValuesRoute
+  AboutOurStandardsRoute: typeof AboutOurStandardsRoute
   ProductsCategoryRoute: typeof ProductsCategoryRoute
+  AboutIndexRoute: typeof AboutIndexRoute
   ProductsIndexRoute: typeof ProductsIndexRoute
 }
 
@@ -141,13 +233,6 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/about': {
-      id: '/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -178,6 +263,62 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about/': {
+      id: '/about/'
+      path: '/about'
+      fullPath: '/about/'
+      preLoaderRoute: typeof AboutIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about/certifications': {
+      id: '/about/certifications'
+      path: '/about/certifications'
+      fullPath: '/about/certifications'
+      preLoaderRoute: typeof AboutCertificationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about/client-expectations': {
+      id: '/about/client-expectations'
+      path: '/about/client-expectations'
+      fullPath: '/about/client-expectations'
+      preLoaderRoute: typeof AboutClientExpectationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about/departments': {
+      id: '/about/departments'
+      path: '/about/departments'
+      fullPath: '/about/departments'
+      preLoaderRoute: typeof AboutDepartmentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about/expertise': {
+      id: '/about/expertise'
+      path: '/about/expertise'
+      fullPath: '/about/expertise'
+      preLoaderRoute: typeof AboutExpertiseRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about/leadership': {
+      id: '/about/leadership'
+      path: '/about/leadership'
+      fullPath: '/about/leadership'
+      preLoaderRoute: typeof AboutLeadershipRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about/mission-vision-values': {
+      id: '/about/mission-vision-values'
+      path: '/about/mission-vision-values'
+      fullPath: '/about/mission-vision-values'
+      preLoaderRoute: typeof AboutMissionVisionValuesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about/our-standards': {
+      id: '/about/our-standards'
+      path: '/about/our-standards'
+      fullPath: '/about/our-standards'
+      preLoaderRoute: typeof AboutOurStandardsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/products/': {
       id: '/products/'
       path: '/products'
@@ -197,12 +338,19 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AboutRoute: AboutRoute,
   ContactRoute: ContactRoute,
   PartnersRoute: PartnersRoute,
   ProjectsRoute: ProjectsRoute,
   ServicesRoute: ServicesRoute,
+  AboutCertificationsRoute: AboutCertificationsRoute,
+  AboutClientExpectationsRoute: AboutClientExpectationsRoute,
+  AboutDepartmentsRoute: AboutDepartmentsRoute,
+  AboutExpertiseRoute: AboutExpertiseRoute,
+  AboutLeadershipRoute: AboutLeadershipRoute,
+  AboutMissionVisionValuesRoute: AboutMissionVisionValuesRoute,
+  AboutOurStandardsRoute: AboutOurStandardsRoute,
   ProductsCategoryRoute: ProductsCategoryRoute,
+  AboutIndexRoute: AboutIndexRoute,
   ProductsIndexRoute: ProductsIndexRoute,
 }
 export const routeTree = rootRouteImport

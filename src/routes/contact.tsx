@@ -11,7 +11,7 @@ export const Route = createFileRoute('/contact')({
   }),
   head: () => ({
     meta: [
-      { title: 'Contact & Request a Quote | Hirut Engineering and General Trading PLC' },
+      { title: 'Contact & Request a Quote | HIRUT Engineering Construction and General Trading' },
       {
         name: 'description',
         content:

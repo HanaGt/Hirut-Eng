@@ -8,9 +8,26 @@ import {
 
 import { Footer, Header } from '../components/Chrome'
 import { BgVideoEffects, CycleRevealEffects, RevealEffects } from '../components/motion'
-import { SITE_NAME } from '../data/site'
+import { PHONE_1, PHONE_2, SITE_NAME, SITE_NAME_SHORT, TAGLINE } from '../data/site'
 
 import appCss from '../styles.css?url'
+
+/* Organization data published as JSON-LD. Every field here is already
+   stated on the site: the legal name (a sole proprietorship, not a private
+   limited company),
+   the short trading name, the two published phone numbers, and the 2016
+   founding year. Address and social profiles stay out until supplied. */
+const ORGANIZATION_LD = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: SITE_NAME,
+  alternateName: SITE_NAME_SHORT,
+  description: TAGLINE,
+  foundingDate: '2016',
+  areaServed: 'Ethiopia and East Africa',
+  telephone: [PHONE_1.display, PHONE_2.display],
+  logo: '/img/logo/mark.webp',
+}
 
 export const Route = createRootRoute({
   head: () => ({
@@ -61,6 +78,13 @@ function RootDocument({ children }: { children: React.ReactNode }) {
     <html lang="en">
       <head>
         <HeadContent />
+        {/* Organization structured data: the legal name is a sole proprietorship,
+            not a private limited company. Only facts already published on the
+            site appear here. */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(ORGANIZATION_LD) }}
+        />
       </head>
       <body>
         {children}

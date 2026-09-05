@@ -9,7 +9,7 @@ import { categoryImages, stock } from '../data/media'
 export const Route = createFileRoute('/products/')({
   head: () => ({
     meta: [
-      { title: 'Products: Seven Categories | Hirut Engineering and General Trading PLC' },
+      { title: 'Products: Seven Categories | HIRUT Engineering Construction and General Trading' },
       {
         name: 'description',
         content:
