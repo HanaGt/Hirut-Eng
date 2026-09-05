@@ -1,6 +1,6 @@
 # Hirut Engineering & General Trading PLC — Website (v2)
 
-TypeScript React on **TanStack Start** with file-based routing (TanStack Router). Every route is **statically prerendered at build time** — view-source shows the full page on all 28 emitted pages — and hydrates into an interactive React app. The approved v1 static build is preserved in [`reference-v1/`](reference-v1/).
+TypeScript React on **TanStack Start** with file-based routing (TanStack Router). Every route is **statically prerendered at build time** — view-source shows the full page on all 28 emitted pages — and hydrates into an interactive React app.
 
 ## Commands
 
@@ -134,12 +134,10 @@ One honest deviation: initial-route JS is **~113 KB gzipped** vs the ~100 KB tar
 - A true logo **vector** (.svg/.ai) if one exists — the supplied files are bitmaps; the reversed variant is generated, not hand-drawn
 - **Official Orica logo file** for the co-branded band (never redrawn — dropped in as delivered), exact entity name (“Orica Digital Solutions” vs “Orica Geosolution”), and permitted partnership wording
 - Mission, vision, values; **portrait photographs of the six named leaders** (initials stand in — never a stock face for a real person); Customer Promise and Our Charter wording; certifications & contractor grade
-- All real project content (sample cards flagged; v1's `project-detail.html` in `reference-v1/` is the approved detail template to port when content arrives)
+- All real project content (sample cards flagged; port a detail template when content arrives)
 - Product datasheet PDFs; company profile PDF
 - Form endpoint / destination email; physical address, map, email, hours, socials
 - Confirmed partner list, logos + permissions
 - Client decision on bilingual launch (add an `/am` route tree; Ethiopic already in the font stacks — Space Grotesk has no Ethiopic glyphs, so Noto Sans Ethiopic is the fallback by design)
 
 When the domain is confirmed: add per-page `<link rel="canonical">`, a real `og:image`, and enable the Start plugin's `sitemap` option with the host.
-#   H i r u t - E n g  
- 
