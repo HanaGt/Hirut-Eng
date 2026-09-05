@@ -4,9 +4,9 @@ import { Link } from '@tanstack/react-router'
    About Us section navigation.
 
    The eight sub-sections in their approved order. This is the single
-   source of truth for the header dropdown, the sticky sub-nav on every
-   /about route, and the "next" link that lets a reader move through the
-   whole section linearly.
+   source of truth for the sticky sub-nav on every /about route, the
+   footer About list, and the "next" link that lets a reader move
+   through the whole section linearly.
    ============================================================ */
 
 export const ABOUT_SECTIONS = [
@@ -57,7 +57,8 @@ export const ABOUT_SECTIONS = [
 
 export type AboutPath = (typeof ABOUT_SECTIONS)[number]['to']
 
-/** Sticky on desktop, a horizontally scrollable pill row on mobile. */
+/** Sticky on desktop, a horizontally scrollable pill row on mobile.
+    Other About pages start at the top; the current item does not reload. */
 export function AboutNav({ current }: { current: AboutPath }) {
   return (
     <nav className="about-nav" aria-label="About Us sections">
@@ -71,6 +72,9 @@ export function AboutNav({ current }: { current: AboutPath }) {
                   to={s.to}
                   className={active ? 'about-nav-link is-current' : 'about-nav-link'}
                   aria-current={active ? 'page' : undefined}
+                  resetScroll={!active}
+                  viewTransition={false}
+                  onClick={active ? (e) => e.preventDefault() : undefined}
                 >
                   {s.label}
                 </Link>
@@ -91,7 +95,7 @@ export function AboutNext({ current }: { current: AboutPath }) {
   return (
     <div className="about-next reveal">
       <p className="about-next-label">{wraps ? 'Back to the start' : 'Next in About Us'}</p>
-      <Link className="about-next-link" to={next.to}>
+      <Link className="about-next-link" to={next.to} resetScroll>
         {next.title} <span className="arrow" aria-hidden="true">→</span>
       </Link>
       <p className="about-next-blurb">{next.blurb}</p>

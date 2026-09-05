@@ -209,6 +209,8 @@ function HomePage() {
                 style={{ '--reveal-delay': `${i * 0.09}s` } as React.CSSProperties}
                 to={leg.to as '/products' | '/services'}
                 hash={leg.hash}
+                resetScroll
+                hashScrollIntoView={leg.hash ? { block: 'start' } : false}
                 key={leg.num}
               >
                 <img
@@ -346,7 +348,7 @@ function HomePage() {
             ))}
           </div>
           <p style={{ marginTop: '2rem' }}>
-            <Link className="btn btn-ghost" to="/services" hash="after-sales">
+            <Link className="btn btn-ghost" to="/services" hash="after-sales" resetScroll hashScrollIntoView={{ block: 'start' }}>
               The full after-sales program <span className="arrow" aria-hidden="true">→</span>
             </Link>
           </p>

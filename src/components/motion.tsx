@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useLayoutEffect } from 'react'
 import { useRouterState } from '@tanstack/react-router'
 
 export const prefersReducedMotion = () =>
@@ -102,7 +102,7 @@ export function BgVideoEffects() {
 export function CycleRevealEffects() {
   const pathname = useRouterState({ select: (s) => s.location.pathname })
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (prefersReducedMotion() || !('IntersectionObserver' in window)) return
     const groups = Array.from(document.querySelectorAll<HTMLElement>('[data-cycle-group]'))
     const items = Array.from(document.querySelectorAll<HTMLElement>('.reveal-cycle'))
@@ -116,10 +116,16 @@ export function CycleRevealEffects() {
           entry.target.classList.toggle('is-in', entry.isIntersecting)
         }
       },
-      // a little inset so the exit plays before the card clears the screen
       { rootMargin: '-8% 0px -12% 0px', threshold: 0.01 },
     )
-    items.forEach((el) => io.observe(el))
+
+    for (const el of items) {
+      const rect = el.getBoundingClientRect()
+      if (rect.top < window.innerHeight * 0.92 && rect.bottom > 0) {
+        el.classList.add('is-in')
+      }
+      io.observe(el)
+    }
 
     return () => {
       io.disconnect()

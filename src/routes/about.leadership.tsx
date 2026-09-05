@@ -61,7 +61,7 @@ function LeadershipPage() {
         </div>
       </section>
 
-      {/* The grid shows a summary only; the full bio opens in a dialog. */}
+      {/* Featured executive + staff directory; the full bio opens in a dialog. */}
       <section className="section band-mist-soft" id="team">
         <div className="container">
           <div className="section-head reveal">
@@ -69,7 +69,7 @@ function LeadershipPage() {
             <h2>Seven professionals, one platform</h2>
             <p className="lead">
               Select any profile to read it in full, and step through the team without leaving the
-              grid.
+              page.
             </p>
           </div>
           <LeadershipGrid />

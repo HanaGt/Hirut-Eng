@@ -1,4 +1,5 @@
-import { Fragment, useState } from 'react'
+import { Fragment, useLayoutEffect, useState } from 'react'
+import { useRouterState } from '@tanstack/react-router'
 
 import { departments } from '../data/departments'
 
@@ -11,10 +12,24 @@ import { departments } from '../data/departments'
    second. One department is open at a time in both, the first by
    default, and the buttons carry the disclosure semantics that work in
    either layout.
+
+   Incoming /about/departments#slug links open that department. The
+   heading id matches the slug so the router can scroll to it instead
+   of leaving the reader at the top of the page.
    ============================================================ */
 
+function slugFromHash(hash: string) {
+  return hash.replace('#', '')
+}
+
 export function Departments() {
-  const [open, setOpen] = useState(0)
+  const hash = useRouterState({ select: (s) => slugFromHash(s.location.hash) })
+  const fromHash = departments.findIndex((d) => d.slug === hash)
+  const [open, setOpen] = useState(() => (fromHash >= 0 ? fromHash : 0))
+
+  useLayoutEffect(() => {
+    if (fromHash >= 0) setOpen(fromHash)
+  }, [fromHash])
 
   return (
     <div
@@ -25,7 +40,7 @@ export function Departments() {
         const isOpen = open === i
         return (
           <Fragment key={d.slug}>
-            <h3 className="dept-tab-h">
+            <h3 className="dept-tab-h" id={d.slug}>
               <button
                 type="button"
                 className={isOpen ? 'dept-tab is-open' : 'dept-tab'}

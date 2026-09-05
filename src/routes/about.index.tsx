@@ -175,7 +175,7 @@ function AboutIndexPage() {
                 <p key={p.slice(0, 40)}>{p}</p>
               ))}
               <p>
-                <Link className="btn btn-primary" to="/about/leadership">
+                <Link className="btn btn-primary" to="/about/leadership" resetScroll>
                   Meet the leadership team <span className="arrow" aria-hidden="true">→</span>
                 </Link>
               </p>
@@ -186,7 +186,13 @@ function AboutIndexPage() {
             >
               {leadership.map((p) => (
                 <li key={p.slug}>
-                  <Link to="/about/leadership" hash={p.slug} aria-label={`${p.name}, ${p.role}`}>
+                  <Link
+                    to="/about/leadership"
+                    hash={p.slug}
+                    resetScroll
+                    hashScrollIntoView={false}
+                    aria-label={`${p.name}, ${p.role}`}
+                  >
                     {p.photo ? (
                       <picture>
                         <source type="image/webp" srcSet={`${p.photo}.webp`} />
@@ -227,7 +233,7 @@ function AboutIndexPage() {
                 style={i % 3 !== 0 ? ({ '--reveal-delay': `${(i % 3) * 0.05}s` } as React.CSSProperties) : undefined}
                 key={d.slug}
               >
-                <Link to="/about/departments" hash={d.slug}>
+                <Link to="/about/departments" hash={d.slug} resetScroll hashScrollIntoView={{ block: 'start' }}>
                   <span className="dept-preview-num" aria-hidden="true">
                     {String(i + 1).padStart(2, '0')}
                   </span>
@@ -267,6 +273,7 @@ function AboutIndexPage() {
                 className="card reveal"
                 style={i % 3 !== 0 ? ({ '--reveal-delay': `${(i % 3) * 0.06}s` } as React.CSSProperties) : undefined}
                 to={s.to}
+                resetScroll
                 key={s.to}
               >
                 <h3>{s.title}</h3>

@@ -26,7 +26,7 @@ export function Breadcrumbs({
     <nav className="breadcrumbs" aria-label="Breadcrumb">
       {trail.map((t) => (
         <span key={t.to + t.label}>
-          <Link to={t.to}>{t.label}</Link>
+          <Link to={t.to} resetScroll>{t.label}</Link>
           <span className="sep">/</span>
         </span>
       ))}
@@ -109,7 +109,7 @@ export function CtaBand({
         {eyebrow ? <Eyebrow center>{eyebrow}</Eyebrow> : null}
         <h2>{heading}</h2>
         {body ? <p style={{ maxWidth: '52ch', marginInline: 'auto' }}>{body}</p> : null}
-        <Link className="btn btn-primary" to="/contact" search={search}>
+        <Link className="btn btn-primary" to="/contact" search={search} resetScroll>
           {label} <span className="arrow" aria-hidden="true">→</span>
         </Link>
         {phones ? (

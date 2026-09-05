@@ -92,11 +92,19 @@
 *::after { box-sizing: border-box; }
 
 html {
-  scroll-behavior: smooth;
   scroll-padding-top: calc(var(--header-h) + 12px);
 }
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
+
+/* Overlay lock (profile dialog, mobile drawer). position:fixed keeps
+   window.scrollY from being zeroed by overflow:hidden. */
+html.is-scroll-locked,
+html.is-scroll-locked body {
+  overflow: hidden;
+}
+html.is-scroll-locked body {
+  position: fixed;
+  inset-inline: 0;
+  width: 100%;
 }
 
 body {
@@ -158,14 +166,11 @@ ul, ol { padding-left: 1.2em; margin: 0 0 1em; }
 }
 .skip-link:focus { top: 12px; color: var(--paper); }
 
-/* ---------- 3. Route transitions ---------- */
-.route-frame { animation: route-enter var(--route-transition) var(--ease-out); }
-@keyframes route-enter {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: none; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .route-frame { animation: none; }
+/* ---------- 3. Route shell ---------- */
+.route-frame { min-height: 70svh; }
+.route-fallback {
+  min-height: 70svh;
+  background: linear-gradient(180deg, var(--ink-950), var(--ink-900));
 }
 
 /* ---------- 4. Layout primitives ---------- */
@@ -315,7 +320,6 @@ ul, ol { padding-left: 1.2em; margin: 0 0 1em; }
   display: flex;
   align-items: center;
   background: transparent;
-  transition: background-color 0.25s, border-color 0.25s;
   border-bottom: 1px solid transparent;
 }
 .site-header.is-solid,
@@ -345,8 +349,7 @@ body.nav-open .header-on-dark:not(.is-solid) .brand-sub { color: var(--ink-900);
 
 .header-on-dark:not(.is-solid) .brand-name,
 .header-on-dark:not(.is-solid) .brand-sub,
-.header-on-dark:not(.is-solid) .site-nav a,
-.header-on-dark:not(.is-solid) .nav-sub-toggle { color: var(--paper); }
+.header-on-dark:not(.is-solid) .site-nav a { color: var(--paper); }
 .header-on-dark:not(.is-solid) .nav-toggle-bar { background: var(--paper); }
 body.nav-open .header-on-dark .nav-toggle-bar { background: var(--ink-900); }
 
@@ -486,7 +489,6 @@ body.nav-open .header-on-dark .nav-toggle-bar { background: var(--ink-900); }
   }
   .header-cta { display: none; }
   .nav-toggle { display: flex; }
-  body.nav-open { overflow: hidden; }
   body.nav-open .nav-toggle-bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
   body.nav-open .nav-toggle-bar:nth-child(2) { opacity: 0; }
   body.nav-open .nav-toggle-bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
@@ -1508,98 +1510,6 @@ a.card { text-decoration: none; color: inherit; }
    markup.
    ============================================================ */
 
-/* ---- header submenu ---- */
-.nav-item--sub { position: relative; }
-.nav-item-row { display: inline-flex; align-items: center; gap: 2px; }
-.nav-sub-toggle {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 26px;
-  height: 26px;
-  padding: 0;
-  background: none;
-  border: 0;
-  cursor: pointer;
-  color: inherit;
-}
-.nav-sub-chev {
-  width: 7px;
-  height: 7px;
-  border-right: 2px solid currentColor;
-  border-bottom: 2px solid currentColor;
-  transform: translateY(-2px) rotate(45deg);
-  transition: transform 0.2s var(--ease-out);
-  opacity: 0.75;
-}
-.nav-item--sub.is-open .nav-sub-chev { transform: translateY(1px) rotate(-135deg); }
-
-@media (min-width: 981px) {
-  .nav-sub {
-    position: absolute;
-    top: calc(100% + 10px);
-    inset-inline-start: -14px;
-    z-index: 20;
-    min-width: 264px;
-    margin: 0;
-    padding: 8px;
-    list-style: none;
-    background: var(--paper);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    box-shadow: 0 26px 60px -30px color-mix(in srgb, var(--ink-950) 70%, transparent);
-    opacity: 0;
-    transform: translateY(-6px);
-    visibility: hidden;
-    transition: opacity 0.18s var(--ease-out), transform 0.18s var(--ease-out), visibility 0.18s;
-  }
-  .nav-item--sub.is-open .nav-sub { opacity: 1; transform: none; visibility: visible; }
-  /* a hover bridge, so the pointer can cross the gap without closing it */
-  .nav-item--sub::after {
-    content: '';
-    position: absolute;
-    inset-inline: -14px;
-    top: 100%;
-    height: 14px;
-  }
-  /* the submenu is a stack, not a row: .site-nav ul sets flex for the bar
-     itself and would otherwise lay these seven links out side by side */
-  .site-nav .nav-sub { display: block; }
-  /* .header-on-dark:not(.is-solid) .site-nav a paints nav links white over
-     the hero; these sit on a paper panel, so they out-specify it back */
-  .site-nav .nav-sub a,
-  .header-on-dark:not(.is-solid) .site-nav .nav-sub a {
-    display: block;
-    padding: 8px 12px;
-    border-radius: 4px;
-    border-bottom: 0;
-    font-size: var(--text-sm);
-    color: var(--ink-900);
-  }
-  .site-nav .nav-sub a:hover,
-  .header-on-dark:not(.is-solid) .site-nav .nav-sub a:hover { background: var(--paper-2); color: var(--hydro-700); }
-  .site-nav .nav-sub a[aria-current='page'],
-  .header-on-dark:not(.is-solid) .site-nav .nav-sub a[aria-current='page'] { color: var(--hydro-700); background: var(--paper-2); }
-}
-
-@media (max-width: 980px) {
-  /* in the drawer the submenu is simply always open, indented under About */
-  .nav-sub-toggle { display: none; }
-  .nav-sub {
-    list-style: none;
-    margin: 0 0 6px;
-    padding: 0 0 0 14px;
-    border-inline-start: 1px solid var(--line);
-  }
-  .site-nav .nav-sub a {
-    font-size: var(--text-base);
-    padding: 9px 0;
-    border-bottom: 0;
-    color: var(--muted) !important;
-  }
-  .site-nav .nav-sub a[aria-current='page'] { color: var(--hydro-700) !important; }
-}
-
 /* ---- sticky sub-navigation ---- */
 .about-nav {
   position: sticky;
@@ -1802,50 +1712,32 @@ a.card { text-decoration: none; color: inherit; }
 .value-card h3 { font-size: var(--text-base); margin: 0.35rem 0 0.4rem; }
 .value-card p { font-size: var(--text-sm); color: var(--muted); margin: 0; line-height: 1.55; }
 
-/* ---- leadership grid ---- */
-.leader-grid {
+/* ---- leadership roster ---- */
+.leader-roster {
+  min-width: 0;
+  display: grid;
+  gap: clamp(2rem, 4vw, 2.8rem);
+}
+
+.leader-group-label {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-2xs);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--hydro-700);
+  margin: 0 0 0.85rem;
+}
+
+.leader-strips {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: clamp(1rem, 2vw, 1.6rem);
+  gap: clamp(0.8rem, 1.5vw, 1.15rem);
 }
-@media (max-width: 980px) { .leader-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 620px) { .leader-grid { grid-template-columns: 1fr; } }
+.leader-strips > li { min-width: 0; }
 
-.leader-card {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
-  padding: 0;
-  text-align: start;
-  font: inherit;
-  color: inherit;
-  background: var(--white);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  overflow: hidden;
-  cursor: pointer;
-  transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s var(--ease-out);
-}
-.leader-card:hover {
-  border-color: var(--hydro-500);
-  transform: translateY(-4px);
-  box-shadow: 0 20px 44px -24px color-mix(in srgb, var(--ink-900) 55%, transparent);
-}
-.leader-portrait,
-.leader-portrait picture,
-.leader-portrait .leader-monogram {
-  display: block;
-  position: relative;
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  overflow: hidden;
-  line-height: 0;
-  background: var(--paper-2);
-}
 .leader-photo {
   width: 100%;
   height: 100%;
@@ -1854,13 +1746,14 @@ a.card { text-decoration: none; color: inherit; }
   transition: transform 0.6s var(--ease-out), filter 0.4s;
   filter: saturate(0.94);
 }
-.leader-card:hover .leader-photo { transform: scale(1.045); filter: saturate(1.04); }
 
 /* initials stand in for a missing portrait: never a stock face of a
    different person on a named individual */
 .leader-monogram {
   display: grid;
   place-items: center;
+  width: 100%;
+  height: 100%;
   font-family: var(--font-display);
   font-weight: 700;
   font-size: clamp(2.4rem, 5vw, 3.4rem);
@@ -1872,53 +1765,132 @@ a.card { text-decoration: none; color: inherit; }
     linear-gradient(140deg, var(--ink-900), var(--ink-800));
 }
 
-.leader-body {
+.leader-exec {
+  display: grid;
+  grid-template-columns: minmax(200px, 0.38fr) minmax(0, 1fr);
+  width: 100%;
+  padding: 0;
+  text-align: start;
+  font: inherit;
+  color: var(--ink-100);
+  background: var(--ink-900);
+  border: 0;
+  border-radius: var(--radius);
+  overflow: hidden;
+  cursor: pointer;
+}
+.leader-exec:hover .leader-photo { transform: scale(1.04); filter: saturate(1.05); }
+.leader-exec:hover .leader-exec-more .arrow { transform: translateX(4px); }
+
+.leader-exec-portrait {
+  display: block;
+  position: relative;
+  min-height: 280px;
+  overflow: hidden;
+  background: var(--ink-800);
+  line-height: 0;
+}
+.leader-exec-portrait picture,
+.leader-exec-portrait .leader-monogram,
+.leader-exec-portrait .leader-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.leader-exec-body {
   min-width: 0;
-  flex: 1;
   display: flex;
   flex-direction: column;
-  padding: clamp(1rem, 1.9vw, 1.35rem);
+  justify-content: center;
+  padding: clamp(1.3rem, 3vw, 2.4rem) clamp(1.3rem, 3.2vw, 2.6rem);
+  border-inline-start: 3px solid var(--hydro-400);
 }
-.leader-name {
+.leader-exec-index {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-2xs);
+  letter-spacing: 0.18em;
+  color: var(--hydro-300);
+  margin-bottom: 0.55rem;
+}
+.leader-exec-name {
   font-family: var(--font-display);
   font-weight: 700;
   font-size: var(--text-h3);
-  line-height: 1.22;
-  color: var(--ink-900);
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+  color: var(--paper);
 }
-.leader-quals-line {
-  font-size: var(--text-2xs);
-  color: var(--muted);
+.leader-exec-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--text-lg);
+  color: var(--hydro-300);
+  margin-top: 0.45rem;
+  line-height: 1.3;
+}
+.leader-exec-org {
+  font-size: var(--text-sm);
+  color: var(--ink-100);
+  margin-top: 0.2rem;
+  line-height: 1.45;
+}
+.leader-exec-quals {
+  font-size: var(--text-xs);
+  color: color-mix(in srgb, var(--ink-100) 82%, var(--ink-900));
   line-height: 1.5;
-  margin-top: 4px;
+  margin-top: 0.7rem;
 }
-.leader-role {
+.leader-exec-stat {
+  font-size: var(--text-sm);
+  color: var(--ink-100);
+  margin-top: 0.85rem;
+}
+.leader-exec-stat strong {
+  font-family: var(--font-display);
+  color: var(--paper);
+}
+.leader-exec-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 1rem;
+}
+.leader-exec-chips span {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--text-2xs);
+  letter-spacing: 0.04em;
+  color: var(--paper);
+  border: 1px solid var(--line-dark);
+  border-radius: 999px;
+  padding: 4px 11px;
+}
+.leader-exec-more {
+  margin-top: 1.15rem;
   font-family: var(--font-display);
   font-weight: 600;
   font-size: var(--text-sm);
-  color: var(--hydro-700);
-  line-height: 1.35;
-  margin-top: 0.5rem;
-}
-.leader-stat {
-  font-size: var(--text-sm);
-  color: var(--muted);
-  margin-top: 0.6rem;
-}
-.leader-stat strong { color: var(--ink-900); font-family: var(--font-display); }
-.leader-more {
-  margin-top: auto;
-  padding-top: 0.9rem;
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: var(--text-sm);
-  color: var(--hydro-700);
+  color: var(--hydro-300);
   display: inline-flex;
   align-items: center;
   gap: 8px;
 }
-.leader-card:hover .leader-more .arrow { transform: translateX(4px); }
-.leader-more .arrow { transition: transform 0.25s var(--ease-out); }
+.leader-exec-more .arrow { transition: transform 0.25s var(--ease-out); }
+
+@media (max-width: 720px) {
+  .leader-exec {
+    grid-template-columns: 1fr;
+  }
+  .leader-exec-portrait {
+    min-height: 0;
+    aspect-ratio: 16 / 10;
+    max-height: 240px;
+  }
+  .leader-exec-body { border-inline-start: 0; border-top: 3px solid var(--hydro-400); }
+}
 
 /* ---- leadership preview row (About landing) ---- */
 .leader-preview {
@@ -1959,8 +1931,6 @@ a.card { text-decoration: none; color: inherit; }
 .leader-preview a:hover .leader-preview-name { color: var(--hydro-700); }
 
 /* ---- leadership profile dialog ---- */
-body.modal-open { overflow: hidden; }
-
 .leader-modal {
   width: min(760px, 94vw);
   max-height: min(86vh, 900px);
@@ -2258,5 +2228,5 @@ body.modal-open { overflow: hidden; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .leader-card, .leader-photo, .dept-preview a, .nav-sub, .about-next-link .arrow { transition: none; }
+  .leader-exec, .leader-photo, .dept-preview a, .about-next-link .arrow { transition: none; }
 }

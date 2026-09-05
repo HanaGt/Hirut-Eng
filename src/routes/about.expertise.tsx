@@ -80,6 +80,7 @@ function ExpertisePage() {
                 style={i % 3 !== 0 ? ({ '--reveal-delay': `${(i % 3) * 0.05}s` } as React.CSSProperties) : undefined}
                 to="/products/$category"
                 params={{ category: c.slug }}
+                resetScroll
                 key={c.slug}
               >
                 <p className="card-num">{c.tagLabels.join(' · ')}</p>
@@ -106,6 +107,8 @@ function ExpertisePage() {
                 style={i > 0 ? ({ '--reveal-delay': `${i * 0.06}s` } as React.CSSProperties) : undefined}
                 to="/services"
                 hash={s.hash}
+                resetScroll
+                hashScrollIntoView={{ block: 'start' }}
                 key={s.hash}
               >
                 <h3>{s.title}</h3>
@@ -135,7 +138,7 @@ function ExpertisePage() {
                 style={i % 3 !== 0 ? ({ '--reveal-delay': `${(i % 3) * 0.05}s` } as React.CSSProperties) : undefined}
                 key={d.slug}
               >
-                <Link to="/about/departments" hash={d.slug}>
+                <Link to="/about/departments" hash={d.slug} resetScroll hashScrollIntoView={{ block: 'start' }}>
                   <span className="dept-preview-num" aria-hidden="true">
                     {String(i + 1).padStart(2, '0')}
                   </span>

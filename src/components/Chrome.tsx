@@ -1,24 +1,30 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { Link, useRouterState } from '@tanstack/react-router'
+import { jumpScroll, lockPageScroll, unlockPageScroll } from '../lib/scroll-lock'
 import { ABOUT_SECTIONS } from './AboutNav'
 import { PhChip } from './Placeholders'
 import { HirutMark } from './Logo'
 import { categories } from '../data/products'
 import { PHONE_1, PHONE_2, SITE_DESCRIPTOR, SITE_NAME, TAGLINE } from '../data/site'
 
-/* About Us carries a submenu of its eight sub-sections. Projects stays out
-   of the navigation until real portfolio content exists (revision 3 §6);
-   the route itself is still reachable and still prerendered. */
+/* Projects stays out of the navigation until real portfolio content exists
+   (revision 3 §6); the route itself is still reachable and still prerendered. */
 const NAV = [
   { to: '/', label: 'Home' },
-  { to: '/about', label: 'About Us', sub: ABOUT_SECTIONS },
+  { to: '/about', label: 'About Us' },
   { to: '/products', label: 'Products' },
   { to: '/services', label: 'Services' },
   { to: '/partners', label: 'Partners' },
   { to: '/contact', label: 'Contact' },
 ] as const
 
+function normPath(path: string) {
+  if (path === '/') return '/'
+  return path.replace(/\/$/, '') || '/'
+}
+
 function Brand({ footer = false }: { footer?: boolean }) {
+  const pathname = useRouterState({ select: (s) => s.location.pathname })
   const inner = (
     <>
       <HirutMark size={footer ? 42 : 38} />
@@ -30,7 +36,14 @@ function Brand({ footer = false }: { footer?: boolean }) {
   )
   if (footer) return <div className="footer-brand-mark">{inner}</div>
   return (
-    <Link className="brand" to="/">
+    <Link
+      className="brand"
+      to="/"
+      viewTransition={false}
+      onClick={() => {
+        if (normPath(pathname) === '/') jumpScroll(0)
+      }}
+    >
       {inner}
     </Link>
   )
@@ -39,48 +52,41 @@ function Brand({ footer = false }: { footer?: boolean }) {
 export function Header() {
   const [solid, setSolid] = useState(false)
   const [open, setOpen] = useState(false)
-  const [aboutOpen, setAboutOpen] = useState(false)
   const pathname = useRouterState({ select: (s) => s.location.pathname })
+  const pathnameRef = useRef(pathname)
+  pathnameRef.current = pathname
+
+  useLayoutEffect(() => {
+    setSolid(window.scrollY > 24)
+  }, [pathname])
 
   useEffect(() => {
     const sync = () => setSolid(window.scrollY > 24)
-    sync()
     window.addEventListener('scroll', sync, { passive: true })
     return () => window.removeEventListener('scroll', sync)
   }, [])
 
-  // Close the drawer and the submenu on navigation; reflect open state on
-  // <body> for CSS.
+  // Close the drawer on navigation; reflect open state on <body> for CSS.
   useEffect(() => {
     setOpen(false)
-    setAboutOpen(false)
   }, [pathname])
   useEffect(() => {
     document.body.classList.toggle('nav-open', open)
     if (!open) return
+    const lockedOn = pathnameRef.current
+    lockPageScroll()
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') setOpen(false)
     }
     document.addEventListener('keydown', onKey)
-    return () => document.removeEventListener('keydown', onKey)
-  }, [open])
-
-  // Esc closes the About submenu, and a click anywhere outside dismisses it.
-  useEffect(() => {
-    if (!aboutOpen) return
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setAboutOpen(false)
-    }
-    const onDown = (e: MouseEvent) => {
-      if (!(e.target as HTMLElement).closest('.nav-item--sub')) setAboutOpen(false)
-    }
-    document.addEventListener('keydown', onKey)
-    document.addEventListener('mousedown', onDown)
     return () => {
       document.removeEventListener('keydown', onKey)
-      document.removeEventListener('mousedown', onDown)
+      document.body.classList.remove('nav-open')
+      /* Same page: put them back. Other page: the router places the
+         new screen at the top (or at a hash), so do not replay this one. */
+      unlockPageScroll(normPath(pathnameRef.current) === normPath(lockedOn))
     }
-  }, [aboutOpen])
+  }, [open])
 
   return (
     <header className={`site-header header-on-dark${solid ? ' is-solid' : ''}`}>
@@ -88,58 +94,33 @@ export function Header() {
         <Brand />
         <nav className="site-nav" id="site-nav" aria-label="Primary">
           <ul>
-            {NAV.map((item) =>
-              'sub' in item ? (
-                /* The label stays a link to the landing page; a separate
-                   toggle owns the submenu, so About Us is reachable in one
-                   click and the eight sections in two, mouse or keyboard.
-                   On the mobile drawer the submenu is always shown. */
-                <li
-                  className={aboutOpen ? 'nav-item--sub is-open' : 'nav-item--sub'}
-                  key={item.to}
-                  onMouseEnter={() => setAboutOpen(true)}
-                  onMouseLeave={() => setAboutOpen(false)}
+            {NAV.map((item) => (
+              <li key={item.to}>
+                <Link
+                  to={item.to}
+                  resetScroll
+                  viewTransition={false}
+                  activeOptions={{ exact: item.to === '/' }}
+                  activeProps={{ 'aria-current': 'page' }}
+                  onClick={() => {
+                    if (normPath(pathname) === normPath(item.to)) jumpScroll(0)
+                  }}
                 >
-                  <span className="nav-item-row">
-                    <Link to={item.to} activeProps={{ 'aria-current': 'page' }}>
-                      {item.label}
-                    </Link>
-                    <button
-                      type="button"
-                      className="nav-sub-toggle"
-                      aria-expanded={aboutOpen}
-                      aria-controls="about-submenu"
-                      onClick={() => setAboutOpen((v) => !v)}
-                    >
-                      <span className="nav-sub-chev" aria-hidden="true" />
-                      <span className="sr-only">About Us sections</span>
-                    </button>
-                  </span>
-                  <ul className="nav-sub" id="about-submenu">
-                    {item.sub.map((s) => (
-                      <li key={s.to}>
-                        <Link to={s.to} activeProps={{ 'aria-current': 'page' }}>
-                          {s.title}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </li>
-              ) : (
-                <li key={item.to}>
-                  <Link
-                    to={item.to}
-                    activeOptions={{ exact: item.to === '/' }}
-                    activeProps={{ 'aria-current': 'page' }}
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ),
-            )}
+                  {item.label}
+                </Link>
+              </li>
+            ))}
           </ul>
         </nav>
-        <Link className="btn btn-primary header-cta" to="/contact">
+        <Link
+          className="btn btn-primary header-cta"
+          to="/contact"
+          resetScroll
+          viewTransition={false}
+          onClick={() => {
+            if (normPath(pathname) === '/contact') jumpScroll(0)
+          }}
+        >
           Request a Quote
         </Link>
         <button
@@ -159,6 +140,11 @@ export function Header() {
 }
 
 export function Footer() {
+  const pathname = useRouterState({ select: (s) => s.location.pathname })
+  const topIfHere = (to: string) => () => {
+    if (normPath(pathname) === normPath(to)) jumpScroll(0)
+  }
+
   return (
     <footer className="site-footer">
       <div className="container">
@@ -176,7 +162,9 @@ export function Footer() {
             <ul>
               {ABOUT_SECTIONS.map((s) => (
                 <li key={s.to}>
-                  <Link to={s.to}>{s.title}</Link>
+                  <Link to={s.to} resetScroll onClick={topIfHere(s.to)}>
+                    {s.title}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -184,10 +172,10 @@ export function Footer() {
           <div>
             <h2 className="footer-h">Explore</h2>
             <ul>
-              <li><Link to="/services">Services</Link></li>
-              <li><Link to="/products">Products</Link></li>
-              <li><Link to="/partners">Partners &amp; Brands</Link></li>
-              <li><Link to="/contact">Contact</Link></li>
+              <li><Link to="/services" resetScroll onClick={topIfHere('/services')}>Services</Link></li>
+              <li><Link to="/products" resetScroll onClick={topIfHere('/products')}>Products</Link></li>
+              <li><Link to="/partners" resetScroll onClick={topIfHere('/partners')}>Partners &amp; Brands</Link></li>
+              <li><Link to="/contact" resetScroll onClick={topIfHere('/contact')}>Contact</Link></li>
             </ul>
           </div>
           <div>
@@ -195,7 +183,12 @@ export function Footer() {
             <ul>
               {categories.map((c) => (
                 <li key={c.slug}>
-                  <Link to="/products/$category" params={{ category: c.slug }}>
+                  <Link
+                    to="/products/$category"
+                    params={{ category: c.slug }}
+                    resetScroll
+                    onClick={topIfHere(`/products/${c.slug}`)}
+                  >
                     {c.footerLabel}
                   </Link>
                 </li>
@@ -208,7 +201,13 @@ export function Footer() {
               <li><a href={`tel:${PHONE_1.tel}`}>{PHONE_1.display}</a></li>
               <li><a href={`tel:${PHONE_2.tel}`}>{PHONE_2.display}</a></li>
               <li>
-                <Link className="btn btn-primary" style={{ marginTop: 10 }} to="/contact">
+                <Link
+                  className="btn btn-primary"
+                  style={{ marginTop: 10 }}
+                  to="/contact"
+                  resetScroll
+                  onClick={topIfHere('/contact')}
+                >
                   Request a Quote
                 </Link>
               </li>

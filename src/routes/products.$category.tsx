@@ -116,7 +116,7 @@ function CategoryPage() {
                 <ul className="check-list" style={{ marginBottom: 0 }}>
                   {c.related.map((r) => (
                     <li key={r.label}>
-                      <Link to="/services" hash={r.hash}>
+                      <Link to="/services" hash={r.hash} resetScroll hashScrollIntoView={{ block: 'start' }}>
                         {r.label}
                       </Link>
                     </li>
