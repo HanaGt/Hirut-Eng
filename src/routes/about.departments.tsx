@@ -24,6 +24,7 @@ function DepartmentsPage() {
   return (
     <>
       <PageHero
+        media="about"
         current="Our Departments"
         trail={[
           { label: 'Home', to: '/' },

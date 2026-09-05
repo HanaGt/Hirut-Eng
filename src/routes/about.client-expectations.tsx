@@ -24,6 +24,7 @@ function ClientExpectationsPage() {
   return (
     <>
       <PageHero
+        media="about"
         current="What Every Client Can Expect"
         trail={[
           { label: 'Home', to: '/' },

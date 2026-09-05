@@ -46,6 +46,7 @@ function ExpertisePage() {
   return (
     <>
       <PageHero
+        media="about"
         current="Our Expertise"
         trail={[
           { label: 'Home', to: '/' },

@@ -555,8 +555,8 @@ body.nav-open .header-on-dark .nav-toggle-bar { background: var(--ink-900); }
 .page-hero--media { padding-block: var(--hero-offset) var(--section-y-hero); }
 .page-hero > .container { position: relative; z-index: 3; }
 
-/* The still paints at once; the clip fades in over it when the
-   connection can afford it (see BgVideoEffects). */
+/* The still paints at once; the clip fades in over it once it is
+   actually playing (see AmbientVideo). */
 .page-hero-still,
 .page-hero-video {
   position: absolute;
@@ -930,10 +930,12 @@ a.card { text-decoration: none; color: inherit; }
 /* the original sand-toned exclusivity label, with the tick motif */
 /* holding the real mark now: solid chip, no dashed "pending" border */
 .orica-logo-slot--filled {
-  border: 1px solid var(--line);
-  padding: 10px 16px;
+  background: transparent;
+  border: 0;
+  padding: 0;
   width: auto;
-  min-width: 170px;
+  min-width: 0;
+  min-height: 0;
 }
 .orica-logo-slot--filled img { width: 150px; height: auto; }
 

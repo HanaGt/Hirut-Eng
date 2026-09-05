@@ -44,6 +44,7 @@ function CertificationsPage() {
   return (
     <>
       <PageHero
+        media="about"
         current="Certifications & Licenses"
         trail={[
           { label: 'Home', to: '/' },

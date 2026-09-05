@@ -23,6 +23,7 @@ function OurStandardsPage() {
   return (
     <>
       <PageHero
+        media="about"
         current="The Standards We Hold Ourselves To"
         trail={[
           { label: 'Home', to: '/' },

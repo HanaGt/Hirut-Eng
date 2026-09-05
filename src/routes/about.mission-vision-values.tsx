@@ -24,6 +24,7 @@ function MissionVisionValuesPage() {
   return (
     <>
       <PageHero
+        media="about"
         current="Mission, Vision & Values"
         trail={[
           { label: 'Home', to: '/' },

@@ -1,6 +1,7 @@
 import { Link } from '@tanstack/react-router'
 import { EyebrowWave, FlowWaves } from './Waves'
 import { HirutMark } from './Logo'
+import { AmbientVideo } from './motion'
 import { headerMedia, headerStill, headerVideo } from '../data/media'
 import { PHONE_1, PHONE_2 } from '../data/site'
 
@@ -64,17 +65,7 @@ export function PageHero({
             fetchPriority="high"
             decoding="async"
           />
-          <video
-            className="page-hero-video"
-            data-bg-video
-            data-src={headerVideo(m)}
-            muted
-            loop
-            playsInline
-            preload="none"
-            aria-hidden="true"
-            tabIndex={-1}
-          />
+          <AmbientVideo className="page-hero-video" src={headerVideo(m)} />
           <span className="page-hero-scrim" aria-hidden="true" />
         </>
       ) : null}
@@ -129,8 +120,7 @@ export function CtaBand({
    Orica Digital Solutions co-branded partnership band (v2 §5): ink background,
    Hirut × Orica Digital Solutions lockup, exclusivity headline, instrument families,
    CTA into the Geotechnical Equipment category. The partner logo is
-   NEVER redrawn or restyled - an official file drops into the light
-   chip slot untouched.
+   NEVER redrawn or restyled — the official transparent mark is shown as supplied.
    ============================================================ */
 export function OricaBand({ compact = false }: { compact?: boolean }) {
   return (
@@ -149,8 +139,6 @@ export function OricaBand({ compact = false }: { compact?: boolean }) {
             <span className="lockup-x" aria-hidden="true">
               ×
             </span>
-            {/* Third-party trademark: shown as supplied, in its official
-                colours on a white chip. Never recoloured or redrawn. */}
             <span className="orica-logo-slot orica-logo-slot--filled">
               <picture>
                 <source type="image/webp" srcSet="/img/logo/orica.webp" />

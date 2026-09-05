@@ -1,5 +1,6 @@
 import { Link, createFileRoute } from '@tanstack/react-router'
 
+import { AmbientVideo } from '../components/motion'
 import { CtaBand, Eyebrow, OricaBand } from '../components/PageBits'
 import { PhChip, SampleImg } from '../components/Placeholders'
 import { ScrubBand } from '../components/ScrubBand'
@@ -113,11 +114,10 @@ function HomePage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: ORG_JSON_LD }} />
 
       {/* 1. Hero - poster paints instantly, the ambient loop fades in behind
-             it once it is near-buffered (skipped under reduced motion /
-             Save-Data by the shared bg-video effect). */}
+             it once it is playing (skipped under reduced motion / Save-Data). */}
       <section className="hero">
         {/* The still is the LCP element: eager, preloaded, high priority.
-            The ambient loop fades in over it once idle. */}
+            The ambient loop fades in over it once it is playing. */}
         <picture>
           <source
             type="image/webp"
@@ -133,17 +133,7 @@ function HomePage() {
             decoding="async"
           />
         </picture>
-        <video
-          className="hero-bg hero-bg--video"
-          muted
-          loop
-          playsInline
-          preload="none"
-          data-bg-video
-          data-src="/video/hero-site.mp4"
-          aria-hidden="true"
-          tabIndex={-1}
-        />
+        <AmbientVideo className="hero-bg hero-bg--video" src="/video/hero-site.mp4" />
         <div className="hero-scrim" aria-hidden="true" />
         <div className="container">
           <Eyebrow>Ethiopia · Since 2016</Eyebrow>

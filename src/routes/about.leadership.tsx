@@ -29,6 +29,7 @@ function LeadershipPage() {
   return (
     <>
       <PageHero
+        media="about"
         current="Our Leadership"
         trail={[
           { label: 'Home', to: '/' },

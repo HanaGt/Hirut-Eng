@@ -2,7 +2,7 @@ import { Suspense } from 'react'
 import { HeadContent, Outlet, Scripts, createRootRoute } from '@tanstack/react-router'
 
 import { Footer, Header } from '../components/Chrome'
-import { BgVideoEffects, CycleRevealEffects, RevealEffects } from '../components/motion'
+import { CycleRevealEffects, RevealEffects } from '../components/motion'
 import { PHONE_1, PHONE_2, SITE_NAME, SITE_NAME_SHORT, TAGLINE } from '../data/site'
 
 import appCss from '../styles.css?url'
@@ -61,7 +61,6 @@ function RootLayout() {
       <Footer />
       <RevealEffects />
       <CycleRevealEffects />
-      <BgVideoEffects />
     </>
   )
 }

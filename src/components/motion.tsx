@@ -1,11 +1,11 @@
-import { useEffect, useLayoutEffect } from 'react'
+import { useEffect, useLayoutEffect, useRef } from 'react'
 import { useRouterState } from '@tanstack/react-router'
 
 export const prefersReducedMotion = () =>
   typeof window !== 'undefined' &&
   window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
-type NetInfo = { saveData?: boolean; effectiveType?: string }
+type NetInfo = { saveData?: boolean }
 const conn = () =>
   typeof navigator === 'undefined'
     ? undefined
@@ -14,79 +14,110 @@ const conn = () =>
 export const saveData = () => Boolean(conn()?.saveData)
 
 /**
- * Ambient video is a luxury, not the message. On a metered or slow
- * link the still already carries the header, so don't spend megabytes
- * on top of it - a large share of this site's visitors are on
- * mid-range Android over Ethiopian mobile networks.
+ * Skip the clip only when the user asked the browser to save data.
+ * The still already carries the header, so a metered connection never
+ * pays for a loop it did not request.
  */
-export const tooSlowForVideo = () => {
-  const c = conn()
-  if (!c) return false
-  return c.saveData === true || /(^|-)2g$/.test(c.effectiveType ?? '')
-}
+export const tooSlowForVideo = () => saveData()
 
 /**
- * Scroll-reveal wiring for every `.reveal` element on the current route.
+ * Hero / page-header loop. The still is the LCP element; this clip is
+ * attached after mount, faded in on the `playing` event, paused while
+ * far offscreen, and left as a still under reduced motion or Save-Data.
  *
- * Progressive enhancement: the server-rendered HTML is fully visible.
- * After hydration, only elements still below the viewport get "armed"
- * (hidden) and then revealed on intersection - no flash for above-fold
- * content, nothing hidden without JS, nothing hidden under
- * prefers-reduced-motion.
+ * Each video owns its own playback so a client-side navigation cannot
+ * miss the clip the way a document-wide idle observer could.
  */
-/**
- * Background videos (§4.2): poster-first, lazy-attached near the
- * viewport, paused while offscreen, and never started at all under
- * reduced motion or Save-Data - the poster is the experience there.
- */
-export function BgVideoEffects() {
-  const pathname = useRouterState({ select: (s) => s.location.pathname })
+export function AmbientVideo({
+  src,
+  className,
+}: {
+  src: string
+  className?: string
+}) {
+  const ref = useRef<HTMLVideoElement>(null)
 
   useEffect(() => {
-    const vids = Array.from(document.querySelectorAll<HTMLVideoElement>('[data-bg-video]'))
-    if (vids.length === 0) return
-    if (prefersReducedMotion() || tooSlowForVideo() || !('IntersectionObserver' in window)) return
+    const v = ref.current
+    if (!v) return
+    if (prefersReducedMotion() || tooSlowForVideo()) return
 
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          const v = entry.target as HTMLVideoElement
-          if (entry.isIntersecting) {
-            if (!v.src && v.dataset.src) v.src = v.dataset.src
-            void v
-              .play()
-              .then(() => v.classList.add('is-playing'))
-              .catch(() => {})
-          } else {
-            v.pause()
-          }
-        }
-      },
-      { rootMargin: '200px 0px' },
-    )
+    let alive = true
+    let inView = true
 
-    // Wait for idle: the hero still is the LCP element, and ambient video
-    // must never compete with it for bandwidth on a slow connection.
-    let cancelled = false
-    const start = () => {
-      if (!cancelled) vids.forEach((v) => io.observe(v))
+    const arm = () => {
+      v.muted = true
+      v.defaultMuted = true
+      v.playsInline = true
+      v.setAttribute('playsinline', '')
+      v.setAttribute('webkit-playsinline', '')
+      v.loop = true
+      if (v.getAttribute('src') !== src) v.src = src
     }
-    const w = window as Window & {
-      requestIdleCallback?: (cb: () => void, o?: { timeout: number }) => number
+
+    const kick = () => {
+      if (!alive || !inView) return
+      arm()
+      void v.play().catch(() => {
+        /* autoplay can reject until the first frame is decoded; `playing` is the success path */
+      })
     }
-    if (typeof w.requestIdleCallback === 'function') {
-      w.requestIdleCallback(start, { timeout: 3000 })
-    } else {
-      setTimeout(start, 1200)
+
+    const onPlaying = () => {
+      if (alive) v.classList.add('is-playing')
     }
+
+    v.addEventListener('playing', onPlaying)
+    v.addEventListener('canplay', kick)
+    v.addEventListener('loadeddata', kick)
+
+    const io =
+      'IntersectionObserver' in window
+        ? new IntersectionObserver(
+            (entries) => {
+              const e = entries[0]
+              if (!e) return
+              /* A 0-size rect means the hero has not laid out yet — do not
+                 pause, or the in-flight play() is aborted and never retried. */
+              inView = e.isIntersecting || e.boundingClientRect.height === 0
+              if (inView) kick()
+              else v.pause()
+            },
+            { rootMargin: '200px 0px', threshold: 0 },
+          )
+        : null
+    io?.observe(v)
+    kick()
+
+    const onVis = () => {
+      if (document.visibilityState === 'visible') kick()
+    }
+    document.addEventListener('visibilitychange', onVis)
 
     return () => {
-      cancelled = true
-      io.disconnect()
+      alive = false
+      io?.disconnect()
+      v.removeEventListener('playing', onPlaying)
+      v.removeEventListener('canplay', kick)
+      v.removeEventListener('loadeddata', kick)
+      document.removeEventListener('visibilitychange', onVis)
+      v.pause()
     }
-  }, [pathname])
+  }, [src])
 
-  return null
+  return (
+    <video
+      ref={ref}
+      className={className}
+      muted
+      loop
+      playsInline
+      autoPlay
+      preload="none"
+      aria-hidden="true"
+      tabIndex={-1}
+    />
+  )
 }
 
 /**
@@ -137,6 +168,15 @@ export function CycleRevealEffects() {
   return null
 }
 
+/**
+ * Scroll-reveal wiring for every `.reveal` element on the current route.
+ *
+ * Progressive enhancement: the server-rendered HTML is fully visible.
+ * After hydration, only elements still below the viewport get "armed"
+ * (hidden) and then revealed on intersection - no flash for above-fold
+ * content, nothing hidden without JS, nothing hidden under
+ * prefers-reduced-motion.
+ */
 export function RevealEffects() {
   const pathname = useRouterState({ select: (s) => s.location.pathname })
 

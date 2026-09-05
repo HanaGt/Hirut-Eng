@@ -49,14 +49,14 @@ export type Partner = {
 }
 
 export const domesticPartners: Partner[] = [
-  { name: 'BKGC', logo: '/img/partners/domestic/bkgc.webp' },
+  { name: 'BKGC', logo: '/img/partners/domestic/bkgc.webp?v=2' },
   { name: 'Ethiopian Army Foundation', logo: '/img/partners/domestic/ethiopian-defence-foundation.webp' },
   { name: 'Defence Construction Enterprise', logo: '/img/partners/domestic/defence-construction-enterprise.webp' },
   { name: 'Defence Construction Design Enterprise', logo: '/img/partners/domestic/defence-construction-design-enterprise.webp' },
   { name: 'Amhara Pipe Factory (APF)', logo: '/img/partners/domestic/amhara-pipe-factory.webp' },
   { name: 'Oromia Water Works Construction Enterprise', logo: '/img/partners/domestic/oromia-water-works.webp' },
   { name: 'Zemen Construction Corporation', logo: '/img/partners/domestic/zemen-construction.webp' },
-  { name: 'GIW', logo: '/img/partners/domestic/giw.webp' },
+  { name: 'GIW', logo: '/img/partners/domestic/giw.webp?v=2' },
   { name: 'Michael Tilahun Import' },
   { name: 'Sekela Engineering' },
 ]
