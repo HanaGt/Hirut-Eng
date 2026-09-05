@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 
-import { AboutNav, AboutNext } from '../components/AboutNav'
+import { AboutNext } from '../components/AboutNav'
 import { CtaBand, Eyebrow, PageHero } from '../components/PageBits'
 import { ourCommitment, ourStandards } from '../data/about'
 import { SITE_NAME } from '../data/site'
@@ -31,8 +31,6 @@ function OurStandardsPage() {
         title="The Standards We Hold Ourselves To"
         lead="Excellence is measured not only by what we deliver, but by how we deliver it."
       />
-
-      <AboutNav current="/about/our-standards" />
 
       {/* 5.8 */}
       <section className="section">

@@ -1,6 +1,6 @@
 import { Link, createFileRoute } from '@tanstack/react-router'
 
-import { AboutNav, AboutNext } from '../components/AboutNav'
+import { AboutNext } from '../components/AboutNav'
 import { CtaBand, Eyebrow, PageHero } from '../components/PageBits'
 import { PhChip } from '../components/Placeholders'
 import { departments } from '../data/departments'
@@ -54,8 +54,6 @@ function ExpertisePage() {
         title="Our Expertise"
         lead="What the firm can actually do, drawn from what it supplies, what it builds, and the departments that carry the work."
       />
-
-      <AboutNav current="/about/expertise" />
 
       {/* Supply */}
       <section className="section" id="supply-expertise">

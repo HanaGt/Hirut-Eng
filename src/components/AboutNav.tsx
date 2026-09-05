@@ -1,3 +1,4 @@
+import { useLayoutEffect } from 'react'
 import { Link } from '@tanstack/react-router'
 
 /* ============================================================
@@ -57,9 +58,28 @@ export const ABOUT_SECTIONS = [
 
 export type AboutPath = (typeof ABOUT_SECTIONS)[number]['to']
 
-/** Sticky on desktop, a horizontally scrollable pill row on mobile.
-    Other About pages start at the top; the current item does not reload. */
+export function aboutPathFromLocation(pathname: string): AboutPath {
+  const p = pathname.replace(/\/$/, '') || '/'
+  return ABOUT_SECTIONS.find((s) => s.to === p)?.to ?? '/about'
+}
+
+/** Keep the current pill in view on the mobile row without moving the page. */
+function revealCurrentTab() {
+  const list = document.querySelector<HTMLElement>('.about-nav-list')
+  const active = document.querySelector<HTMLElement>('.about-nav-link.is-current')
+  const item = active?.parentElement
+  if (!list || !item) return
+  const left = item.offsetLeft - (list.clientWidth - item.offsetWidth) / 2
+  list.scrollTo({ left: Math.max(0, left), behavior: 'auto' })
+}
+
+/** Lives in the About layout, above every sub-page, and stays put when
+    the tab changes. Sticky under the site header on scroll. */
 export function AboutNav({ current }: { current: AboutPath }) {
+  useLayoutEffect(() => {
+    revealCurrentTab()
+  }, [current])
+
   return (
     <nav className="about-nav" aria-label="About Us sections">
       <div className="container">
@@ -72,7 +92,7 @@ export function AboutNav({ current }: { current: AboutPath }) {
                   to={s.to}
                   className={active ? 'about-nav-link is-current' : 'about-nav-link'}
                   aria-current={active ? 'page' : undefined}
-                  resetScroll={!active}
+                  resetScroll={false}
                   viewTransition={false}
                   onClick={active ? (e) => e.preventDefault() : undefined}
                 >

@@ -1511,6 +1511,9 @@ a.card { text-decoration: none; color: inherit; }
    ============================================================ */
 
 /* ---- sticky sub-navigation ---- */
+.about-nav-offset { display: block; height: var(--header-h); }
+.about-shell .page-hero { padding-top: var(--section-y-hero); }
+.about-shell .page-hero--media { padding-block: var(--section-y-hero); }
 .about-nav {
   position: sticky;
   top: var(--header-h);

@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 
-import { AboutNav, AboutNext } from '../components/AboutNav'
+import { AboutNext } from '../components/AboutNav'
 import { Departments } from '../components/Departments'
 import { CtaBand, Eyebrow, PageHero } from '../components/PageBits'
 import { departmentsIntro, integratedAcrossDisciplines } from '../data/departments'
@@ -32,8 +32,6 @@ function DepartmentsPage() {
         title={departmentsIntro.headline}
         lead={departmentsIntro.paragraphs[0]}
       />
-
-      <AboutNav current="/about/departments" />
 
       <section className="section">
         <div className="container">

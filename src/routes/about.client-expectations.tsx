@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 
-import { AboutNav, AboutNext } from '../components/AboutNav'
+import { AboutNext } from '../components/AboutNav'
 import { CtaBand, Eyebrow, PageHero } from '../components/PageBits'
 import { PhChip } from '../components/Placeholders'
 import { clientExpectations, commitmentToEveryClient, customerPromise } from '../data/about'
@@ -32,8 +32,6 @@ function ClientExpectationsPage() {
         title="What Every Client Can Expect"
         lead="The same commitment on every project, from the first consultation to long after commissioning."
       />
-
-      <AboutNav current="/about/client-expectations" />
 
       {/* 5.7 */}
       <section className="section">

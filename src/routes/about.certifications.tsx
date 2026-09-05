@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 
-import { AboutNav, AboutNext } from '../components/AboutNav'
+import { AboutNext } from '../components/AboutNav'
 import { CtaBand, Eyebrow, PageHero } from '../components/PageBits'
 import { PhChip, PhMedia } from '../components/Placeholders'
 import { SITE_NAME } from '../data/site'
@@ -52,8 +52,6 @@ function CertificationsPage() {
         title="Certifications &amp; Licenses"
         lead="Registrations, grades and licences, presented for tender committees and prequalification submissions."
       />
-
-      <AboutNav current="/about/certifications" />
 
       <section className="section">
         <div className="container">

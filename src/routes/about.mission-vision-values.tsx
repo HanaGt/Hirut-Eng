@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 
-import { AboutNav, AboutNext } from '../components/AboutNav'
+import { AboutNext } from '../components/AboutNav'
 import { StatementSwitcher, ValueBoard } from '../components/MissionVision'
 import { CtaBand, Eyebrow, PageHero } from '../components/PageBits'
 import { corporatePromise } from '../data/about'
@@ -32,8 +32,6 @@ function MissionVisionValuesPage() {
         title="Mission, Vision &amp; Values"
         lead="Where we are going, what we do to get there, and the standards we keep on the way."
       />
-
-      <AboutNav current="/about/mission-vision-values" />
 
       <section className="section">
         <div className="container">

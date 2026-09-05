@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 
-import { AboutNav, AboutNext } from '../components/AboutNav'
+import { AboutNext } from '../components/AboutNav'
 import { LeadershipGrid } from '../components/Leadership'
 import { CtaBand, Eyebrow, PageHero } from '../components/PageBits'
 import {
@@ -37,8 +37,6 @@ function LeadershipPage() {
         title={leadershipPageIntro.headline}
         lead={leadershipPageIntro.paragraphs[0]}
       />
-
-      <AboutNav current="/about/leadership" />
 
       <section className="section">
         <div className="container">

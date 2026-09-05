@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as PartnersRouteImport } from './routes/partners'
 import { Route as ProjectsRouteImport } from './routes/projects'
@@ -28,6 +29,11 @@ import { Route as ProductsCategoryRouteImport } from './routes/products.$categor
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -51,45 +57,45 @@ const ServicesRoute = ServicesRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutIndexRoute = AboutIndexRouteImport.update({
-  id: '/about/',
-  path: '/about/',
-  getParentRoute: () => rootRouteImport,
+  id: '/',
+  path: '/',
+  getParentRoute: () => AboutRoute,
 } as any)
 const AboutCertificationsRoute = AboutCertificationsRouteImport.update({
-  id: '/about/certifications',
-  path: '/about/certifications',
-  getParentRoute: () => rootRouteImport,
+  id: '/certifications',
+  path: '/certifications',
+  getParentRoute: () => AboutRoute,
 } as any)
 const AboutClientExpectationsRoute = AboutClientExpectationsRouteImport.update({
-  id: '/about/client-expectations',
-  path: '/about/client-expectations',
-  getParentRoute: () => rootRouteImport,
+  id: '/client-expectations',
+  path: '/client-expectations',
+  getParentRoute: () => AboutRoute,
 } as any)
 const AboutDepartmentsRoute = AboutDepartmentsRouteImport.update({
-  id: '/about/departments',
-  path: '/about/departments',
-  getParentRoute: () => rootRouteImport,
+  id: '/departments',
+  path: '/departments',
+  getParentRoute: () => AboutRoute,
 } as any)
 const AboutExpertiseRoute = AboutExpertiseRouteImport.update({
-  id: '/about/expertise',
-  path: '/about/expertise',
-  getParentRoute: () => rootRouteImport,
+  id: '/expertise',
+  path: '/expertise',
+  getParentRoute: () => AboutRoute,
 } as any)
 const AboutLeadershipRoute = AboutLeadershipRouteImport.update({
-  id: '/about/leadership',
-  path: '/about/leadership',
-  getParentRoute: () => rootRouteImport,
+  id: '/leadership',
+  path: '/leadership',
+  getParentRoute: () => AboutRoute,
 } as any)
 const AboutMissionVisionValuesRoute =
   AboutMissionVisionValuesRouteImport.update({
-    id: '/about/mission-vision-values',
-    path: '/about/mission-vision-values',
-    getParentRoute: () => rootRouteImport,
+    id: '/mission-vision-values',
+    path: '/mission-vision-values',
+    getParentRoute: () => AboutRoute,
   } as any)
 const AboutOurStandardsRoute = AboutOurStandardsRouteImport.update({
-  id: '/about/our-standards',
-  path: '/about/our-standards',
-  getParentRoute: () => rootRouteImport,
+  id: '/our-standards',
+  path: '/our-standards',
+  getParentRoute: () => AboutRoute,
 } as any)
 const ProductsIndexRoute = ProductsIndexRouteImport.update({
   id: '/products/',
@@ -104,6 +110,7 @@ const ProductsCategoryRoute = ProductsCategoryRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRouteWithChildren
   '/contact': typeof ContactRoute
   '/partners': typeof PartnersRoute
   '/projects': typeof ProjectsRoute
@@ -139,6 +146,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRouteWithChildren
   '/contact': typeof ContactRoute
   '/partners': typeof PartnersRoute
   '/projects': typeof ProjectsRoute
@@ -158,6 +166,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/about'
     | '/contact'
     | '/partners'
     | '/projects'
@@ -192,6 +201,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/about'
     | '/contact'
     | '/partners'
     | '/projects'
@@ -210,19 +220,12 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRouteWithChildren
   ContactRoute: typeof ContactRoute
   PartnersRoute: typeof PartnersRoute
   ProjectsRoute: typeof ProjectsRoute
   ServicesRoute: typeof ServicesRoute
-  AboutCertificationsRoute: typeof AboutCertificationsRoute
-  AboutClientExpectationsRoute: typeof AboutClientExpectationsRoute
-  AboutDepartmentsRoute: typeof AboutDepartmentsRoute
-  AboutExpertiseRoute: typeof AboutExpertiseRoute
-  AboutLeadershipRoute: typeof AboutLeadershipRoute
-  AboutMissionVisionValuesRoute: typeof AboutMissionVisionValuesRoute
-  AboutOurStandardsRoute: typeof AboutOurStandardsRoute
   ProductsCategoryRoute: typeof ProductsCategoryRoute
-  AboutIndexRoute: typeof AboutIndexRoute
   ProductsIndexRoute: typeof ProductsIndexRoute
 }
 
@@ -233,6 +236,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -265,59 +275,59 @@ declare module '@tanstack/react-router' {
     }
     '/about/': {
       id: '/about/'
-      path: '/about'
+      path: '/'
       fullPath: '/about/'
       preLoaderRoute: typeof AboutIndexRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AboutRoute
     }
     '/about/certifications': {
       id: '/about/certifications'
-      path: '/about/certifications'
+      path: '/certifications'
       fullPath: '/about/certifications'
       preLoaderRoute: typeof AboutCertificationsRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AboutRoute
     }
     '/about/client-expectations': {
       id: '/about/client-expectations'
-      path: '/about/client-expectations'
+      path: '/client-expectations'
       fullPath: '/about/client-expectations'
       preLoaderRoute: typeof AboutClientExpectationsRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AboutRoute
     }
     '/about/departments': {
       id: '/about/departments'
-      path: '/about/departments'
+      path: '/departments'
       fullPath: '/about/departments'
       preLoaderRoute: typeof AboutDepartmentsRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AboutRoute
     }
     '/about/expertise': {
       id: '/about/expertise'
-      path: '/about/expertise'
+      path: '/expertise'
       fullPath: '/about/expertise'
       preLoaderRoute: typeof AboutExpertiseRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AboutRoute
     }
     '/about/leadership': {
       id: '/about/leadership'
-      path: '/about/leadership'
+      path: '/leadership'
       fullPath: '/about/leadership'
       preLoaderRoute: typeof AboutLeadershipRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AboutRoute
     }
     '/about/mission-vision-values': {
       id: '/about/mission-vision-values'
-      path: '/about/mission-vision-values'
+      path: '/mission-vision-values'
       fullPath: '/about/mission-vision-values'
       preLoaderRoute: typeof AboutMissionVisionValuesRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AboutRoute
     }
     '/about/our-standards': {
       id: '/about/our-standards'
-      path: '/about/our-standards'
+      path: '/our-standards'
       fullPath: '/about/our-standards'
       preLoaderRoute: typeof AboutOurStandardsRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AboutRoute
     }
     '/products/': {
       id: '/products/'
@@ -336,12 +346,18 @@ declare module '@tanstack/react-router' {
   }
 }
 
-const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  ContactRoute: ContactRoute,
-  PartnersRoute: PartnersRoute,
-  ProjectsRoute: ProjectsRoute,
-  ServicesRoute: ServicesRoute,
+interface AboutRouteChildren {
+  AboutCertificationsRoute: typeof AboutCertificationsRoute
+  AboutClientExpectationsRoute: typeof AboutClientExpectationsRoute
+  AboutDepartmentsRoute: typeof AboutDepartmentsRoute
+  AboutExpertiseRoute: typeof AboutExpertiseRoute
+  AboutLeadershipRoute: typeof AboutLeadershipRoute
+  AboutMissionVisionValuesRoute: typeof AboutMissionVisionValuesRoute
+  AboutOurStandardsRoute: typeof AboutOurStandardsRoute
+  AboutIndexRoute: typeof AboutIndexRoute
+}
+
+const AboutRouteChildren: AboutRouteChildren = {
   AboutCertificationsRoute: AboutCertificationsRoute,
   AboutClientExpectationsRoute: AboutClientExpectationsRoute,
   AboutDepartmentsRoute: AboutDepartmentsRoute,
@@ -349,8 +365,19 @@ const rootRouteChildren: RootRouteChildren = {
   AboutLeadershipRoute: AboutLeadershipRoute,
   AboutMissionVisionValuesRoute: AboutMissionVisionValuesRoute,
   AboutOurStandardsRoute: AboutOurStandardsRoute,
-  ProductsCategoryRoute: ProductsCategoryRoute,
   AboutIndexRoute: AboutIndexRoute,
+}
+
+const AboutRouteWithChildren = AboutRoute._addFileChildren(AboutRouteChildren)
+
+const rootRouteChildren: RootRouteChildren = {
+  IndexRoute: IndexRoute,
+  AboutRoute: AboutRouteWithChildren,
+  ContactRoute: ContactRoute,
+  PartnersRoute: PartnersRoute,
+  ProjectsRoute: ProjectsRoute,
+  ServicesRoute: ServicesRoute,
+  ProductsCategoryRoute: ProductsCategoryRoute,
   ProductsIndexRoute: ProductsIndexRoute,
 }
 export const routeTree = rootRouteImport

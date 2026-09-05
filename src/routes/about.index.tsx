@@ -1,6 +1,6 @@
 import { Link, createFileRoute } from '@tanstack/react-router'
 
-import { ABOUT_SECTIONS, AboutNav, AboutNext } from '../components/AboutNav'
+import { ABOUT_SECTIONS, AboutNext } from '../components/AboutNav'
 import { CtaBand, Eyebrow, PageHero } from '../components/PageBits'
 import { PhChip, PhMedia, SampleImg } from '../components/Placeholders'
 import { StatsBand } from '../components/StatsBand'
@@ -66,8 +66,6 @@ function AboutIndexPage() {
         title="Built by engineers, for the long term"
         lead="HIRUT Engineering Construction and General Trading was founded in 2016 by engineers with long field experience. Ten years on, we are a multidisciplinary firm working across water and ground: we supply, we design, we build, and we stay."
       />
-
-      <AboutNav current="/about" />
 
       {/* Our story - approved v2 copy, kept verbatim */}
       <section className="section">

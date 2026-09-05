@@ -49,19 +49,25 @@ function Brand({ footer = false }: { footer?: boolean }) {
   )
 }
 
+function isAboutPath(path: string) {
+  const p = normPath(path)
+  return p === '/about' || p.startsWith('/about/')
+}
+
 export function Header() {
-  const [solid, setSolid] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
   const pathname = useRouterState({ select: (s) => s.location.pathname })
   const pathnameRef = useRef(pathname)
   pathnameRef.current = pathname
+  const solid = scrolled || isAboutPath(pathname)
 
   useLayoutEffect(() => {
-    setSolid(window.scrollY > 24)
+    setScrolled(window.scrollY > 24)
   }, [pathname])
 
   useEffect(() => {
-    const sync = () => setSolid(window.scrollY > 24)
+    const sync = () => setScrolled(window.scrollY > 24)
     window.addEventListener('scroll', sync, { passive: true })
     return () => window.removeEventListener('scroll', sync)
   }, [])
