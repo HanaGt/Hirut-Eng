@@ -1,7 +1,8 @@
 import { Link, createFileRoute } from '@tanstack/react-router'
 
+import { ConstructionSlideshow } from '../components/ConstructionSlideshow'
 import { CtaBand, Eyebrow, PageHero } from '../components/PageBits'
-import { PhMedia } from '../components/Placeholders'
+import { constructionPhotos } from '../data/media'
 import { afterSalesPillars } from '../data/site'
 
 export const Route = createFileRoute('/services')({
@@ -98,18 +99,14 @@ function ServicesPage() {
               to complete water supply infrastructure.
             </p>
           </div>
-          <div className="grid grid-2" style={{ alignItems: 'start' }}>
+          <div className="grid grid-2 construction-split">
             <ul className="spec-list reveal">
               {CONSTRUCTION.map((item) => (
                 <li key={item}>{item}</li>
               ))}
             </ul>
-            <div className="reveal" style={{ '--reveal-delay': '.1s' } as React.CSSProperties}>
-              <PhMedia detail="Construction-progress photo from the supplied batch (building progress / foundation work): swap in when the media library is delivered" />
-              <p className="spec-note" style={{ marginTop: '.8rem' }}>
-                Background video slot: this section can carry an ambient site video (autoplay,
-                muted, loop) once the media library is delivered.
-              </p>
+            <div className="reveal construction-split-media" style={{ '--reveal-delay': '.1s' } as React.CSSProperties}>
+              <ConstructionSlideshow photos={constructionPhotos} />
             </div>
           </div>
           <p style={{ marginTop: '1.6rem' }}>

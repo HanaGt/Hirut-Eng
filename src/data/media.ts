@@ -150,3 +150,60 @@ export const storyPhoto = {
   height: 1024,
   alt: 'A field crew in hard hats lowering a blue well casing beside a pickup truck',
 }
+
+export const constructionPhotos = [
+  {
+    src: '/img/services/construction-works.jpg',
+    width: 768,
+    height: 1024,
+    alt: 'Workers in safety gear heat-welding a geomembrane liner on a construction site',
+  },
+  {
+    src: '/img/services/construction-excavation.jpg',
+    width: 768,
+    height: 1024,
+    alt: 'Crew laying a waterproofing membrane across the floor of a deep excavation',
+  },
+  {
+    src: '/img/services/construction-instrumentation.jpg',
+    width: 768,
+    height: 1024,
+    alt: 'A technician in a hard hat taking readings from field instruments on muddy ground',
+  },
+  {
+    src: '/img/services/construction-landscaping.jpg',
+    width: 612,
+    height: 960,
+    alt: 'Landscaping and water-feature works underway in an urban park',
+  },
+  {
+    src: '/img/services/construction-liner-basin.jpg',
+    width: 768,
+    height: 1024,
+    alt: 'Crews installing a geomembrane liner down a slope into a water basin',
+  },
+  {
+    src: '/img/services/construction-liner-slope.jpg',
+    width: 1024,
+    height: 768,
+    alt: 'A line of workers securing a geomembrane liner on a hillside, with an excavator above',
+  },
+  {
+    src: '/img/services/construction-drilling.jpg',
+    width: 674,
+    height: 1024,
+    alt: 'A drilling rig in operation, with water spraying from the borehole',
+  },
+  {
+    src: '/img/services/construction-geotextile.jpg',
+    width: 768,
+    height: 1024,
+    alt: 'Workers spreading a white geotextile liner across a graded earth slope',
+  },
+  {
+    src: '/img/services/construction-waterproofing.jpg',
+    width: 1024,
+    height: 768,
+    alt: 'Crews placing rebar and waterproofing sheets on a foundation wall',
+  },
+] as const
