@@ -999,7 +999,7 @@ a.card { text-decoration: none; color: inherit; }
 .pillars--light .pillar summary::after { color: var(--hydro-700); }
 .pillars--light .pillar-body ul { color: var(--muted); }
 
-/* ---------- 15. Partner badges ---------- */
+/* ---------- 15. Partner badges & logo grid ---------- */
 .badge-grid { display: flex; flex-wrap: wrap; gap: 10px; }
 .p-badge {
   font-family: var(--font-display);
@@ -1016,6 +1016,58 @@ a.card { text-decoration: none; color: inherit; }
   background: color-mix(in srgb, var(--ink-100) 6%, transparent);
   border-color: var(--line-dark);
   color: var(--ink-100);
+}
+
+.partner-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(11.5rem, 1fr));
+  gap: 12px;
+}
+.partner-grid--compact {
+  grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr));
+}
+.partner-card {
+  margin: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 0.85rem 0.95rem;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  text-align: center;
+  overflow: hidden;
+}
+.partner-card img {
+  width: 100%;
+  aspect-ratio: 1;
+  height: auto;
+  object-fit: contain;
+}
+.partner-card figcaption {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--text-xs);
+  letter-spacing: 0.03em;
+  line-height: 1.35;
+  color: var(--ink-800);
+}
+.partner-card--text {
+  justify-content: center;
+  min-height: 10.5rem;
+}
+.partner-card--text figcaption {
+  font-size: var(--text-sm);
+  letter-spacing: 0.05em;
+}
+@media (min-width: 720px) {
+  .partner-grid { grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr)); }
+  .partner-grid--compact { grid-template-columns: repeat(auto-fill, minmax(10.5rem, 1fr)); }
 }
 
 /* ---------- 16. Filters ---------- */

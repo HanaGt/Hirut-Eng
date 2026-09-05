@@ -7,7 +7,8 @@ import { StatsBand } from '../components/StatsBand'
 import { FlowWaves } from '../components/Waves'
 import { categories } from '../data/products'
 import { categoryImages, legImages, projectImages, stock, stockSoft } from '../data/media'
-import { SITE_NAME, sampleProjects } from '../data/site'
+import { PartnerGrid } from '../components/PartnerGrid'
+import { SITE_NAME, partnerBand, sampleProjects } from '../data/site'
 
 export const Route = createFileRoute('/')({
   head: () => ({
@@ -94,21 +95,6 @@ const LEGS = [
     to: '/services',
     hash: 'after-sales',
   },
-]
-
-const PARTNER_BAND = [
-  'Orica Digital Solutions',
-  'RST Instruments',
-  'SISGEO',
-  'ENCARDIO RITE',
-  'Hunter',
-  'Perkins',
-  'JCB',
-  'PENTAX',
-  'Defence Construction Enterprise',
-  'Oromia Water Works Construction Enterprise',
-  'Zemen Construction Corporation',
-  'Ethiopian Army Foundation',
 ]
 
 const PILLARS_COMPACT = [
@@ -362,12 +348,8 @@ function HomePage() {
             <Eyebrow>Partners &amp; brands we work with</Eyebrow>
             <h2>Trusted by builders, chosen by brands</h2>
           </div>
-          <div className="badge-grid reveal" aria-label="Partners and brands">
-            {PARTNER_BAND.map((name) => (
-              <span className="p-badge" key={name}>
-                {name}
-              </span>
-            ))}
+          <div className="reveal">
+            <PartnerGrid partners={partnerBand} label="Partners and brands" compact />
           </div>
           <p style={{ marginTop: '1.6rem' }}>
             <Link to="/partners">All partners &amp; brands →</Link>

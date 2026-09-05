@@ -43,33 +43,57 @@ export const inquiryTypes: Array<{ group: string; options: Array<{ value: string
   },
 ]
 
-export const domesticPartners = [
-  'BKGC',
-  'Ethiopian Army Foundation',
-  'Defence Construction Enterprise',
-  'Defence Construction Design Enterprise',
-  'Amhar Pipe Factory (APF)',
-  'Oromia Water Works Construction Enterprise',
-  'Zemen Construction Corporation',
-  'GIW',
-  'Michael Tilahun Import',
-  'Sekela Engineering',
+export type Partner = {
+  name: string
+  logo?: string
+}
+
+export const domesticPartners: Partner[] = [
+  { name: 'BKGC', logo: '/img/partners/domestic/bkgc.webp' },
+  { name: 'Ethiopian Army Foundation', logo: '/img/partners/domestic/ethiopian-defence-foundation.webp' },
+  { name: 'Defence Construction Enterprise', logo: '/img/partners/domestic/defence-construction-enterprise.webp' },
+  { name: 'Defence Construction Design Enterprise', logo: '/img/partners/domestic/defence-construction-design-enterprise.webp' },
+  { name: 'Amhara Pipe Factory (APF)', logo: '/img/partners/domestic/amhara-pipe-factory.webp' },
+  { name: 'Oromia Water Works Construction Enterprise', logo: '/img/partners/domestic/oromia-water-works.webp' },
+  { name: 'Zemen Construction Corporation', logo: '/img/partners/domestic/zemen-construction.webp' },
+  { name: 'GIW', logo: '/img/partners/domestic/giw.webp' },
+  { name: 'Michael Tilahun Import' },
+  { name: 'Sekela Engineering' },
 ]
 
-export const internationalPartners = [
-  'AIM Industrials',
+export const internationalPartners: Partner[] = [
+  { name: 'AIM Industrials', logo: '/img/partners/brands/aim-industrials.webp' },
+  { name: 'Orica Digital Solutions', logo: '/img/partners/brands/orica-digital-solutions.webp?v=3' },
+  { name: 'RST Instruments', logo: '/img/partners/brands/rst-instruments.webp' },
+  { name: 'SISGEO', logo: '/img/partners/brands/sisgeo.webp' },
+  { name: 'ENCARDIO RITE', logo: '/img/partners/brands/encardio-rite.webp' },
+  { name: 'SME Monitoring', logo: '/img/partners/brands/sme-monitoring.webp' },
+  { name: 'Hunter', logo: '/img/partners/brands/hunter.webp?v=2' },
+  { name: 'Laxmidrip', logo: '/img/partners/brands/laxmidrip.webp?v=2' },
+  { name: 'Perkins', logo: '/img/partners/brands/perkins.webp' },
+  { name: 'JCB', logo: '/img/partners/brands/jcb.webp' },
+  { name: 'USTUNEL', logo: '/img/partners/brands/ustunel.webp?v=2' },
+  { name: 'PENTAX', logo: '/img/partners/brands/pentax.webp?v=2' },
+]
+
+const PARTNER_BAND_NAMES = new Set([
   'Orica Digital Solutions',
   'RST Instruments',
   'SISGEO',
   'ENCARDIO RITE',
-  'SME Monitoring',
   'Hunter',
-  'Laxmidrip',
   'Perkins',
   'JCB',
-  'USTUNEL',
   'PENTAX',
-]
+  'Defence Construction Enterprise',
+  'Oromia Water Works Construction Enterprise',
+  'Zemen Construction Corporation',
+  'Ethiopian Army Foundation',
+])
+
+export const partnerBand: Partner[] = [...internationalPartners, ...domesticPartners].filter((p) =>
+  PARTNER_BAND_NAMES.has(p.name),
+)
 
 export interface SampleProject {
   sector: string
