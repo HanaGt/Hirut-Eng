@@ -151,6 +151,39 @@ export const storyPhoto = {
   alt: 'A field crew in hard hats lowering a blue well casing beside a pickup truck',
 }
 
+export const pumpPhotos = [
+  {
+    src: '/img/products/pumps/pump1.png',
+    width: 600,
+    height: 600,
+    alt: 'Pump and accessory 1',
+  },
+  {
+    src: '/img/products/pumps/pump2.png',
+    width: 600,
+    height: 600,
+    alt: 'Pump and accessory 2',
+  },
+  {
+    src: '/img/products/pumps/pump3.png',
+    width: 600,
+    height: 600,
+    alt: 'Pump and accessory 3',
+  },
+  {
+    src: '/img/products/pumps/pump4.png',
+    width: 600,
+    height: 600,
+    alt: 'Pump and accessory 4',
+  },
+  {
+    src: '/img/products/pumps/pump5.png',
+    width: 600,
+    height: 600,
+    alt: 'Pump and accessory 5',
+  },
+] as const
+
 export const constructionPhotos = [
   {
     src: '/img/services/construction-works.jpg',

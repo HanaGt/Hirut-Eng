@@ -124,22 +124,76 @@ export const partnerBand: Partner[] = [...internationalPartners, ...domesticPart
   PARTNER_BAND_NAMES.has(p.name),
 )
 
-export interface SampleProject {
+export interface Project {
   sector: string
   sectorLabel: string
   region: string
   regionLabel: string
   year: string
   title: string
+  image?: string
+  desc?: string
+  isSample?: boolean
 }
 
-export const sampleProjects: SampleProject[] = [
-  { sector: 'water-supply', sectorLabel: 'Water Supply', region: 'sample-a', regionLabel: 'Sample Region A', year: 'sample-recent', title: 'Sample: town water supply scheme' },
-  { sector: 'geotechnical', sectorLabel: 'Geotechnical', region: 'sample-b', regionLabel: 'Sample Region B', year: 'sample-recent', title: 'Sample: dam instrumentation program' },
-  { sector: 'irrigation', sectorLabel: 'Irrigation', region: 'sample-c', regionLabel: 'Sample Region C', year: 'sample-earlier', title: 'Sample: commercial farm drip system' },
-  { sector: 'hydraulic', sectorLabel: 'Hydraulic Structures', region: 'sample-a', regionLabel: 'Sample Region A', year: 'sample-earlier', title: 'Sample: hydraulic structure works' },
-  { sector: 'waterproofing', sectorLabel: 'Waterproofing', region: 'sample-b', regionLabel: 'Sample Region B', year: 'sample-recent', title: 'Sample: basement waterproofing works' },
-  { sector: 'well-drilling', sectorLabel: 'Well Drilling', region: 'sample-c', regionLabel: 'Sample Region C', year: 'sample-earlier', title: 'Sample: deep borehole drilling' },
+export const projects: Project[] = [
+  { 
+    sector: 'well-drilling', 
+    sectorLabel: 'Well Drilling', 
+    region: 'ethiopia', 
+    regionLabel: 'Ethiopia', 
+    year: 'recent', 
+    title: 'Drilling Works',
+    image: '/img/projects/drilling-works.png',
+    desc: 'Deep borehole drilling and water extraction projects.',
+  },
+  { 
+    sector: 'irrigation', 
+    sectorLabel: 'Irrigation', 
+    region: 'ethiopia', 
+    regionLabel: 'Ethiopia', 
+    year: 'recent', 
+    title: 'Irrigation Works',
+    image: '/img/projects/irrigation-works.jpg',
+    desc: 'Modern agricultural irrigation systems and water management.',
+  },
+  { 
+    sector: 'hydraulic', 
+    sectorLabel: 'Hydraulic Structures', 
+    region: 'ethiopia', 
+    regionLabel: 'Ethiopia', 
+    year: 'recent', 
+    title: 'Fountain Works',
+    image: '/img/projects/fountain-works.png',
+    desc: 'Design and construction of architectural water fountains.',
+  },
+  { 
+    sector: 'water-supply', 
+    sectorLabel: 'Water Supply', 
+    region: 'amhara', 
+    regionLabel: 'Amhara Region', 
+    year: '2023', 
+    title: 'Town Water Supply Scheme', 
+    desc: 'Comprehensive water supply and distribution scheme for urban areas.' 
+  },
+  { 
+    sector: 'geotechnical', 
+    sectorLabel: 'Geotechnical', 
+    region: 'oromia', 
+    regionLabel: 'Oromia Region', 
+    year: '2024', 
+    title: 'Dam Instrumentation Program', 
+    desc: 'Supply and installation of geotechnical monitoring instruments for dam safety.' 
+  },
+  { 
+    sector: 'waterproofing', 
+    sectorLabel: 'Waterproofing', 
+    region: 'addis-ababa', 
+    regionLabel: 'Addis Ababa', 
+    year: '2023', 
+    title: 'Basement Waterproofing Works', 
+    desc: 'Advanced membrane waterproofing applied to deep basement structures.' 
+  },
 ]
 
 export const afterSalesPillars: Array<{ title: string; blurb: string; items: string[] }> = [

@@ -2,14 +2,14 @@ import { Link, createFileRoute } from '@tanstack/react-router'
 
 import { AmbientVideo } from '../components/motion'
 import { CtaBand, Eyebrow, OricaBand } from '../components/PageBits'
-import { PhChip, SampleImg } from '../components/Placeholders'
+import { SampleImg } from '../components/Placeholders'
 import { ScrubBand } from '../components/ScrubBand'
 import { StatsBand } from '../components/StatsBand'
 import { FlowWaves } from '../components/Waves'
 import { categories } from '../data/products'
-import { categoryImages, legImages, projectImages, stock, stockSoft } from '../data/media'
+import { categoryImages, legImages, stock, stockSoft } from '../data/media'
 import { PartnerGrid } from '../components/PartnerGrid'
-import { SITE_NAME, partnerBand, sampleProjects } from '../data/site'
+import { projects, SITE_NAME, partnerBand } from '../data/site'
 
 export const Route = createFileRoute('/')({
   head: () => ({
@@ -108,7 +108,6 @@ const PILLARS_COMPACT = [
 ]
 
 function HomePage() {
-  const featured = sampleProjects.slice(0, 3)
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: ORG_JSON_LD }} />
@@ -267,21 +266,25 @@ function HomePage() {
             <p className="lead">
               50+ projects delivered across Ethiopia and consultancy work across Africa.
             </p>
-            <PhChip>
-              real project content pending: the three cards below are labeled samples with
-              illustrative artwork, demonstrating the layout only
-            </PhChip>
           </div>
           <div className="grid grid-3">
-            {featured.map((p, i) => (
+            {projects.slice(0, 3).map((p, i) => (
               <Link
                 className="card card--media project-card reveal"
                 style={i > 0 ? ({ '--reveal-delay': `${i * 0.08}s` } as React.CSSProperties) : undefined}
                 to="/projects"
                 key={p.title}
               >
-                <span className="sample-flag">Sample</span>
-                <SampleImg {...stock(projectImages[i])} />
+                <img
+                  className="sample-img"
+                  src={p.image}
+                  alt={p.title}
+                  width={1600}
+                  height={1000}
+                  loading="lazy"
+                  decoding="async"
+                  style={{ aspectRatio: '16 / 9' }}
+                />
                 <div className="card-body">
                   <div className="project-meta">
                     <span>{p.sectorLabel}</span>
@@ -289,7 +292,7 @@ function HomePage() {
                     <span>{p.regionLabel}</span>
                   </div>
                   <h3>{p.title}</h3>
-                  <p>Layout demonstration. Real project scope, client, and outcome to be supplied.</p>
+                  <p>{p.desc}</p>
                   <span className="card-link">All projects →</span>
                 </div>
               </Link>

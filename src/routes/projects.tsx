@@ -2,8 +2,8 @@ import { useMemo, useState } from 'react'
 import { createFileRoute } from '@tanstack/react-router'
 
 import { CtaBand, PageHero } from '../components/PageBits'
-import { PhChip, SampleImg } from '../components/Placeholders'
-import { sampleProjects } from '../data/site'
+import { SampleImg } from '../components/Placeholders'
+import { projects } from '../data/site'
 import { projectImages, stock } from '../data/media'
 
 export const Route = createFileRoute('/projects')({
@@ -34,13 +34,15 @@ const SECTORS = [
   { value: 'well-drilling', label: 'Well Drilling' },
 ]
 const REGIONS = [
-  { value: 'sample-a', label: 'Sample Region A' },
-  { value: 'sample-b', label: 'Sample Region B' },
-  { value: 'sample-c', label: 'Sample Region C' },
+  { value: 'ethiopia', label: 'Ethiopia' },
+  { value: 'amhara', label: 'Amhara Region' },
+  { value: 'oromia', label: 'Oromia Region' },
+  { value: 'addis-ababa', label: 'Addis Ababa' },
 ]
 const YEARS = [
-  { value: 'sample-recent', label: 'Sample: recent' },
-  { value: 'sample-earlier', label: 'Sample: earlier' },
+  { value: 'recent', label: 'Recent' },
+  { value: '2024', label: '2024' },
+  { value: '2023', label: '2023' },
 ]
 
 function ProjectsPage() {
@@ -50,7 +52,7 @@ function ProjectsPage() {
 
   const visible = useMemo(
     () =>
-      sampleProjects.filter(
+      projects.filter(
         (p) =>
           (sector === 'all' || p.sector === sector) &&
           (region === 'all' || p.region === region) &&
@@ -66,12 +68,7 @@ function ProjectsPage() {
         current="Projects"
         title="Fifty projects and counting"
         lead="Water supply, irrigation, geotechnical instrumentation, hydraulic structures, waterproofing, and well drilling, delivered across Ethiopia, with consultancy work across Africa."
-      >
-        <PhChip>
-          all project content pending: the six cards below are clearly-labeled samples that
-          demonstrate the portfolio layout and filters
-        </PhChip>
-      </PageHero>
+      />
 
       <section className="section">
         <div className="container">
@@ -118,8 +115,20 @@ function ProjectsPage() {
                   style={i % 3 !== 0 ? ({ '--reveal-delay': `${(i % 3) * 0.06}s` } as React.CSSProperties) : undefined}
                   key={p.title}
                 >
-                  <span className="sample-flag">Sample</span>
-                  <SampleImg {...stock(projectImages[sampleProjects.indexOf(p) % projectImages.length])} />
+                  {p.image ? (
+                    <img
+                      className="sample-img"
+                      src={p.image}
+                      alt={p.title}
+                      width={1600}
+                      height={1000}
+                      loading="lazy"
+                      decoding="async"
+                      style={{ aspectRatio: '16 / 9' }}
+                    />
+                  ) : (
+                    <SampleImg {...stock(projectImages[projects.indexOf(p) % projectImages.length])} />
+                  )}
                   <div className="card-body">
                     <div className="project-meta">
                       <span>{p.sectorLabel}</span>
@@ -127,7 +136,7 @@ function ProjectsPage() {
                       <span>{p.regionLabel}</span>
                     </div>
                     <h3>{p.title}</h3>
-                    <p>Sample card for layout only. Client, scope, and outcome to be supplied.</p>
+                    <p>{p.desc}</p>
                   </div>
                 </div>
               ))}
@@ -142,3 +151,4 @@ function ProjectsPage() {
     </>
   )
 }
+

@@ -2,8 +2,9 @@ import { Link, createFileRoute, notFound } from '@tanstack/react-router'
 
 import { CtaBand, Eyebrow, OricaBand, PageHero } from '../components/PageBits'
 import { PhChip, SampleImg } from '../components/Placeholders'
+import { ConstructionSlideshow } from '../components/ConstructionSlideshow'
 import { categories, getCategory } from '../data/products'
-import { categoryImages, stock } from '../data/media'
+import { categoryImages, pumpPhotos, stock } from '../data/media'
 import { SITE_NAME } from '../data/site'
 
 export const Route = createFileRoute('/products/$category')({
@@ -102,15 +103,23 @@ function CategoryPage() {
               <PhChip>datasheets pending: download slots built, files to be attached</PhChip>
             </div>
             <div className="reveal" style={{ '--reveal-delay': '.1s' } as React.CSSProperties}>
-              <SampleImg
-                {...stock(categoryImages[c.slug])}
-                ratio="16 / 10"
-                sizes="(max-width: 980px) 92vw, 44vw"
-              />
-              <p className="sample-note">
-                Sample photograph: stock imagery standing in until the company's own photography
-                of this category is supplied.
-              </p>
+              {c.slug === 'pumps-accessories' ? (
+                <div style={{ position: 'relative', aspectRatio: '16 / 10', width: '100%' }}>
+                  <ConstructionSlideshow photos={pumpPhotos} />
+                </div>
+              ) : (
+                <>
+                  <SampleImg
+                    {...stock(categoryImages[c.slug])}
+                    ratio="16 / 10"
+                    sizes="(max-width: 980px) 92vw, 44vw"
+                  />
+                  <p className="sample-note">
+                    Sample photograph: stock imagery standing in until the company's own photography
+                    of this category is supplied.
+                  </p>
+                </>
+              )}
               <div className="card" style={{ marginTop: '1.2rem' }}>
                 <p className="card-num">Related services</p>
                 <ul className="check-list" style={{ marginBottom: 0 }}>
