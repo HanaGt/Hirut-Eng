@@ -9,7 +9,8 @@ import { departments } from '../data/departments'
    of markup. Each department is a button followed by its own panel, so
    on a narrow screen the pairs simply stack; on a wide screen the grid
    places every button in the first column and the open panel in the
-   second. One department is open at a time in both, the first by
+   second. Desktop keeps one department selected; tablet and mobile
+   toggle the open item closed on a second click. The first is open by
    default, and the buttons carry the disclosure semantics that work in
    either layout.
 
@@ -18,18 +19,35 @@ import { departments } from '../data/departments'
    of leaving the reader at the top of the page.
    ============================================================ */
 
+const DESKTOP_TABS = '(min-width: 981px)'
+
 function slugFromHash(hash: string) {
   return hash.replace('#', '')
+}
+
+function isDesktopTabs() {
+  return window.matchMedia(DESKTOP_TABS).matches
 }
 
 export function Departments() {
   const hash = useRouterState({ select: (s) => slugFromHash(s.location.hash) })
   const fromHash = departments.findIndex((d) => d.slug === hash)
-  const [open, setOpen] = useState(() => (fromHash >= 0 ? fromHash : 0))
+  const [open, setOpen] = useState<number | null>(() => (fromHash >= 0 ? fromHash : 0))
 
   useLayoutEffect(() => {
     if (fromHash >= 0) setOpen(fromHash)
   }, [fromHash])
+
+  useLayoutEffect(() => {
+    const mq = window.matchMedia(DESKTOP_TABS)
+    const keepOneOpen = () => {
+      if (!mq.matches) return
+      setOpen((current) => (current == null ? 0 : current))
+    }
+    keepOneOpen()
+    mq.addEventListener('change', keepOneOpen)
+    return () => mq.removeEventListener('change', keepOneOpen)
+  }, [])
 
   return (
     <div
@@ -47,7 +65,11 @@ export function Departments() {
                 id={`dept-tab-${d.slug}`}
                 aria-expanded={isOpen}
                 aria-controls={`dept-panel-${d.slug}`}
-                onClick={() => setOpen(i)}
+                onClick={() =>
+                  setOpen((current) =>
+                    current === i && !isDesktopTabs() ? null : i,
+                  )
+                }
               >
                 <span className="dept-tab-num" aria-hidden="true">
                   {String(i + 1).padStart(2, '0')}

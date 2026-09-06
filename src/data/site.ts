@@ -22,11 +22,17 @@ export const OFFICE = {
 }
 
 export const SOCIAL = [
-  { id: 'telegram' as const, label: 'Telegram', href: 'https://t.me/Hirutengineering' },
+  {
+    id: 'telegram' as const,
+    label: 'Telegram',
+    href: 'https://t.me/Hirutengineering',
+    display: 't.me/Hirutengineering',
+  },
   {
     id: 'facebook' as const,
     label: 'Facebook',
     href: 'https://www.facebook.com/share/1czPpCM8ZQ/?mibextid=wwXIfr',
+    display: 'facebook.com/share/1czPpCM8ZQ',
   },
 ]
 

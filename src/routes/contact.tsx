@@ -98,7 +98,7 @@ function ContactPage() {
                   <li key={s.href}>
                     <a className="social-link" href={s.href} target="_blank" rel="noopener noreferrer">
                       <SocialIcon name={s.id} />
-                      {s.label}
+                      {s.display}
                     </a>
                   </li>
                 ))}
