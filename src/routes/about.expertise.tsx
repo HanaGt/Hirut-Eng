@@ -2,7 +2,6 @@ import { Link, createFileRoute } from '@tanstack/react-router'
 
 import { AboutNext } from '../components/AboutNav'
 import { CtaBand, Eyebrow, PageHero } from '../components/PageBits'
-import { PhChip } from '../components/Placeholders'
 import { departments } from '../data/departments'
 import { categories } from '../data/products'
 import { SITE_NAME } from '../data/site'
@@ -59,11 +58,6 @@ function ExpertisePage() {
       {/* Supply */}
       <section className="section" id="supply-expertise">
         <div className="container">
-          <PhChip style={{ marginBottom: 'clamp(1.6rem, 3vw, 2.4rem)' }}>
-            additional expertise narrative pending from client: this page is assembled from
-            capability already published elsewhere on the site, and no new claims have been written
-            for it
-          </PhChip>
           <div className="section-head reveal">
             <Eyebrow>Supply</Eyebrow>
             <h2>Seven product categories</h2>

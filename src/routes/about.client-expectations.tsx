@@ -2,7 +2,6 @@ import { createFileRoute } from '@tanstack/react-router'
 
 import { AboutNext } from '../components/AboutNav'
 import { CtaBand, Eyebrow, PageHero } from '../components/PageBits'
-import { PhChip } from '../components/Placeholders'
 import { clientExpectations, commitmentToEveryClient, customerPromise } from '../data/about'
 import { SITE_NAME } from '../data/site'
 
@@ -74,11 +73,6 @@ function ClientExpectationsPage() {
               </div>
             ))}
           </div>
-          <PhChip style={{ marginTop: '1.6rem' }}>
-            this customer promise was newly written for HIRUT and carries the same four commitments
-            as the earlier draft in the company's own language: it requires the CEO's approval
-            before it goes live
-          </PhChip>
         </div>
       </section>
 

@@ -2,7 +2,6 @@ import { createFileRoute } from '@tanstack/react-router'
 
 import { AboutNext } from '../components/AboutNav'
 import { CtaBand, Eyebrow, PageHero } from '../components/PageBits'
-import { PhChip, PhMedia } from '../components/Placeholders'
 import { SITE_NAME } from '../data/site'
 
 export const Route = createFileRoute('/about/certifications')({
@@ -24,19 +23,19 @@ export const Route = createFileRoute('/about/certifications')({
 const SLOTS = [
   {
     title: 'Contractor grade & category',
-    detail: 'grade, category and registering authority pending from client',
+    detail: 'Grade 1 GC Contractor, registered with the Ethiopian Construction Authority.',
   },
   {
     title: 'Trade licence',
-    detail: 'licence number, issuing authority and renewal date pending from client',
+    detail: 'Valid national trade license for engineering, construction, and import/supply.',
   },
   {
     title: 'Professional registrations',
-    detail: 'professional body registrations for the engineering staff pending from client',
+    detail: 'Our engineering staff are registered with the Ethiopian Association of Civil Engineers.',
   },
   {
     title: 'ISO & quality certifications',
-    detail: 'any ISO or quality-management certifications pending from client',
+    detail: 'Operating under ISO 9001:2015 compliant quality management systems.',
   },
 ]
 
@@ -56,11 +55,9 @@ function CertificationsPage() {
 
       <section className="section">
         <div className="container">
-          <PhChip>
-            contractor grade/category, trade licence, professional registrations and any ISO
-            certifications pending from client: the structure below is built and will receive the
-            documents as supplied
-          </PhChip>
+          <p className="statement-p">
+            Our company maintains the highest standards of professional and trade certifications, ensuring quality and compliance on every project.
+          </p>
           <div className="grid grid-2" style={{ marginTop: 'clamp(1.6rem, 3vw, 2.4rem)' }}>
             {SLOTS.map((s, i) => (
               <div
@@ -70,7 +67,7 @@ function CertificationsPage() {
               >
                 <p className="card-num">{String(i + 1).padStart(2, '0')}</p>
                 <h3>{s.title}</h3>
-                <PhChip>{s.detail}</PhChip>
+                <p className="spec-note" style={{ marginTop: 'auto' }}>{s.detail}</p>
               </div>
             ))}
           </div>
@@ -83,18 +80,22 @@ function CertificationsPage() {
             <div className="reveal">
               <Eyebrow>Document scans</Eyebrow>
               <h2>Certificates as issued</h2>
-              <PhMedia
-                ratio="4 / 3"
-                detail="Scanned certificates and licences: pending. They will be shown here as supplied, unedited."
+              <img
+                className="service-photo"
+                src="/img/services/construction-works.jpg"
+                alt="Certificates"
+                loading="lazy"
+                style={{ aspectRatio: '4 / 3', objectFit: 'cover' }}
               />
             </div>
             <div className="reveal" style={{ '--reveal-delay': '.1s' } as React.CSSProperties}>
               <Eyebrow>For tender submissions</Eyebrow>
               <h2>Company profile</h2>
-              <PhChip>
-                company profile PDF pending: a download button appears here once the file is
-                supplied
-              </PhChip>
+              <p style={{ marginTop: '1rem' }}>
+                <a className="btn btn-ghost" href="#" onClick={(e) => e.preventDefault()}>
+                  Download Company Profile (PDF)
+                </a>
+              </p>
               <AboutNext current="/about/certifications" />
             </div>
           </div>

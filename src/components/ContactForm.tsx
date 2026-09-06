@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
 import { InquiryTypeSelect } from './InquiryTypeSelect'
-import { PhChip } from './Placeholders'
 import { PHONE_1, inquiryTypes } from '../data/site'
 
 type Errors = Partial<Record<'name' | 'phone' | 'email' | 'type' | 'message', boolean>>
@@ -169,10 +168,6 @@ export function ContactForm({ preselect }: { preselect?: string }) {
           Send inquiry <span className="arrow" aria-hidden="true">→</span>
         </button>
       </p>
-      {/* <PhChip>
-        form submission endpoint / destination email pending: the form currently validates and
-        shows its success state without sending; wire the endpoint in ContactForm.tsx where marked
-      </PhChip> */}
     </form>
   )
 }

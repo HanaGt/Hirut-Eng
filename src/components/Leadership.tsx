@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
 
 import { jumpScroll, lockPageScroll, unlockPageScroll } from '../lib/scroll-lock'
-import { PhChip } from './Placeholders'
 import { leaderInitials, leadership, type Leader } from '../data/leadership'
 
 /* ============================================================
@@ -253,10 +252,6 @@ export function LeadershipGrid() {
         </div>
       </div>
 
-      <PhChip style={{ marginTop: '1.6rem' }}>
-        professional headshots for all seven leadership members pending: supplied portraits are
-        used where they exist and initials stand in elsewhere, never a stock face of another person
-      </PhChip>
 
       {/* Every profile is rendered into the closed dialog rather than only the
           open one, so all seven bios are in the prerendered HTML for search

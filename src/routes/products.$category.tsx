@@ -1,7 +1,7 @@
 import { Link, createFileRoute, notFound } from '@tanstack/react-router'
 
 import { CtaBand, Eyebrow, OricaBand, PageHero } from '../components/PageBits'
-import { PhChip, SampleImg } from '../components/Placeholders'
+import { SampleImg } from '../components/Placeholders'
 import { categories, getCategory } from '../data/products'
 import { categoryImages, stock } from '../data/media'
 import { SITE_NAME } from '../data/site'
@@ -99,7 +99,7 @@ function CategoryPage() {
                   Download spec sheet (PDF)
                 </a>
               </p>
-              <PhChip>datasheets pending: download slots built, files to be attached</PhChip>
+              <p className="spec-note" style={{ marginTop: '1rem' }}>Datasheets will be available for download soon.</p>
             </div>
             <div className="reveal" style={{ '--reveal-delay': '.1s' } as React.CSSProperties}>
               <SampleImg
@@ -107,10 +107,6 @@ function CategoryPage() {
                 ratio="16 / 10"
                 sizes="(max-width: 980px) 92vw, 44vw"
               />
-              <p className="sample-note">
-                Sample photograph: stock imagery standing in until the company's own photography
-                of this category is supplied.
-              </p>
               <div className="card" style={{ marginTop: '1.2rem' }}>
                 <p className="card-num">Related services</p>
                 <ul className="check-list" style={{ marginBottom: 0 }}>

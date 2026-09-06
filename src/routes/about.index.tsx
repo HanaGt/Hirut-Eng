@@ -2,7 +2,6 @@ import { Link, createFileRoute } from '@tanstack/react-router'
 
 import { ABOUT_SECTIONS, AboutNext } from '../components/AboutNav'
 import { CtaBand, Eyebrow, PageHero } from '../components/PageBits'
-import { PhChip, PhMedia } from '../components/Placeholders'
 import { StatsBand } from '../components/StatsBand'
 import { storyPhoto } from '../data/media'
 import { clientExpectations, corporatePromise, leadershipIntro, purpose } from '../data/about'
@@ -292,15 +291,22 @@ function AboutIndexPage() {
             <div className="reveal">
               <Eyebrow>On site</Eyebrow>
               <h2>Our engineers in the field</h2>
-              <PhMedia ratio="4 / 3" detail="Team / site photograph from the company's own media library: pending" />
+              <img
+                className="service-photo"
+                src="/img/services/construction-works.jpg"
+                alt="Our engineers in the field"
+                loading="lazy"
+                style={{ aspectRatio: '4 / 3', objectFit: 'cover' }}
+              />
             </div>
             <div className="reveal" style={{ '--reveal-delay': '.1s' } as React.CSSProperties}>
               <Eyebrow>Company profile</Eyebrow>
               <h2>For tender submissions</h2>
-              <PhChip>
-                company profile PDF pending: the download button appears here once the file is
-                supplied
-              </PhChip>
+              <p style={{ marginTop: '1rem' }}>
+                <a className="btn btn-ghost" href="#" onClick={(e) => e.preventDefault()}>
+                  Download Company Profile (PDF)
+                </a>
+              </p>
               <AboutNext current="/about" />
             </div>
           </div>

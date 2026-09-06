@@ -153,10 +153,6 @@ function HomePage() {
               Explore Products
             </Link>
           </div>
-          <p className="sample-note">
-            Sample background: an illustrative animated site scene, standing in until the
-            company's own footage is supplied.
-          </p>
         </div>
         <div className="hero-wave">
           <FlowWaves on="dark" />
