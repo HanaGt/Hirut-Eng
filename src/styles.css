@@ -2398,13 +2398,13 @@ body.is-scrolled .about-nav-link.is-current {
 
 .leader-modal-head {
   display: grid;
-  grid-template-columns: 116px 1fr;
+  grid-template-columns: 200px 1fr;
   gap: clamp(1rem, 2vw, 1.6rem);
   align-items: start;
   margin-bottom: 1.4rem;
   padding-inline-end: 44px;
 }
-@media (max-width: 560px) { .leader-modal-head { grid-template-columns: 84px 1fr; } }
+@media (max-width: 560px) { .leader-modal-head { grid-template-columns: 120px 1fr; } }
 .leader-modal-portrait,
 .leader-modal-portrait picture,
 .leader-modal-portrait .leader-monogram {

@@ -281,7 +281,7 @@ export function LeadershipGrid() {
                     <Portrait
                       photo={p.photo}
                       name={p.name}
-                      sizes="(max-width: 560px) 84px, 116px"
+                      sizes="(max-width: 560px) 120px, 200px"
                     />
                   </span>
                   <div>
