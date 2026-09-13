@@ -87,18 +87,18 @@ export const domesticPartners: Partner[] = [
   { name: 'Zemen Construction Corporation', logo: '/img/partners/domestic/zemen-construction.webp' },
   { name: 'GIW', logo: '/img/partners/domestic/giw.webp?v=2' },
   { name: 'Michael Tilahun Import', logo: '/img/partners/domestic/michael-tilahun-import.webp' },
-  { name: 'Sekela Engineering' },
+  { name: 'Sekela Engineering', logo: '/img/partners/domestic/sekela-engineering.webp' },
 ]
 
 export const internationalPartners: Partner[] = [
   { name: 'AIM Industrials', logo: '/img/partners/brands/aim-industrials.webp' },
-  { name: 'Orica Digital Solutions', logo: '/img/partners/brands/orica-digital-solutions.webp?v=3' },
-  { name: 'RST Instruments', logo: '/img/partners/brands/rst-instruments.webp' },
-  { name: 'SISGEO', logo: '/img/partners/brands/sisgeo.webp' },
+  { name: 'Orica Digital Solutions', logo: '/img/partners/brands/orica-digital-solutions.webp?v=4' },
+  { name: 'RST Instruments', logo: '/img/partners/brands/rst-instruments.png?v=5' },
+  { name: 'SISGEO', logo: '/img/partners/brands/sisgeo.webp?v=2' },
   { name: 'ENCARDIO RITE', logo: '/img/partners/brands/encardio-rite.webp' },
   { name: 'SME Monitoring', logo: '/img/partners/brands/sme-monitoring.webp' },
   { name: 'Hunter', logo: '/img/partners/brands/hunter.webp?v=2' },
-  { name: 'Laxmidrip', logo: '/img/partners/brands/laxmidrip.webp?v=2' },
+  { name: 'Laxmidrip', logo: '/img/partners/brands/laxmidrip.webp?v=3' },
   { name: 'Perkins', logo: '/img/partners/brands/perkins.webp' },
   { name: 'JCB', logo: '/img/partners/brands/jcb.webp' },
   { name: 'USTUNEL', logo: '/img/partners/brands/ustunel.webp?v=2' },

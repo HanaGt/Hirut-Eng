@@ -11,9 +11,7 @@
    person's own supplied bio.
 
    `photo` points at a real supplied portrait (extension-less: .webp is
-   preferred, .jpg is the fallback). Two members have no portrait yet;
-   their cards carry an initials monogram rather than a stock face of
-   somebody else.
+   preferred, .jpg is the fallback).
    ============================================================ */
 
 export interface Leader {
@@ -143,24 +141,25 @@ export const leadership: Leader[] = [
   {
     slug: 'hana-guta-feyissa',
     name: 'Hana Guta Feyissa',
-    postNominals: 'B.Sc. (Electrical and Computer Engineering), B.A (Management)',
+    postNominals: 'B.Sc. (Software Technology, Re-engineering and Computing Technology), B.A (Management)',
     role: 'Director | IT Support & Geo-Solutions Department',
     experience: '5+ years',
     disciplines: [
-      'Electrical and computer engineering',
+      'Software technology, re-engineering and computing technology',
       'Information technology',
       'Digital systems',
       'Management',
       'Geospatial solutions',
     ],
     bio: [
-      'Hana Guta Feyissa is a multidisciplinary professional with more than 5 years of experience in electrical and computer engineering, information technology, digital systems, management, and geospatial solutions.',
+      'Hana Guta Feyissa is a multidisciplinary professional with more than 5 years of experience in software technology, re-engineering and computing technology, information technology, digital systems, management, and geospatial solutions.',
       'Her professional experience supports the integration of technology into engineering and business operations, including IT systems, digital workflows, technical data management, geospatial applications, information systems, and digital project-support solutions.',
       'As Director of IT Support and Geo-Solutions, she contributes to the company’s digital transformation by promoting the effective use of technology, engineering data, and geospatial tools to improve operational efficiency, data accessibility, technical communication, visualization, and decision-making.',
       'Her multidisciplinary background provides an important link between engineering operations and modern digital technologies.',
     ],
     qualsLabel: 'Academic Qualifications',
-    quals: ['B.Sc. in Electrical & Computer Engineering', 'B.A. in Management'],
+    quals: ['B.Sc. in Software Technology, Re-engineering and Computing Technology', 'B.A. in Management'],
+    photo: '/img/team/hana',
   },
   {
     slug: 'tegene-negussie-begashaw',
@@ -188,6 +187,7 @@ export const leadership: Leader[] = [
       'M.Sc. in Accounting',
       'M.A. in Tax & Property Valuation',
     ],
+    photo: '/img/team/tegene',
   },
   {
     slug: 'nathan-guta-feyissa',
