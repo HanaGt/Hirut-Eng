@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { InquiryTypeSelect } from './InquiryTypeSelect'
-import { PHONE_1, inquiryTypes } from '../data/site'
+import { EMAIL, PHONE_1, inquiryTypes } from '../data/site'
+import { submitInquiry } from '../lib/submitInquiry'
 
 type Errors = Partial<Record<'name' | 'phone' | 'email' | 'type' | 'message', boolean>>
 
@@ -12,24 +13,43 @@ const ERROR_TEXT: Record<keyof Errors, string> = {
   message: 'Please tell us a little about your inquiry.',
 }
 
+const TYPE_OPTIONS = inquiryTypes.flatMap((g) => g.options)
+const validValues = TYPE_OPTIONS.map((o) => o.value)
+
+function typeLabel(value: string) {
+  return TYPE_OPTIONS.find((o) => o.value === value)?.label ?? value
+}
+
 export function ContactForm({ preselect }: { preselect?: string }) {
   const [errors, setErrors] = useState<Errors>({})
   const [sent, setSent] = useState(false)
+  const [sending, setSending] = useState(false)
+  const [submitError, setSubmitError] = useState(false)
   const [type, setType] = useState('')
   const formRef = useRef<HTMLFormElement>(null)
   const successRef = useRef<HTMLDivElement>(null)
-
-  const validValues = inquiryTypes.flatMap((g) => g.options.map((o) => o.value))
 
   // Category CTAs link here with ?type=…; applied after hydration so the
   // prerendered HTML (built without search params) matches on first paint.
   useEffect(() => {
     if (preselect && validValues.includes(preselect)) setType(preselect)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [preselect])
 
-  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+  useEffect(() => {
+    if (!sent) return
+    const t = window.setTimeout(() => {
+      setSent(false)
+      setType('')
+      setErrors({})
+      setSubmitError(false)
+    }, 5000)
+    return () => window.clearTimeout(t)
+  }, [sent])
+
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
+    if (sending) return
+
     const form = e.currentTarget
     const data = new FormData(form)
     const val = (k: string) => String(data.get(k) ?? '').trim()
@@ -41,6 +61,7 @@ export function ContactForm({ preselect }: { preselect?: string }) {
     if (!val('inquiry-type')) next.type = true
     if (!val('message')) next.message = true
     setErrors(next)
+    setSubmitError(false)
 
     if (Object.keys(next).length > 0) {
       requestAnimationFrame(() => {
@@ -49,11 +70,25 @@ export function ContactForm({ preselect }: { preselect?: string }) {
       return
     }
 
-    /* [PLACEHOLDER: form submission endpoint / destination email]
-       When the endpoint is confirmed, POST the FormData here before
-       showing the success state. */
-    setSent(true)
-    requestAnimationFrame(() => successRef.current?.focus())
+    setSending(true)
+    try {
+      await submitInquiry({
+        name: val('name'),
+        company: val('company'),
+        phone: val('phone'),
+        email: val('email'),
+        inquiryTypeLabel: typeLabel(val('inquiry-type')),
+        message: val('message'),
+        honeypot: val('botcheck'),
+      })
+      setSent(true)
+      requestAnimationFrame(() => successRef.current?.focus())
+    } catch (err) {
+      console.error(err)
+      setSubmitError(true)
+    } finally {
+      setSending(false)
+    }
   }
 
   const err = (k: keyof Errors) =>
@@ -79,7 +114,11 @@ export function ContactForm({ preselect }: { preselect?: string }) {
   }
 
   return (
-    <form ref={formRef} onSubmit={onSubmit} noValidate>
+    <form ref={formRef} onSubmit={onSubmit} noValidate aria-busy={sending || undefined}>
+      <div className="hp" aria-hidden="true">
+        <label htmlFor="hp-website">Website</label>
+        <input id="hp-website" type="text" name="botcheck" tabIndex={-1} autoComplete="off" />
+      </div>
       <div className="form-grid">
         <div className="field">
           <label htmlFor="name">
@@ -164,10 +203,22 @@ export function ContactForm({ preselect }: { preselect?: string }) {
         </div>
       </div>
       <p style={{ marginTop: '1.4rem' }}>
-        <button type="submit" className="btn btn-primary">
-          Send inquiry <span className="arrow" aria-hidden="true">→</span>
+        <button type="submit" className="btn btn-primary" disabled={sending}>
+          {sending ? (
+            'Sending…'
+          ) : (
+            <>
+              Send inquiry <span className="arrow" aria-hidden="true">→</span>
+            </>
+          )}
         </button>
       </p>
+      {submitError ? (
+        <p className="form-submit-error" role="alert">
+          We couldn't send your inquiry. Please try again, or email{' '}
+          <a href={EMAIL.href}>{EMAIL.display}</a>.
+        </p>
+      ) : null}
     </form>
   )
 }

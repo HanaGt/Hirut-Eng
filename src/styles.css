@@ -286,6 +286,12 @@ ul, ol { padding-left: 1.2em; margin: 0 0 1em; }
 
 .btn-primary { background: var(--hydro-700); color: var(--white); }
 .btn-primary:hover { background: var(--hydro-600); color: var(--white); }
+.btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+}
+.btn:disabled:hover .arrow { transform: none; }
 
 .btn-ghost { border-color: currentColor; color: var(--ink-900); background: transparent; }
 .btn-ghost:hover { border-color: var(--hydro-600); color: var(--hydro-600); }
@@ -1263,6 +1269,24 @@ a.card { text-decoration: none; color: inherit; }
   background: var(--white);
   padding: clamp(1.8rem, 4vw, 2.8rem);
   text-align: center;
+}
+.form-submit-error {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--danger);
+  margin-top: 0.85rem;
+}
+.form-submit-error a { color: inherit; }
+.hp {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
 }
 .form-success .tick {
   width: 54px;
