@@ -4,8 +4,10 @@ import { ContactForm } from '../components/ContactForm'
 import { PageHero } from '../components/PageBits'
 import { SocialIcon } from '../components/SocialIcon'
 import { EMAIL, OFFICE, PHONE_1, PHONE_2, SOCIAL } from '../data/site'
+import { listInquiryTypes } from '../server/product.functions'
 
 export const Route = createFileRoute('/contact')({
+  loader: () => listInquiryTypes(),
   validateSearch: (search: Record<string, unknown>): { type?: string } => ({
     type: typeof search.type === 'string' ? search.type : undefined,
   }),
@@ -28,6 +30,7 @@ export const Route = createFileRoute('/contact')({
 })
 
 function ContactPage() {
+  const inquiryTypes = Route.useLoaderData()
   const { type } = Route.useSearch()
   return (
     <>
@@ -41,7 +44,7 @@ function ContactPage() {
       <section className="section">
         <div className="container contact-grid">
           <div className="reveal">
-            <ContactForm preselect={type} />
+            <ContactForm preselect={type} inquiryTypes={inquiryTypes} />
           </div>
 
           <aside className="reveal" style={{ '--reveal-delay': '.1s' } as React.CSSProperties}>

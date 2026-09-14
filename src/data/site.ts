@@ -45,7 +45,10 @@ export const stats = [
   { value: 50, suffix: '+', label: 'Skilled engineers' },
 ] as const
 
-export const inquiryTypes: Array<{ group: string; options: Array<{ value: string; label: string }> }> = [
+export type InquiryGroup = { group: string; options: Array<{ value: string; label: string }> }
+
+/** Seed / fallback. Live contact options come from published product categories. */
+export const inquiryTypes: InquiryGroup[] = [
   {
     group: 'Products',
     options: [

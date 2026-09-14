@@ -3,10 +3,12 @@ import { createFileRoute } from '@tanstack/react-router'
 
 import { CtaBand, PageHero } from '../components/PageBits'
 import { SampleImg } from '../components/Placeholders'
-import { projects } from '../data/site'
+import { PROJECT_REGIONS, PROJECT_SECTORS, PROJECT_YEARS } from '../data/project-meta'
 import { projectImages, stock } from '../data/media'
+import { listPublishedProjects } from '../server/project.functions'
 
 export const Route = createFileRoute('/projects')({
+  loader: () => listPublishedProjects(),
   head: () => ({
     meta: [
       { title: 'Projects | HIRUT Engineering Construction and General Trading' },
@@ -25,27 +27,12 @@ export const Route = createFileRoute('/projects')({
   component: ProjectsPage,
 })
 
-const SECTORS = [
-  { value: 'water-supply', label: 'Water Supply' },
-  { value: 'irrigation', label: 'Irrigation' },
-  { value: 'geotechnical', label: 'Geotechnical' },
-  { value: 'hydraulic', label: 'Hydraulic Structures' },
-  { value: 'waterproofing', label: 'Waterproofing' },
-  { value: 'well-drilling', label: 'Well Drilling' },
-]
-const REGIONS = [
-  { value: 'ethiopia', label: 'Ethiopia' },
-  { value: 'amhara', label: 'Amhara Region' },
-  { value: 'oromia', label: 'Oromia Region' },
-  { value: 'addis-ababa', label: 'Addis Ababa' },
-]
-const YEARS = [
-  { value: 'recent', label: 'Recent' },
-  { value: '2024', label: '2024' },
-  { value: '2023', label: '2023' },
-]
+const SECTORS = PROJECT_SECTORS
+const REGIONS = PROJECT_REGIONS
+const YEARS = PROJECT_YEARS
 
 function ProjectsPage() {
+  const projects = Route.useLoaderData()
   const [sector, setSector] = useState('all')
   const [region, setRegion] = useState('all')
   const [year, setYear] = useState('all')
@@ -58,7 +45,7 @@ function ProjectsPage() {
           (region === 'all' || p.region === region) &&
           (year === 'all' || p.year === year),
       ),
-    [sector, region, year],
+    [projects, sector, region, year],
   )
 
   return (
@@ -127,7 +114,7 @@ function ProjectsPage() {
                       style={{ aspectRatio: '16 / 9' }}
                     />
                   ) : (
-                    <SampleImg {...stock(projectImages[projects.indexOf(p) % projectImages.length])} />
+                    <SampleImg {...stock(projectImages[i % projectImages.length])} />
                   )}
                   <div className="card-body">
                     <div className="project-meta">

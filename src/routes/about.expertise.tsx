@@ -3,26 +3,26 @@ import { Link, createFileRoute } from '@tanstack/react-router'
 import { AboutNext } from '../components/AboutNav'
 import { CtaBand, Eyebrow, PageHero } from '../components/PageBits'
 import { departments } from '../data/departments'
-import { categories } from '../data/products'
 import { SITE_NAME } from '../data/site'
+import { listPublishedProducts } from '../server/product.functions'
 
 export const Route = createFileRoute('/about/expertise')({
+  loader: () => listPublishedProducts(),
   head: () => ({
     meta: [
       { title: `Our Expertise | ${SITE_NAME}` },
       {
         name: 'description',
-        content:
-          'The capability behind the work: seven product categories, three service lines (construction works, professional and consultancy services, after-sales services), and six specialised departments.',
+          content:
+            'The capability behind the work: product categories, three service lines (construction works, professional and consultancy services, after-sales services), and six specialised departments.',
       },
     ],
   }),
   component: ExpertisePage,
 })
 
-/* Assembled only from capability already published on this site: the seven
-   product categories, the three service lines, and the six departments.
-   No new claims are made here. */
+/* Assembled from capability already published on this site: product
+   categories, the three service lines, and the six departments. */
 const SERVICE_LINES = [
   {
     hash: 'construction' as const,
@@ -37,11 +37,12 @@ const SERVICE_LINES = [
   {
     hash: 'after-sales' as const,
     title: 'After-Sales Services',
-    body: 'A six-pillar service organisation: commissioning, training, maintenance, warranty support, monitoring and emergency response.',
+    body: 'Commissioning, training, maintenance, warranty support, monitoring and emergency response.',
   },
 ]
 
 function ExpertisePage() {
+  const categories = Route.useLoaderData()
   return (
     <>
       <PageHero
@@ -60,7 +61,9 @@ function ExpertisePage() {
         <div className="container">
           <div className="section-head reveal">
             <Eyebrow>Supply</Eyebrow>
-            <h2>Seven product categories</h2>
+            <h2>
+              {categories.length} product {categories.length === 1 ? 'category' : 'categories'}
+            </h2>
             <p className="lead">
               Imported and supplied with technical backing, and installed by the same firm that
               sells them.

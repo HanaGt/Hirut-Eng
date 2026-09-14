@@ -6,10 +6,12 @@ import { SampleImg } from '../components/Placeholders'
 import { ScrubBand } from '../components/ScrubBand'
 import { StatsBand } from '../components/StatsBand'
 import { FlowWaves } from '../components/Waves'
-import { categories } from '../data/products'
-import { categoryImages, legImages, stock, stockSoft } from '../data/media'
+import { legImages, projectImages, stock, stockSoft } from '../data/media'
 import { PartnerGrid } from '../components/PartnerGrid'
-import { projects, SITE_NAME, partnerBand } from '../data/site'
+import { CategoryPhoto } from '../components/CategoryPhoto'
+import { SITE_NAME, partnerBand } from '../data/site'
+import { listPublishedProducts } from '../server/product.functions'
+import { listPublishedProjects } from '../server/project.functions'
 
 export const Route = createFileRoute('/')({
   head: () => ({
@@ -39,6 +41,10 @@ export const Route = createFileRoute('/')({
       },
     ],
   }),
+  loader: async () => ({
+    projects: await listPublishedProjects(),
+    products: await listPublishedProducts(),
+  }),
   component: HomePage,
 })
 
@@ -67,7 +73,7 @@ const LEGS = [
   {
     num: '01 · Supply',
     title: 'Import & supply',
-    body: 'Seven product categories imported and sold with technical backing behind every line.',
+    body: 'Product categories imported and sold with technical backing behind every line.',
     linkShort: 'Browse the catalog',
     to: '/products',
     hash: undefined as string | undefined,
@@ -108,6 +114,7 @@ const PILLARS_COMPACT = [
 ]
 
 function HomePage() {
+  const { projects, products } = Route.useLoaderData()
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: ORG_JSON_LD }} />
@@ -214,14 +221,16 @@ function HomePage() {
         <div className="container">
           <div className="section-head reveal">
             <Eyebrow>Supply</Eyebrow>
-            <h2>Seven product categories, imported and backed</h2>
+            <h2>
+              {products.length} product {products.length === 1 ? 'category' : 'categories'}, imported and backed
+            </h2>
             <p className="lead">
               Every category ships with the same promise: honest specifications, installation
               capability in-house, and support after commissioning.
             </p>
           </div>
           <div className="grid grid-3">
-            {categories.map((c, i) => (
+            {products.map((c, i) => (
               <Link
                 className="card card--media reveal"
                 style={i % 3 !== 0 ? ({ '--reveal-delay': `${(i % 3) * 0.06}s` } as React.CSSProperties) : undefined}
@@ -229,7 +238,7 @@ function HomePage() {
                 params={{ category: c.slug }}
                 key={c.slug}
               >
-                <SampleImg {...stock(categoryImages[c.slug])} />
+                <CategoryPhoto slug={c.slug} image={c.image} />
                 <div className="card-body">
                   <h3>{c.name}</h3>
                   <p>{c.cardBlurb}</p>
@@ -271,16 +280,20 @@ function HomePage() {
                 to="/projects"
                 key={p.title}
               >
-                <img
-                  className="sample-img"
-                  src={p.image}
-                  alt={p.title}
-                  width={1600}
-                  height={1000}
-                  loading="lazy"
-                  decoding="async"
-                  style={{ aspectRatio: '16 / 9' }}
-                />
+                {p.image ? (
+                  <img
+                    className="sample-img"
+                    src={p.image}
+                    alt={p.title}
+                    width={1600}
+                    height={1000}
+                    loading="lazy"
+                    decoding="async"
+                    style={{ aspectRatio: '16 / 9' }}
+                  />
+                ) : (
+                  <SampleImg {...stock(projectImages[i % projectImages.length])} />
+                )}
                 <div className="card-body">
                   <div className="project-meta">
                     <span>{p.sectorLabel}</span>

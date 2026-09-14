@@ -1,9 +1,10 @@
 import { Suspense } from 'react'
-import { HeadContent, Outlet, Scripts, createRootRoute } from '@tanstack/react-router'
+import { HeadContent, Outlet, Scripts, createRootRoute, useRouterState } from '@tanstack/react-router'
 
 import { Footer, Header } from '../components/Chrome'
 import { CycleRevealEffects, RevealEffects } from '../components/motion'
 import { EMAIL, OFFICE, PHONE_1, PHONE_2, SITE_NAME, SITE_NAME_SHORT, SOCIAL, TAGLINE } from '../data/site'
+import { listProductNav } from '../server/product.functions'
 
 import appCss from '../styles.css?url'
 
@@ -35,6 +36,7 @@ const ORGANIZATION_LD = {
 }
 
 export const Route = createRootRoute({
+  loader: async () => ({ productNav: await listProductNav() }),
   head: () => ({
     meta: [
       { charSet: 'utf-8' },
@@ -57,6 +59,16 @@ export const Route = createRootRoute({
 })
 
 function RootLayout() {
+  const isAdmin = useRouterState({
+    select: (s) => s.location.pathname === '/admin' || s.location.pathname.startsWith('/admin/'),
+  })
+  if (isAdmin) {
+    return (
+      <Suspense fallback={<div className="route-fallback" />}>
+        <Outlet />
+      </Suspense>
+    )
+  }
   return (
     <>
       <a className="skip-link" href="#main">

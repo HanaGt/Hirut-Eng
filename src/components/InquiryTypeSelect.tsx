@@ -1,28 +1,28 @@
 import { useEffect, useId, useRef, useState } from 'react'
-import { inquiryTypes } from '../data/site'
-
-const OPTIONS = inquiryTypes.flatMap((g) => g.options.map((o) => ({ ...o, group: g.group })))
+import type { InquiryGroup } from '../data/site'
 
 type Props = {
   id: string
   name: string
   value: string
+  groups: InquiryGroup[]
   invalid?: boolean
   describedBy?: string
   onChange: (value: string) => void
 }
 
-export function InquiryTypeSelect({ id, name, value, invalid, describedBy, onChange }: Props) {
+export function InquiryTypeSelect({ id, name, value, groups, invalid, describedBy, onChange }: Props) {
+  const options = groups.flatMap((g) => g.options.map((o) => ({ ...o, group: g.group })))
   const [open, setOpen] = useState(false)
   const [active, setActive] = useState(0)
   const rootRef = useRef<HTMLDivElement>(null)
   const listId = useId()
-  const selected = OPTIONS.find((o) => o.value === value)
-  const activeOption = OPTIONS[active]
+  const selected = options.find((o) => o.value === value)
+  const activeOption = options[active]
 
   useEffect(() => {
     if (!open) return
-    const i = OPTIONS.findIndex((o) => o.value === value)
+    const i = options.findIndex((o) => o.value === value)
     setActive(i >= 0 ? i : 0)
   }, [open, value])
 
@@ -58,7 +58,7 @@ export function InquiryTypeSelect({ id, name, value, invalid, describedBy, onCha
     if (e.key === 'ArrowDown') {
       e.preventDefault()
       if (!open) setOpen(true)
-      else setActive((i) => Math.min(i + 1, OPTIONS.length - 1))
+      else setActive((i) => Math.min(i + 1, options.length - 1))
       return
     }
     if (e.key === 'ArrowUp') {
@@ -76,7 +76,7 @@ export function InquiryTypeSelect({ id, name, value, invalid, describedBy, onCha
     if (e.key === 'End') {
       e.preventDefault()
       if (!open) setOpen(true)
-      setActive(OPTIONS.length - 1)
+      setActive(options.length - 1)
       return
     }
     if (e.key === 'Enter' || e.key === ' ') {
@@ -88,8 +88,8 @@ export function InquiryTypeSelect({ id, name, value, invalid, describedBy, onCha
     if (e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) {
       const q = e.key.toLowerCase()
       const from = open ? active + 1 : 0
-      const i = OPTIONS.findIndex((o, idx) => idx >= from && o.label.toLowerCase().startsWith(q))
-      const wrap = OPTIONS.findIndex((o) => o.label.toLowerCase().startsWith(q))
+      const i = options.findIndex((o, idx) => idx >= from && o.label.toLowerCase().startsWith(q))
+      const wrap = options.findIndex((o) => o.label.toLowerCase().startsWith(q))
       const next = i >= 0 ? i : wrap
       if (next >= 0) {
         e.preventDefault()
@@ -130,11 +130,11 @@ export function InquiryTypeSelect({ id, name, value, invalid, describedBy, onCha
       </button>
       {open && (
         <div className="select-panel" id={listId} role="listbox" aria-labelledby={id} tabIndex={-1}>
-          {inquiryTypes.map((group) => (
+          {groups.map((group) => (
             <div className="select-group" role="group" aria-label={group.group} key={group.group}>
               <div className="select-group-label">{group.group}</div>
               {group.options.map((o) => {
-                const i = OPTIONS.findIndex((x) => x.value === o.value)
+                const i = options.findIndex((x) => x.value === o.value)
                 const isSelected = o.value === value
                 const isActive = i === active
                 return (

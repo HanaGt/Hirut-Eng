@@ -1,10 +1,9 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
-import { Link, useRouterState } from '@tanstack/react-router'
+import { Link, useLoaderData, useRouterState } from '@tanstack/react-router'
 import { jumpScroll, lockPageScroll, unlockPageScroll } from '../lib/scroll-lock'
 import { ABOUT_SECTIONS } from './AboutNav'
 import { HirutMark } from './Logo'
 import { SocialIcon } from './SocialIcon'
-import { categories } from '../data/products'
 import { EMAIL, OFFICE, PHONE_1, PHONE_2, SITE_DESCRIPTOR, SITE_NAME, SOCIAL, TAGLINE } from '../data/site'
 
 /* Projects stays out of the navigation until real portfolio content exists
@@ -150,6 +149,7 @@ export function Header() {
 }
 
 export function Footer() {
+  const { productNav } = useLoaderData({ from: '__root__' })
   const pathname = useRouterState({ select: (s) => s.location.pathname })
   const topIfHere = (to: string) => () => {
     if (normPath(pathname) === normPath(to)) jumpScroll(0)
@@ -202,7 +202,7 @@ export function Footer() {
           <div>
             <h2 className="footer-h">Products</h2>
             <ul>
-              {categories.map((c) => (
+              {productNav.map((c) => (
                 <li key={c.slug}>
                   <Link
                     to="/products/$category"

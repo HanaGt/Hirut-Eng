@@ -4,6 +4,7 @@ dist
 dist-ssr
 *.local
 .env
+.env.*
 .nitro
 .tanstack
 .wrangler
@@ -13,3 +14,4 @@ __unconfig*
 todos.json
 .cta.json
 .tmp-*
+data

@@ -1,14 +1,14 @@
 import { Link, createFileRoute, notFound } from '@tanstack/react-router'
 
+import { CategoryPhoto } from '../components/CategoryPhoto'
 import { CtaBand, Eyebrow, OricaBand, PageHero } from '../components/PageBits'
-import { SampleImg } from '../components/Placeholders'
-import { categories, getCategory } from '../data/products'
-import { categoryImages, stock } from '../data/media'
+import { categories } from '../data/products'
 import { SITE_NAME } from '../data/site'
+import { getPublishedProduct } from '../server/product.functions'
 
 export const Route = createFileRoute('/products/$category')({
-  loader: ({ params }) => {
-    const category = getCategory(params.category)
+  loader: async ({ params }) => {
+    const category = await getPublishedProduct({ data: { slug: params.category } })
     if (!category) throw notFound()
     return { category }
   },
@@ -34,7 +34,7 @@ function CategoryNotFound() {
       <div className="container">
         <h1>Category not found</h1>
         <p>
-          That product category doesn't exist. <Link to="/products">Browse all seven categories →</Link>
+          That product category doesn't exist. <Link to="/products">Browse all products →</Link>
         </p>
       </div>
     </section>
@@ -102,8 +102,9 @@ function CategoryPage() {
               <p className="spec-note" style={{ marginTop: '1rem' }}>Datasheets will be available for download soon.</p>
             </div>
             <div className="reveal" style={{ '--reveal-delay': '.1s' } as React.CSSProperties}>
-              <SampleImg
-                {...stock(categoryImages[c.slug])}
+              <CategoryPhoto
+                slug={c.slug}
+                image={c.image}
                 ratio="16 / 10"
                 sizes="(max-width: 980px) 92vw, 44vw"
               />

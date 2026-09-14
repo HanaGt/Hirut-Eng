@@ -7,6 +7,9 @@ export default defineConfig({
   resolve: {
     tsconfigPaths: true,
   },
+  ssr: {
+    external: ['node:sqlite'],
+  },
 
   plugins: [
     tanstackStart({
@@ -15,6 +18,10 @@ export default defineConfig({
         crawlLinks: true,
         autoStaticPathsDiscovery: true,
         failOnError: true,
+        filter: (page) => {
+          const path = String(page.path ?? '')
+          return !path.startsWith('/admin') && !path.startsWith('/uploads')
+        },
       },
     }),
 

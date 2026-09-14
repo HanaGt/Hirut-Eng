@@ -1,27 +1,31 @@
 import { useState } from 'react'
 import { Link, createFileRoute } from '@tanstack/react-router'
 
+import { CategoryPhoto } from '../components/CategoryPhoto'
 import { Eyebrow, PageHero } from '../components/PageBits'
-import { SampleImg } from '../components/Placeholders'
-import { categories } from '../data/products'
-import { categoryImages, stock } from '../data/media'
+import { listPublishedProducts } from '../server/product.functions'
 
 export const Route = createFileRoute('/products/')({
-  head: () => ({
-    meta: [
-      { title: 'Products: Seven Categories | HIRUT Engineering Construction and General Trading' },
-      {
-        name: 'description',
-        content:
-          'Seven imported product categories: gabions and wire products, geosynthetics, geotechnical equipment, irrigation and farm equipment, power supply, pumps and accessories, and waterproofing materials.',
-      },
-      { property: 'og:title', content: 'Products | Hirut Engineering' },
-      {
-        property: 'og:description',
-        content: 'Imported, specified honestly, installed by our own engineers, and supported after the sale.',
-      },
-    ],
-  }),
+  loader: () => listPublishedProducts(),
+  head: ({ loaderData }) => {
+    const n = loaderData?.length ?? 0
+    const label = n === 1 ? '1 category' : `${n} categories`
+    return {
+      meta: [
+        { title: `Products: ${label} | HIRUT Engineering Construction and General Trading` },
+        {
+          name: 'description',
+          content:
+            'Imported product categories specified honestly, installed by our own engineers, and covered by after-sales support.',
+        },
+        { property: 'og:title', content: 'Products | Hirut Engineering' },
+        {
+          property: 'og:description',
+          content: 'Imported, specified honestly, installed by our own engineers, and supported after the sale.',
+        },
+      ],
+    }
+  },
   component: ProductsHub,
 })
 
@@ -33,16 +37,18 @@ const FILTERS = [
 ] as const
 
 function ProductsHub() {
+  const categories = Route.useLoaderData()
   const [filter, setFilter] = useState<'all' | 'water' | 'ground' | 'power'>('all')
   const visible = categories.filter((c) => filter === 'all' || c.tags.includes(filter))
+  const n = categories.length
 
   return (
     <>
       <PageHero
         media="products"
         current="Products"
-        title="Seven categories. One standard."
-        lead="Everything we import is specified honestly, installed by our own engineers when you want it installed, and covered by a six-pillar after-sales program."
+        title={`${n} ${n === 1 ? 'category' : 'categories'}. One standard.`}
+        lead="Everything we import is specified honestly, installed by our own engineers when you want it installed, and covered by after-sales support."
       />
 
       <section className="section">
@@ -70,7 +76,7 @@ function ProductsHub() {
                 params={{ category: c.slug }}
                 key={c.slug}
               >
-                <SampleImg {...stock(categoryImages[c.slug])} />
+                <CategoryPhoto slug={c.slug} image={c.image} />
                 <div className="card-body">
                   <div className="card-tags">
                     {c.tagLabels.map((t) => (

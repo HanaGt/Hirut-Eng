@@ -1,4 +1,17 @@
 export type ServiceHash = 'construction' | 'consultancy' | 'after-sales'
+export type ProductTag = 'water' | 'ground' | 'power'
+
+export const PRODUCT_TAG_OPTIONS: Array<{ value: ProductTag; label: string }> = [
+  { value: 'water', label: 'Water' },
+  { value: 'ground', label: 'Ground' },
+  { value: 'power', label: 'Power' },
+]
+
+export const SERVICE_HASH_OPTIONS: Array<{ value: ServiceHash; label: string }> = [
+  { value: 'construction', label: 'Construction Works' },
+  { value: 'consultancy', label: 'Professional & Consultancy' },
+  { value: 'after-sales', label: 'After-Sales Services' },
+]
 
 export interface SpecGroup {
   title?: string
@@ -9,7 +22,7 @@ export interface Category {
   slug: string
   name: string
   footerLabel: string
-  tags: Array<'water' | 'ground' | 'power'>
+  tags: ProductTag[]
   tagLabels: string[]
   cardBlurb: string
   metaDescription: string
@@ -17,10 +30,28 @@ export interface Category {
   heroLead: string
   specGroups: SpecGroup[]
   specNote?: string
-  mediaPlaceholders: string[]
+  mediaPlaceholders?: string[]
   related: Array<{ label: string; hash: ServiceHash }>
   cta: { heading: string; body: string; label: string }
   featureOrica?: boolean
+  image?: string
+}
+
+export function slugifyCategory(value: string) {
+  return value
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+}
+
+export function displayTagLabels(tags: ProductTag[], featureOrica?: boolean) {
+  const labels = tags.map((tag) => PRODUCT_TAG_OPTIONS.find((option) => option.value === tag)?.label ?? tag)
+  if (featureOrica) labels.push('Exclusive · Orica Digital Solutions')
+  return labels
+}
+
+export function inquiryLabelForProduct(name: string, featureOrica?: boolean) {
+  return featureOrica ? `${name} (incl. Orica Digital Solutions instruments)` : name
 }
 
 export const categories: Category[] = [

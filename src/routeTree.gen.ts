@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as PartnersRouteImport } from './routes/partners'
 import { Route as ProjectsRouteImport } from './routes/projects'
@@ -23,8 +24,32 @@ import { Route as AboutExpertiseRouteImport } from './routes/about.expertise'
 import { Route as AboutLeadershipRouteImport } from './routes/about.leadership'
 import { Route as AboutMissionVisionValuesRouteImport } from './routes/about.mission-vision-values'
 import { Route as AboutOurStandardsRouteImport } from './routes/about.our-standards'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as AdminInquiriesRouteImport } from './routes/admin.inquiries'
+import { Route as AdminLoginRouteImport } from './routes/admin.login'
+import { Route as AdminProductsRouteImport } from './routes/admin.products'
+import { Route as AdminProjectsRouteImport } from './routes/admin.projects'
+import { Route as AdminServicesRouteImport } from './routes/admin.services'
 import { Route as ProductsIndexRouteImport } from './routes/products.index'
 import { Route as ProductsCategoryRouteImport } from './routes/products.$category'
+import { Route as AdminInquiriesIndexRouteImport } from './routes/admin.inquiries.index'
+import { Route as AdminInquiriesIdRouteImport } from './routes/admin.inquiries.$id'
+import { Route as AdminProductsIndexRouteImport } from './routes/admin.products.index'
+import { Route as AdminProductsSlugRouteImport } from './routes/admin.products.$slug'
+import { Route as AdminProductsNewRouteImport } from './routes/admin.products.new'
+import { Route as AdminProjectsIndexRouteImport } from './routes/admin.projects.index'
+import { Route as AdminProjectsIdRouteImport } from './routes/admin.projects.$id'
+import { Route as AdminProjectsNewRouteImport } from './routes/admin.projects.new'
+import { Route as AdminServicesIndexRouteImport } from './routes/admin.services.index'
+import { Route as AdminServicesAfterSalesRouteImport } from './routes/admin.services.after-sales'
+import { Route as AdminServicesConsultancyRouteImport } from './routes/admin.services.consultancy'
+import { Route as UploadsKindFileRouteImport } from './routes/uploads.$kind.$file'
+import { Route as AdminServicesAfterSalesIndexRouteImport } from './routes/admin.services.after-sales.index'
+import { Route as AdminServicesAfterSalesIdRouteImport } from './routes/admin.services.after-sales.$id'
+import { Route as AdminServicesAfterSalesNewRouteImport } from './routes/admin.services.after-sales.new'
+import { Route as AdminServicesConsultancyIndexRouteImport } from './routes/admin.services.consultancy.index'
+import { Route as AdminServicesConsultancyIdRouteImport } from './routes/admin.services.consultancy.$id'
+import { Route as AdminServicesConsultancyNewRouteImport } from './routes/admin.services.consultancy.new'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -34,6 +59,11 @@ const IndexRoute = IndexRouteImport.update({
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -97,6 +127,36 @@ const AboutOurStandardsRoute = AboutOurStandardsRouteImport.update({
   path: '/our-standards',
   getParentRoute: () => AboutRoute,
 } as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminInquiriesRoute = AdminInquiriesRouteImport.update({
+  id: '/inquiries',
+  path: '/inquiries',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminLoginRoute = AdminLoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminProductsRoute = AdminProductsRouteImport.update({
+  id: '/products',
+  path: '/products',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminProjectsRoute = AdminProjectsRouteImport.update({
+  id: '/projects',
+  path: '/projects',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminServicesRoute = AdminServicesRouteImport.update({
+  id: '/services',
+  path: '/services',
+  getParentRoute: () => AdminRoute,
+} as any)
 const ProductsIndexRoute = ProductsIndexRouteImport.update({
   id: '/products/',
   path: '/products/',
@@ -107,10 +167,108 @@ const ProductsCategoryRoute = ProductsCategoryRouteImport.update({
   path: '/products/$category',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminInquiriesIndexRoute = AdminInquiriesIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminInquiriesRoute,
+} as any)
+const AdminInquiriesIdRoute = AdminInquiriesIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => AdminInquiriesRoute,
+} as any)
+const AdminProductsIndexRoute = AdminProductsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminProductsRoute,
+} as any)
+const AdminProductsSlugRoute = AdminProductsSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => AdminProductsRoute,
+} as any)
+const AdminProductsNewRoute = AdminProductsNewRouteImport.update({
+  id: '/new',
+  path: '/new',
+  getParentRoute: () => AdminProductsRoute,
+} as any)
+const AdminProjectsIndexRoute = AdminProjectsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminProjectsRoute,
+} as any)
+const AdminProjectsIdRoute = AdminProjectsIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => AdminProjectsRoute,
+} as any)
+const AdminProjectsNewRoute = AdminProjectsNewRouteImport.update({
+  id: '/new',
+  path: '/new',
+  getParentRoute: () => AdminProjectsRoute,
+} as any)
+const AdminServicesIndexRoute = AdminServicesIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminServicesRoute,
+} as any)
+const AdminServicesAfterSalesRoute = AdminServicesAfterSalesRouteImport.update({
+  id: '/after-sales',
+  path: '/after-sales',
+  getParentRoute: () => AdminServicesRoute,
+} as any)
+const AdminServicesConsultancyRoute =
+  AdminServicesConsultancyRouteImport.update({
+    id: '/consultancy',
+    path: '/consultancy',
+    getParentRoute: () => AdminServicesRoute,
+  } as any)
+const UploadsKindFileRoute = UploadsKindFileRouteImport.update({
+  id: '/uploads/$kind/$file',
+  path: '/uploads/$kind/$file',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminServicesAfterSalesIndexRoute =
+  AdminServicesAfterSalesIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => AdminServicesAfterSalesRoute,
+  } as any)
+const AdminServicesAfterSalesIdRoute =
+  AdminServicesAfterSalesIdRouteImport.update({
+    id: '/$id',
+    path: '/$id',
+    getParentRoute: () => AdminServicesAfterSalesRoute,
+  } as any)
+const AdminServicesAfterSalesNewRoute =
+  AdminServicesAfterSalesNewRouteImport.update({
+    id: '/new',
+    path: '/new',
+    getParentRoute: () => AdminServicesAfterSalesRoute,
+  } as any)
+const AdminServicesConsultancyIndexRoute =
+  AdminServicesConsultancyIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => AdminServicesConsultancyRoute,
+  } as any)
+const AdminServicesConsultancyIdRoute =
+  AdminServicesConsultancyIdRouteImport.update({
+    id: '/$id',
+    path: '/$id',
+    getParentRoute: () => AdminServicesConsultancyRoute,
+  } as any)
+const AdminServicesConsultancyNewRoute =
+  AdminServicesConsultancyNewRouteImport.update({
+    id: '/new',
+    path: '/new',
+    getParentRoute: () => AdminServicesConsultancyRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRouteWithChildren
+  '/admin': typeof AdminRouteWithChildren
   '/contact': typeof ContactRoute
   '/partners': typeof PartnersRoute
   '/projects': typeof ProjectsRoute
@@ -122,9 +280,33 @@ export interface FileRoutesByFullPath {
   '/about/leadership': typeof AboutLeadershipRoute
   '/about/mission-vision-values': typeof AboutMissionVisionValuesRoute
   '/about/our-standards': typeof AboutOurStandardsRoute
+  '/admin/inquiries': typeof AdminInquiriesRouteWithChildren
+  '/admin/login': typeof AdminLoginRoute
+  '/admin/products': typeof AdminProductsRouteWithChildren
+  '/admin/projects': typeof AdminProjectsRouteWithChildren
+  '/admin/services': typeof AdminServicesRouteWithChildren
   '/products/$category': typeof ProductsCategoryRoute
   '/about/': typeof AboutIndexRoute
+  '/admin/': typeof AdminIndexRoute
   '/products/': typeof ProductsIndexRoute
+  '/admin/inquiries/$id': typeof AdminInquiriesIdRoute
+  '/admin/products/$slug': typeof AdminProductsSlugRoute
+  '/admin/products/new': typeof AdminProductsNewRoute
+  '/admin/projects/$id': typeof AdminProjectsIdRoute
+  '/admin/projects/new': typeof AdminProjectsNewRoute
+  '/admin/services/after-sales': typeof AdminServicesAfterSalesRouteWithChildren
+  '/admin/services/consultancy': typeof AdminServicesConsultancyRouteWithChildren
+  '/uploads/$kind/$file': typeof UploadsKindFileRoute
+  '/admin/inquiries/': typeof AdminInquiriesIndexRoute
+  '/admin/products/': typeof AdminProductsIndexRoute
+  '/admin/projects/': typeof AdminProjectsIndexRoute
+  '/admin/services/': typeof AdminServicesIndexRoute
+  '/admin/services/after-sales/$id': typeof AdminServicesAfterSalesIdRoute
+  '/admin/services/after-sales/new': typeof AdminServicesAfterSalesNewRoute
+  '/admin/services/consultancy/$id': typeof AdminServicesConsultancyIdRoute
+  '/admin/services/consultancy/new': typeof AdminServicesConsultancyNewRoute
+  '/admin/services/after-sales/': typeof AdminServicesAfterSalesIndexRoute
+  '/admin/services/consultancy/': typeof AdminServicesConsultancyIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -139,14 +321,33 @@ export interface FileRoutesByTo {
   '/about/leadership': typeof AboutLeadershipRoute
   '/about/mission-vision-values': typeof AboutMissionVisionValuesRoute
   '/about/our-standards': typeof AboutOurStandardsRoute
+  '/admin/login': typeof AdminLoginRoute
   '/products/$category': typeof ProductsCategoryRoute
   '/about': typeof AboutIndexRoute
+  '/admin': typeof AdminIndexRoute
   '/products': typeof ProductsIndexRoute
+  '/admin/inquiries/$id': typeof AdminInquiriesIdRoute
+  '/admin/products/$slug': typeof AdminProductsSlugRoute
+  '/admin/products/new': typeof AdminProductsNewRoute
+  '/admin/projects/$id': typeof AdminProjectsIdRoute
+  '/admin/projects/new': typeof AdminProjectsNewRoute
+  '/uploads/$kind/$file': typeof UploadsKindFileRoute
+  '/admin/inquiries': typeof AdminInquiriesIndexRoute
+  '/admin/products': typeof AdminProductsIndexRoute
+  '/admin/projects': typeof AdminProjectsIndexRoute
+  '/admin/services': typeof AdminServicesIndexRoute
+  '/admin/services/after-sales/$id': typeof AdminServicesAfterSalesIdRoute
+  '/admin/services/after-sales/new': typeof AdminServicesAfterSalesNewRoute
+  '/admin/services/consultancy/$id': typeof AdminServicesConsultancyIdRoute
+  '/admin/services/consultancy/new': typeof AdminServicesConsultancyNewRoute
+  '/admin/services/after-sales': typeof AdminServicesAfterSalesIndexRoute
+  '/admin/services/consultancy': typeof AdminServicesConsultancyIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRouteWithChildren
+  '/admin': typeof AdminRouteWithChildren
   '/contact': typeof ContactRoute
   '/partners': typeof PartnersRoute
   '/projects': typeof ProjectsRoute
@@ -158,15 +359,40 @@ export interface FileRoutesById {
   '/about/leadership': typeof AboutLeadershipRoute
   '/about/mission-vision-values': typeof AboutMissionVisionValuesRoute
   '/about/our-standards': typeof AboutOurStandardsRoute
+  '/admin/inquiries': typeof AdminInquiriesRouteWithChildren
+  '/admin/login': typeof AdminLoginRoute
+  '/admin/products': typeof AdminProductsRouteWithChildren
+  '/admin/projects': typeof AdminProjectsRouteWithChildren
+  '/admin/services': typeof AdminServicesRouteWithChildren
   '/products/$category': typeof ProductsCategoryRoute
   '/about/': typeof AboutIndexRoute
+  '/admin/': typeof AdminIndexRoute
   '/products/': typeof ProductsIndexRoute
+  '/admin/inquiries/$id': typeof AdminInquiriesIdRoute
+  '/admin/products/$slug': typeof AdminProductsSlugRoute
+  '/admin/products/new': typeof AdminProductsNewRoute
+  '/admin/projects/$id': typeof AdminProjectsIdRoute
+  '/admin/projects/new': typeof AdminProjectsNewRoute
+  '/admin/services/after-sales': typeof AdminServicesAfterSalesRouteWithChildren
+  '/admin/services/consultancy': typeof AdminServicesConsultancyRouteWithChildren
+  '/uploads/$kind/$file': typeof UploadsKindFileRoute
+  '/admin/inquiries/': typeof AdminInquiriesIndexRoute
+  '/admin/products/': typeof AdminProductsIndexRoute
+  '/admin/projects/': typeof AdminProjectsIndexRoute
+  '/admin/services/': typeof AdminServicesIndexRoute
+  '/admin/services/after-sales/$id': typeof AdminServicesAfterSalesIdRoute
+  '/admin/services/after-sales/new': typeof AdminServicesAfterSalesNewRoute
+  '/admin/services/consultancy/$id': typeof AdminServicesConsultancyIdRoute
+  '/admin/services/consultancy/new': typeof AdminServicesConsultancyNewRoute
+  '/admin/services/after-sales/': typeof AdminServicesAfterSalesIndexRoute
+  '/admin/services/consultancy/': typeof AdminServicesConsultancyIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/about'
+    | '/admin'
     | '/contact'
     | '/partners'
     | '/projects'
@@ -178,9 +404,33 @@ export interface FileRouteTypes {
     | '/about/leadership'
     | '/about/mission-vision-values'
     | '/about/our-standards'
+    | '/admin/inquiries'
+    | '/admin/login'
+    | '/admin/products'
+    | '/admin/projects'
+    | '/admin/services'
     | '/products/$category'
     | '/about/'
+    | '/admin/'
     | '/products/'
+    | '/admin/inquiries/$id'
+    | '/admin/products/$slug'
+    | '/admin/products/new'
+    | '/admin/projects/$id'
+    | '/admin/projects/new'
+    | '/admin/services/after-sales'
+    | '/admin/services/consultancy'
+    | '/uploads/$kind/$file'
+    | '/admin/inquiries/'
+    | '/admin/products/'
+    | '/admin/projects/'
+    | '/admin/services/'
+    | '/admin/services/after-sales/$id'
+    | '/admin/services/after-sales/new'
+    | '/admin/services/consultancy/$id'
+    | '/admin/services/consultancy/new'
+    | '/admin/services/after-sales/'
+    | '/admin/services/consultancy/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -195,13 +445,32 @@ export interface FileRouteTypes {
     | '/about/leadership'
     | '/about/mission-vision-values'
     | '/about/our-standards'
+    | '/admin/login'
     | '/products/$category'
     | '/about'
+    | '/admin'
     | '/products'
+    | '/admin/inquiries/$id'
+    | '/admin/products/$slug'
+    | '/admin/products/new'
+    | '/admin/projects/$id'
+    | '/admin/projects/new'
+    | '/uploads/$kind/$file'
+    | '/admin/inquiries'
+    | '/admin/products'
+    | '/admin/projects'
+    | '/admin/services'
+    | '/admin/services/after-sales/$id'
+    | '/admin/services/after-sales/new'
+    | '/admin/services/consultancy/$id'
+    | '/admin/services/consultancy/new'
+    | '/admin/services/after-sales'
+    | '/admin/services/consultancy'
   id:
     | '__root__'
     | '/'
     | '/about'
+    | '/admin'
     | '/contact'
     | '/partners'
     | '/projects'
@@ -213,20 +482,46 @@ export interface FileRouteTypes {
     | '/about/leadership'
     | '/about/mission-vision-values'
     | '/about/our-standards'
+    | '/admin/inquiries'
+    | '/admin/login'
+    | '/admin/products'
+    | '/admin/projects'
+    | '/admin/services'
     | '/products/$category'
     | '/about/'
+    | '/admin/'
     | '/products/'
+    | '/admin/inquiries/$id'
+    | '/admin/products/$slug'
+    | '/admin/products/new'
+    | '/admin/projects/$id'
+    | '/admin/projects/new'
+    | '/admin/services/after-sales'
+    | '/admin/services/consultancy'
+    | '/uploads/$kind/$file'
+    | '/admin/inquiries/'
+    | '/admin/products/'
+    | '/admin/projects/'
+    | '/admin/services/'
+    | '/admin/services/after-sales/$id'
+    | '/admin/services/after-sales/new'
+    | '/admin/services/consultancy/$id'
+    | '/admin/services/consultancy/new'
+    | '/admin/services/after-sales/'
+    | '/admin/services/consultancy/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRouteWithChildren
+  AdminRoute: typeof AdminRouteWithChildren
   ContactRoute: typeof ContactRoute
   PartnersRoute: typeof PartnersRoute
   ProjectsRoute: typeof ProjectsRoute
   ServicesRoute: typeof ServicesRoute
   ProductsCategoryRoute: typeof ProductsCategoryRoute
   ProductsIndexRoute: typeof ProductsIndexRoute
+  UploadsKindFileRoute: typeof UploadsKindFileRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -243,6 +538,13 @@ declare module '@tanstack/react-router' {
       path: '/about'
       fullPath: '/about'
       preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -329,6 +631,48 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutOurStandardsRouteImport
       parentRoute: typeof AboutRoute
     }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/inquiries': {
+      id: '/admin/inquiries'
+      path: '/inquiries'
+      fullPath: '/admin/inquiries'
+      preLoaderRoute: typeof AdminInquiriesRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/login': {
+      id: '/admin/login'
+      path: '/login'
+      fullPath: '/admin/login'
+      preLoaderRoute: typeof AdminLoginRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/products': {
+      id: '/admin/products'
+      path: '/products'
+      fullPath: '/admin/products'
+      preLoaderRoute: typeof AdminProductsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/projects': {
+      id: '/admin/projects'
+      path: '/projects'
+      fullPath: '/admin/projects'
+      preLoaderRoute: typeof AdminProjectsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/services': {
+      id: '/admin/services'
+      path: '/services'
+      fullPath: '/admin/services'
+      preLoaderRoute: typeof AdminServicesRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/products/': {
       id: '/products/'
       path: '/products'
@@ -342,6 +686,132 @@ declare module '@tanstack/react-router' {
       fullPath: '/products/$category'
       preLoaderRoute: typeof ProductsCategoryRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/admin/inquiries/': {
+      id: '/admin/inquiries/'
+      path: '/'
+      fullPath: '/admin/inquiries/'
+      preLoaderRoute: typeof AdminInquiriesIndexRouteImport
+      parentRoute: typeof AdminInquiriesRoute
+    }
+    '/admin/inquiries/$id': {
+      id: '/admin/inquiries/$id'
+      path: '/$id'
+      fullPath: '/admin/inquiries/$id'
+      preLoaderRoute: typeof AdminInquiriesIdRouteImport
+      parentRoute: typeof AdminInquiriesRoute
+    }
+    '/admin/products/': {
+      id: '/admin/products/'
+      path: '/'
+      fullPath: '/admin/products/'
+      preLoaderRoute: typeof AdminProductsIndexRouteImport
+      parentRoute: typeof AdminProductsRoute
+    }
+    '/admin/products/$slug': {
+      id: '/admin/products/$slug'
+      path: '/$slug'
+      fullPath: '/admin/products/$slug'
+      preLoaderRoute: typeof AdminProductsSlugRouteImport
+      parentRoute: typeof AdminProductsRoute
+    }
+    '/admin/products/new': {
+      id: '/admin/products/new'
+      path: '/new'
+      fullPath: '/admin/products/new'
+      preLoaderRoute: typeof AdminProductsNewRouteImport
+      parentRoute: typeof AdminProductsRoute
+    }
+    '/admin/projects/': {
+      id: '/admin/projects/'
+      path: '/'
+      fullPath: '/admin/projects/'
+      preLoaderRoute: typeof AdminProjectsIndexRouteImport
+      parentRoute: typeof AdminProjectsRoute
+    }
+    '/admin/projects/$id': {
+      id: '/admin/projects/$id'
+      path: '/$id'
+      fullPath: '/admin/projects/$id'
+      preLoaderRoute: typeof AdminProjectsIdRouteImport
+      parentRoute: typeof AdminProjectsRoute
+    }
+    '/admin/projects/new': {
+      id: '/admin/projects/new'
+      path: '/new'
+      fullPath: '/admin/projects/new'
+      preLoaderRoute: typeof AdminProjectsNewRouteImport
+      parentRoute: typeof AdminProjectsRoute
+    }
+    '/admin/services/': {
+      id: '/admin/services/'
+      path: '/'
+      fullPath: '/admin/services/'
+      preLoaderRoute: typeof AdminServicesIndexRouteImport
+      parentRoute: typeof AdminServicesRoute
+    }
+    '/admin/services/after-sales': {
+      id: '/admin/services/after-sales'
+      path: '/after-sales'
+      fullPath: '/admin/services/after-sales'
+      preLoaderRoute: typeof AdminServicesAfterSalesRouteImport
+      parentRoute: typeof AdminServicesRoute
+    }
+    '/admin/services/consultancy': {
+      id: '/admin/services/consultancy'
+      path: '/consultancy'
+      fullPath: '/admin/services/consultancy'
+      preLoaderRoute: typeof AdminServicesConsultancyRouteImport
+      parentRoute: typeof AdminServicesRoute
+    }
+    '/uploads/$kind/$file': {
+      id: '/uploads/$kind/$file'
+      path: '/uploads/$kind/$file'
+      fullPath: '/uploads/$kind/$file'
+      preLoaderRoute: typeof UploadsKindFileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/services/after-sales/': {
+      id: '/admin/services/after-sales/'
+      path: '/'
+      fullPath: '/admin/services/after-sales/'
+      preLoaderRoute: typeof AdminServicesAfterSalesIndexRouteImport
+      parentRoute: typeof AdminServicesAfterSalesRoute
+    }
+    '/admin/services/after-sales/$id': {
+      id: '/admin/services/after-sales/$id'
+      path: '/$id'
+      fullPath: '/admin/services/after-sales/$id'
+      preLoaderRoute: typeof AdminServicesAfterSalesIdRouteImport
+      parentRoute: typeof AdminServicesAfterSalesRoute
+    }
+    '/admin/services/after-sales/new': {
+      id: '/admin/services/after-sales/new'
+      path: '/new'
+      fullPath: '/admin/services/after-sales/new'
+      preLoaderRoute: typeof AdminServicesAfterSalesNewRouteImport
+      parentRoute: typeof AdminServicesAfterSalesRoute
+    }
+    '/admin/services/consultancy/': {
+      id: '/admin/services/consultancy/'
+      path: '/'
+      fullPath: '/admin/services/consultancy/'
+      preLoaderRoute: typeof AdminServicesConsultancyIndexRouteImport
+      parentRoute: typeof AdminServicesConsultancyRoute
+    }
+    '/admin/services/consultancy/$id': {
+      id: '/admin/services/consultancy/$id'
+      path: '/$id'
+      fullPath: '/admin/services/consultancy/$id'
+      preLoaderRoute: typeof AdminServicesConsultancyIdRouteImport
+      parentRoute: typeof AdminServicesConsultancyRoute
+    }
+    '/admin/services/consultancy/new': {
+      id: '/admin/services/consultancy/new'
+      path: '/new'
+      fullPath: '/admin/services/consultancy/new'
+      preLoaderRoute: typeof AdminServicesConsultancyNewRouteImport
+      parentRoute: typeof AdminServicesConsultancyRoute
     }
   }
 }
@@ -370,15 +840,135 @@ const AboutRouteChildren: AboutRouteChildren = {
 
 const AboutRouteWithChildren = AboutRoute._addFileChildren(AboutRouteChildren)
 
+interface AdminInquiriesRouteChildren {
+  AdminInquiriesIdRoute: typeof AdminInquiriesIdRoute
+  AdminInquiriesIndexRoute: typeof AdminInquiriesIndexRoute
+}
+
+const AdminInquiriesRouteChildren: AdminInquiriesRouteChildren = {
+  AdminInquiriesIdRoute: AdminInquiriesIdRoute,
+  AdminInquiriesIndexRoute: AdminInquiriesIndexRoute,
+}
+
+const AdminInquiriesRouteWithChildren = AdminInquiriesRoute._addFileChildren(
+  AdminInquiriesRouteChildren,
+)
+
+interface AdminProductsRouteChildren {
+  AdminProductsSlugRoute: typeof AdminProductsSlugRoute
+  AdminProductsNewRoute: typeof AdminProductsNewRoute
+  AdminProductsIndexRoute: typeof AdminProductsIndexRoute
+}
+
+const AdminProductsRouteChildren: AdminProductsRouteChildren = {
+  AdminProductsSlugRoute: AdminProductsSlugRoute,
+  AdminProductsNewRoute: AdminProductsNewRoute,
+  AdminProductsIndexRoute: AdminProductsIndexRoute,
+}
+
+const AdminProductsRouteWithChildren = AdminProductsRoute._addFileChildren(
+  AdminProductsRouteChildren,
+)
+
+interface AdminProjectsRouteChildren {
+  AdminProjectsIdRoute: typeof AdminProjectsIdRoute
+  AdminProjectsNewRoute: typeof AdminProjectsNewRoute
+  AdminProjectsIndexRoute: typeof AdminProjectsIndexRoute
+}
+
+const AdminProjectsRouteChildren: AdminProjectsRouteChildren = {
+  AdminProjectsIdRoute: AdminProjectsIdRoute,
+  AdminProjectsNewRoute: AdminProjectsNewRoute,
+  AdminProjectsIndexRoute: AdminProjectsIndexRoute,
+}
+
+const AdminProjectsRouteWithChildren = AdminProjectsRoute._addFileChildren(
+  AdminProjectsRouteChildren,
+)
+
+interface AdminServicesAfterSalesRouteChildren {
+  AdminServicesAfterSalesIdRoute: typeof AdminServicesAfterSalesIdRoute
+  AdminServicesAfterSalesNewRoute: typeof AdminServicesAfterSalesNewRoute
+  AdminServicesAfterSalesIndexRoute: typeof AdminServicesAfterSalesIndexRoute
+}
+
+const AdminServicesAfterSalesRouteChildren: AdminServicesAfterSalesRouteChildren =
+  {
+    AdminServicesAfterSalesIdRoute: AdminServicesAfterSalesIdRoute,
+    AdminServicesAfterSalesNewRoute: AdminServicesAfterSalesNewRoute,
+    AdminServicesAfterSalesIndexRoute: AdminServicesAfterSalesIndexRoute,
+  }
+
+const AdminServicesAfterSalesRouteWithChildren =
+  AdminServicesAfterSalesRoute._addFileChildren(
+    AdminServicesAfterSalesRouteChildren,
+  )
+
+interface AdminServicesConsultancyRouteChildren {
+  AdminServicesConsultancyIdRoute: typeof AdminServicesConsultancyIdRoute
+  AdminServicesConsultancyNewRoute: typeof AdminServicesConsultancyNewRoute
+  AdminServicesConsultancyIndexRoute: typeof AdminServicesConsultancyIndexRoute
+}
+
+const AdminServicesConsultancyRouteChildren: AdminServicesConsultancyRouteChildren =
+  {
+    AdminServicesConsultancyIdRoute: AdminServicesConsultancyIdRoute,
+    AdminServicesConsultancyNewRoute: AdminServicesConsultancyNewRoute,
+    AdminServicesConsultancyIndexRoute: AdminServicesConsultancyIndexRoute,
+  }
+
+const AdminServicesConsultancyRouteWithChildren =
+  AdminServicesConsultancyRoute._addFileChildren(
+    AdminServicesConsultancyRouteChildren,
+  )
+
+interface AdminServicesRouteChildren {
+  AdminServicesAfterSalesRoute: typeof AdminServicesAfterSalesRouteWithChildren
+  AdminServicesConsultancyRoute: typeof AdminServicesConsultancyRouteWithChildren
+  AdminServicesIndexRoute: typeof AdminServicesIndexRoute
+}
+
+const AdminServicesRouteChildren: AdminServicesRouteChildren = {
+  AdminServicesAfterSalesRoute: AdminServicesAfterSalesRouteWithChildren,
+  AdminServicesConsultancyRoute: AdminServicesConsultancyRouteWithChildren,
+  AdminServicesIndexRoute: AdminServicesIndexRoute,
+}
+
+const AdminServicesRouteWithChildren = AdminServicesRoute._addFileChildren(
+  AdminServicesRouteChildren,
+)
+
+interface AdminRouteChildren {
+  AdminInquiriesRoute: typeof AdminInquiriesRouteWithChildren
+  AdminLoginRoute: typeof AdminLoginRoute
+  AdminProductsRoute: typeof AdminProductsRouteWithChildren
+  AdminProjectsRoute: typeof AdminProjectsRouteWithChildren
+  AdminServicesRoute: typeof AdminServicesRouteWithChildren
+  AdminIndexRoute: typeof AdminIndexRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminInquiriesRoute: AdminInquiriesRouteWithChildren,
+  AdminLoginRoute: AdminLoginRoute,
+  AdminProductsRoute: AdminProductsRouteWithChildren,
+  AdminProjectsRoute: AdminProjectsRouteWithChildren,
+  AdminServicesRoute: AdminServicesRouteWithChildren,
+  AdminIndexRoute: AdminIndexRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRouteWithChildren,
+  AdminRoute: AdminRouteWithChildren,
   ContactRoute: ContactRoute,
   PartnersRoute: PartnersRoute,
   ProjectsRoute: ProjectsRoute,
   ServicesRoute: ServicesRoute,
   ProductsCategoryRoute: ProductsCategoryRoute,
   ProductsIndexRoute: ProductsIndexRoute,
+  UploadsKindFileRoute: UploadsKindFileRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
+import { useServerFn } from '@tanstack/react-start'
 import { InquiryTypeSelect } from './InquiryTypeSelect'
-import { EMAIL, PHONE_1, inquiryTypes } from '../data/site'
-import { submitInquiry } from '../lib/submitInquiry'
+import { EMAIL, PHONE_1, type InquiryGroup } from '../data/site'
+import { submitInquiry } from '../server/inquiry.functions'
 
 type Errors = Partial<Record<'name' | 'phone' | 'email' | 'type' | 'message', boolean>>
 
@@ -13,14 +14,12 @@ const ERROR_TEXT: Record<keyof Errors, string> = {
   message: 'Please tell us a little about your inquiry.',
 }
 
-const TYPE_OPTIONS = inquiryTypes.flatMap((g) => g.options)
-const validValues = TYPE_OPTIONS.map((o) => o.value)
-
-function typeLabel(value: string) {
-  return TYPE_OPTIONS.find((o) => o.value === value)?.label ?? value
-}
-
-export function ContactForm({ preselect }: { preselect?: string }) {
+export function ContactForm({ preselect, inquiryTypes }: { preselect?: string; inquiryTypes: InquiryGroup[] }) {
+  const typeOptions = inquiryTypes.flatMap((g) => g.options)
+  const validValues = typeOptions.map((o) => o.value)
+  function typeLabel(value: string) {
+    return typeOptions.find((o) => o.value === value)?.label ?? value
+  }
   const [errors, setErrors] = useState<Errors>({})
   const [sent, setSent] = useState(false)
   const [sending, setSending] = useState(false)
@@ -28,12 +27,13 @@ export function ContactForm({ preselect }: { preselect?: string }) {
   const [type, setType] = useState('')
   const formRef = useRef<HTMLFormElement>(null)
   const successRef = useRef<HTMLDivElement>(null)
+  const sendInquiry = useServerFn(submitInquiry)
 
   // Category CTAs link here with ?type=…; applied after hydration so the
   // prerendered HTML (built without search params) matches on first paint.
   useEffect(() => {
     if (preselect && validValues.includes(preselect)) setType(preselect)
-  }, [preselect])
+  }, [preselect, inquiryTypes])
 
   useEffect(() => {
     if (!sent) return
@@ -72,14 +72,16 @@ export function ContactForm({ preselect }: { preselect?: string }) {
 
     setSending(true)
     try {
-      await submitInquiry({
-        name: val('name'),
-        company: val('company'),
-        phone: val('phone'),
-        email: val('email'),
-        inquiryTypeLabel: typeLabel(val('inquiry-type')),
-        message: val('message'),
-        honeypot: val('botcheck'),
+      await sendInquiry({
+        data: {
+          name: val('name'),
+          company: val('company'),
+          phone: val('phone'),
+          email: val('email'),
+          inquiryTypeLabel: typeLabel(val('inquiry-type')),
+          message: val('message'),
+          honeypot: val('botcheck'),
+        },
       })
       setSent(true)
       requestAnimationFrame(() => successRef.current?.focus())
@@ -178,6 +180,7 @@ export function ContactForm({ preselect }: { preselect?: string }) {
             id="inquiry-type"
             name="inquiry-type"
             value={type}
+            groups={inquiryTypes}
             invalid={errors.type}
             describedBy={errors.type ? 'err-type' : undefined}
             onChange={(next) => {

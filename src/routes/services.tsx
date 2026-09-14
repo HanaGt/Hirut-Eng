@@ -2,8 +2,7 @@ import { Link, createFileRoute } from '@tanstack/react-router'
 
 import { ConstructionSlideshow } from '../components/ConstructionSlideshow'
 import { CtaBand, Eyebrow, PageHero } from '../components/PageBits'
-import { constructionPhotos } from '../data/media'
-import { afterSalesPillars } from '../data/site'
+import { listPublicServices } from '../server/service.functions'
 
 export const Route = createFileRoute('/services')({
   head: () => ({
@@ -12,7 +11,7 @@ export const Route = createFileRoute('/services')({
       {
         name: 'description',
         content:
-          'Construction works, professional design and consultancy, and a six-pillar after-sales program: well drilling, irrigation, hydraulic structures, waterproofing, piezometer installation, commissioning, training, maintenance, and long-term monitoring.',
+          'Construction works, professional design and consultancy, and after-sales support: well drilling, irrigation, hydraulic structures, waterproofing, piezometer installation, commissioning, training, maintenance, and long-term monitoring.',
       },
       { property: 'og:title', content: 'Services | Hirut Engineering' },
       {
@@ -21,55 +20,12 @@ export const Route = createFileRoute('/services')({
       },
     ],
   }),
+  loader: () => listPublicServices(),
   component: ServicesPage,
 })
 
-const CONSTRUCTION = [
-  'Electromechanical & General Sanitary Works',
-  'Hydraulic Structure Construction',
-  'Modern Irrigation Design & Build',
-  'Piezometer Installation & Geotechnical Works',
-  'Solar Pump Installation & Commissioning',
-  'Water Features & Fountain Works',
-  'Water Supply Infrastructure Construction',
-  'Waterproofing Works',
-  'Well Drilling & General Construction Works',
-]
-
-const CONSULTANCY = [
-  {
-    num: 'PM · M&E',
-    title: 'Project Management, Monitoring & Evaluation',
-    body: 'Independent oversight that keeps projects on scope, on budget, and honest.',
-  },
-  {
-    num: 'Water',
-    title: 'Well Drilling Design & Consultancy',
-    body: 'Hydrogeological judgment for boreholes that produce, and keep producing.',
-  },
-  {
-    num: 'Irrigation',
-    title: 'Modern Irrigation Consultancy',
-    body: 'Drip and sprinkler system design matched to crop, soil, and water source.',
-  },
-  {
-    num: 'Fire',
-    title: 'Building Fire System Design & Consultancy',
-    body: 'Code-compliant fire system design for commercial and institutional buildings.',
-  },
-  {
-    num: 'Sanitary',
-    title: 'Building Sanitary System Design & Consultancy',
-    body: 'Water supply and drainage design that works for the life of the building.',
-  },
-  {
-    num: 'Features',
-    title: 'Water Features & Aquariums Design & Consultancy',
-    body: 'Fountains, features, and aquariums engineered, not just decorated.',
-  },
-]
-
 function ServicesPage() {
+  const { photos: constructionPhotos, works, consultancy, pillars } = Route.useLoaderData()
   return (
     <>
       <PageHero
@@ -101,12 +57,12 @@ function ServicesPage() {
           </div>
           <div className="grid grid-2 construction-split">
             <ul className="spec-list reveal">
-              {CONSTRUCTION.map((item) => (
-                <li key={item}>{item}</li>
+              {works.map((item) => (
+                <li key={item.id}>{item.title}</li>
               ))}
             </ul>
             <div className="reveal construction-split-media" style={{ '--reveal-delay': '.1s' } as React.CSSProperties}>
-              <ConstructionSlideshow photos={constructionPhotos} />
+              {constructionPhotos.length > 0 ? <ConstructionSlideshow photos={constructionPhotos} /> : null}
             </div>
           </div>
           <p style={{ marginTop: '1.6rem' }}>
@@ -129,13 +85,13 @@ function ServicesPage() {
             </p>
           </div>
           <div className="grid grid-3">
-            {CONSULTANCY.map((c, i) => (
+            {consultancy.map((c, i) => (
               <div
                 className="card reveal"
                 style={i % 3 !== 0 ? ({ '--reveal-delay': `${(i % 3) * 0.05}s` } as React.CSSProperties) : undefined}
-                key={c.num}
+                key={c.id}
               >
-                <p className="card-num">{c.num}</p>
+                {c.num ? <p className="card-num">{c.num}</p> : null}
                 <h3>{c.title}</h3>
                 <p>{c.body}</p>
               </div>
@@ -157,13 +113,13 @@ function ServicesPage() {
             <h2>After-Sales Services</h2>
             <p className="lead">
               Most suppliers in this market disappear after commissioning. Our after-sales program
-              is a six-pillar service organization. Expand each pillar to see exactly what it
-              covers.
+              is a {pillars.length}-pillar service organization. Expand each pillar to see exactly
+              what it covers.
             </p>
           </div>
           <div className="pillars pillars--light reveal">
-            {afterSalesPillars.map((p, i) => (
-              <details className="pillar" open={i === 0} key={p.title}>
+            {pillars.map((p, i) => (
+              <details className="pillar" open={i === 0} key={p.id}>
                 <summary>{p.title}</summary>
                 <div className="pillar-body">
                   <ul>
