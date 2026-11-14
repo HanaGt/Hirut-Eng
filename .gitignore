@@ -14,4 +14,4 @@ __unconfig*
 todos.json
 .cta.json
 .tmp-*
-data
+/data/
