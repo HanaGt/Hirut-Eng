@@ -1,7 +1,7 @@
 import { createServerFn } from '@tanstack/react-start'
 import { getRequest } from '@tanstack/react-start/server'
 import { authMiddleware } from './auth-middleware'
-import { getDb } from './db.server'
+import { ADMIN_UNAVAILABLE, getDb, isEphemeralDb } from './db.server'
 import { verifyPassword } from './password.server'
 import { createSession, destroySession, readAdminSession } from './session.server'
 
@@ -37,6 +37,7 @@ export const loginAdmin = createServerFn({ method: 'POST' })
     return { email, password }
   })
   .handler(async ({ data }) => {
+    if (isEphemeralDb()) throw new Error(ADMIN_UNAVAILABLE)
     if (!rateLimitOk()) throw new Error('Too many attempts. Try again in a few minutes.')
     const db = getDb()
     const admin = db.prepare('SELECT id, email, password_hash FROM admins WHERE email = ?').get(data.email) as

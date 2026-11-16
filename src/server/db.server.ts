@@ -52,15 +52,42 @@ export type SessionRow = {
 }
 
 let db: DatabaseSync | undefined
+let ephemeral = false
+
+export const ADMIN_UNAVAILABLE =
+  'Admin is unavailable on this deployment: there is no persistent database, so changes would be lost.'
+
+/**
+ * True when the on-disk database could not be opened (e.g. Vercel's read-only
+ * filesystem) and we fell back to an in-memory copy seeded from src/data.
+ * Public pages still work; anything written is lost when the instance stops.
+ */
+export function isEphemeralDb() {
+  getDb()
+  return ephemeral
+}
+
+function openOnDisk() {
+  mkdirSync(dirname(DB_PATH), { recursive: true })
+  const database = new DatabaseSync(DB_PATH)
+  database.exec('PRAGMA journal_mode = WAL')
+  return database
+}
 
 export function getDb() {
   if (!db) {
-    mkdirSync(dirname(DB_PATH), { recursive: true })
-    db = new DatabaseSync(DB_PATH)
-    db.exec('PRAGMA journal_mode = WAL')
-    db.exec('PRAGMA foreign_keys = ON')
-    migrate(db)
-    seed(db)
+    let database: DatabaseSync
+    try {
+      database = openOnDisk()
+    } catch (err) {
+      console.warn(`[db] cannot open ${DB_PATH} (${(err as Error).message}); using in-memory database seeded from src/data`)
+      database = new DatabaseSync(':memory:')
+      ephemeral = true
+    }
+    database.exec('PRAGMA foreign_keys = ON')
+    migrate(database)
+    seed(database)
+    db = database
   }
   return db
 }
@@ -160,7 +187,7 @@ function migrate(database: DatabaseSync) {
 
 function seed(database: DatabaseSync) {
   const adminCount = database.prepare('SELECT COUNT(*) AS n FROM admins').get() as { n: number }
-  if (adminCount.n === 0) {
+  if (adminCount.n === 0 && !ephemeral) {
     const email = (process.env.ADMIN_EMAIL ?? '').trim().toLowerCase()
     const password = process.env.ADMIN_PASSWORD ?? ''
     if (!email || !password) {
